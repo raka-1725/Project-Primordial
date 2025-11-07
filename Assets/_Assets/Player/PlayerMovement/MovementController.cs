@@ -6,16 +6,17 @@ using UnityEngine.InputSystem;
 public class MovementController : MonoBehaviour
 {
     InputSystem_Actions mInputAction;
-    [SerializeField] float mJumpSpeed = 15f;
+    [SerializeField] float mJumpSpeed = 6f;
     [SerializeField] float mMaxMoveSpeed = 5f;
     [SerializeField] float mGroundMoveSpeedAcceleration = 40f;
     [SerializeField] float mAirMoveSpeedAcceleration = 5f;
     [SerializeField] float mTurnLerpRate = 40f;
     [SerializeField] float mMaxFallSpeed = 50f;
     [SerializeField] float mAirCheckRadius = 0.2f;
-    [SerializeField] LayerMask mAirCheckLayerMask = 1;
-    private CharacterController mCharacterController;
 
+    [SerializeField] LayerMask mAirCheckLayerMask = 1;
+
+    private CharacterController mCharacterController;
     private Animator mAnimator;
 
     private Vector3 mVerticalVelocity;
@@ -23,18 +24,23 @@ public class MovementController : MonoBehaviour
     private Vector2 mMoveInput;
 
     private bool mShouldTryJump;
-
     private bool mIsInAir;
+
+    public InputSystem_Actions GetInputActions()
+    {
+        return mInputAction;
+    }
 
     void Awake()
     {
         mInputAction = new InputSystem_Actions();
-        mCharacterController = GetComponent<CharacterController>();
-        mAnimator = GetComponent<Animator>();
-
+        mInputAction.Player.Jump.performed += PerformJump;
 
         mInputAction.Player.Move.performed += HandleMoveInput;
         mInputAction.Player.Move.canceled += HandleMoveInput;
+
+        mCharacterController = GetComponent<CharacterController>();
+        mAnimator = GetComponent<Animator>();
 
     }
 

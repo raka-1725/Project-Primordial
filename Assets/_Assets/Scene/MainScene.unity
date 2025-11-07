@@ -569,6 +569,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9100000, guid: e2a0370ef16597346af70d1ca0a273c2, type: 2}
     - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: mJumpSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: mMaxFallSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: mAirCheckRadius
       value: 0.2
       objectReference: {fileID: 0}
@@ -691,7 +699,7 @@ Transform:
   m_GameObject: {fileID: 1295020057}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.54, z: 0.5}
+  m_LocalPosition: {x: 0.5, y: 2.37, z: -2.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
