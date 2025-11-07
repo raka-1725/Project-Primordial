@@ -4,9 +4,11 @@
 
 * Engine Configuration
 
-|Engine|Version|
-|------|-------|
-|Unity| 6000.1.17f1|
+|Engine|Version|Rendering|
+|------|-------|---------|
+|Unity| 6000.1.17f1|HDRP
+
+
 
 
 ---
