@@ -616,6 +616,14 @@ PrefabInstance:
       propertyPath: mAirCheckRadius
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: mMagicAttackSpawn
+      value: 
+      objectReference: {fileID: 1233496330}
+    - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: mMagicAttackPrefab
+      value: 
+      objectReference: {fileID: 286646688807115751, guid: 55e53a526edc8264197baaa4fbe6c7aa, type: 3}
     - target: {fileID: 8775076214042754613, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: m_Center.y
       value: 0.48
@@ -636,6 +644,11 @@ PrefabInstance:
       addedObject: {fileID: 19952427}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+--- !u!4 &1233496330 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6811805260163846328, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+  m_PrefabInstance: {fileID: 1233496329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2013410473
 GameObject:
   m_ObjectHideFlags: 1
