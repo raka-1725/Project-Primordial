@@ -706,6 +706,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 275048305219704296, guid: aacbd8a74c7783a46b5aa59a7faf1e9f, type: 3}
+      propertyPath: FollowOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 370649364478575901, guid: aacbd8a74c7783a46b5aa59a7faf1e9f, type: 3}
+      propertyPath: Lens.OrthographicSize
+      value: 1.55
+      objectReference: {fileID: 0}
     - target: {fileID: 370649364478575901, guid: aacbd8a74c7783a46b5aa59a7faf1e9f, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -716,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4993365008192963799, guid: aacbd8a74c7783a46b5aa59a7faf1e9f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.02
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 4993365008192963799, guid: aacbd8a74c7783a46b5aa59a7faf1e9f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -771,13 +779,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2076055402311094763, guid: 5dae41a17b033fc42bfb6830acfdabda, type: 3}
+      propertyPath: orthographic size
+      value: 1.55
+      objectReference: {fileID: 0}
     - target: {fileID: 8431434970015977406, guid: 5dae41a17b033fc42bfb6830acfdabda, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.73845
       objectReference: {fileID: 0}
     - target: {fileID: 8431434970015977406, guid: 5dae41a17b033fc42bfb6830acfdabda, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.02
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 8431434970015977406, guid: 5dae41a17b033fc42bfb6830acfdabda, type: 3}
       propertyPath: m_LocalPosition.z
