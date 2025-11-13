@@ -4,97 +4,66 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class MovementController : MonoBehaviour
 {
-    // Input System
-    private InputSystem_Actions mInputAction;
+    private InputSystem_Actions inputActions;
 
     [Header("Movement Settings")]
-    [SerializeField] private float mJumpSpeed = 6f;
-    [SerializeField] private float mMaxMoveSpeed = 5f;
-    [SerializeField] private float mGroundMoveSpeedAcceleration = 40f;
-    [SerializeField] private float mAirMoveSpeedAcceleration = 5f;
-    [SerializeField] private float mTurnLerpRate = 40f;
-    [SerializeField] private float mMaxFallSpeed = 50f;
-    [SerializeField] private float mAirCheckRadius = 0.2f;
-    [SerializeField] private LayerMask mAirCheckLayerMask = 1;
+    [SerializeField] private float jumpSpeed = 6f;
+    [SerializeField] private float maxMoveSpeed = 5f;
+    [SerializeField] private float groundAcceleration = 40f;
+    [SerializeField] private float airAcceleration = 5f;
+    [SerializeField] private float turnLerpRate = 40f;
+    [SerializeField] private float maxFallSpeed = 50f;
+    [SerializeField] private float airCheckRadius = 0.2f;
+    [SerializeField] private LayerMask airCheckLayerMask = 1;
 
-    [Header("Magic Attack Settings")]
-    [SerializeField] private GameObject mMagicAttackPrefab;
-    [SerializeField] private Transform mMagicAttackSpawn;
-    [SerializeField] private float mMagicForce = 20.0f;
-
-    // Components 
-    private CharacterController mCharacterController;
-    private Animator mAnimator;
+    private CharacterController characterController;
+    private Animator animator;
     private Camera mainCamera;
 
-    // Movement State
-    private Vector3 mVerticalVelocity;
-    private Vector3 mHorizontalVelocity;
-    private Vector2 mMoveInput;
-    private bool mShouldTryJump;
-    private bool mIsInAir;
+    private Vector3 verticalVelocity;
+    private Vector3 horizontalVelocity;
+    private Vector2 moveInput;
+    private bool shouldJump;
+    private bool isInAir;
 
-    // Attack State 
-    private bool mCanAttack = true;
-    private GameObject currentTarget = null;
+    private GameObject currentTarget;
+
+    public GameObject CurrentTarget => currentTarget;
 
     void Awake()
     {
-        mInputAction = new InputSystem_Actions();
-        mInputAction.Player.Jump.performed += PerformJump;
-        mInputAction.Player.Move.performed += HandleMoveInput;
-        mInputAction.Player.Move.canceled += HandleMoveInput;
-        mInputAction.Player.Attack.performed += ctx => TryMagicAttack();
+        inputActions = new InputSystem_Actions();
+        inputActions.Player.Jump.performed += PerformJump;
+        inputActions.Player.Move.performed += HandleMoveInput;
+        inputActions.Player.Move.canceled += HandleMoveInput;
 
-        mCharacterController = GetComponent<CharacterController>();
-        mAnimator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
         mainCamera = Camera.main;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    private void OnEnable() => mInputAction.Enable();
-    private void OnDisable() => mInputAction.Disable();
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
 
-    public void HandleMoveInput(InputAction.CallbackContext context)
+    private void HandleMoveInput(InputAction.CallbackContext context)
     {
-        mMoveInput = context.ReadValue<Vector2>();
+        moveInput = context.ReadValue<Vector2>();
     }
 
-    public void PerformJump(InputAction.CallbackContext context)
+    private void PerformJump(InputAction.CallbackContext context)
     {
-        if (!mIsInAir && context.performed)
+        if (!isInAir && context.performed)
         {
-            mShouldTryJump = true;
+            shouldJump = true;
         }
     }
-
-    private void TryMagicAttack()
-    {
-        if (mCanAttack && currentTarget != null && mMagicAttackPrefab != null && mMagicAttackSpawn != null)
-        {
-            mCanAttack = false;
-            mAnimator.SetTrigger("Attack");
-
-            GameObject magicClone = Instantiate(mMagicAttackPrefab, mMagicAttackSpawn.position, mMagicAttackSpawn.rotation);
-            Rigidbody rBody = magicClone.GetComponent<Rigidbody>();
-            if (rBody != null)
-            {
-                // Aim toward target
-                Vector3 direction = (currentTarget.transform.position - mMagicAttackSpawn.position).normalized;
-                rBody.AddForce(direction * mMagicForce, ForceMode.Impulse);
-            }
-
-            Invoke(nameof(ResetAttack), 1.0f);
-        }
-    }
-
-    private void ResetAttack() => mCanAttack = true;
 
     void Update()
     {
-        mIsInAir = IsInAir();
+        isInAir = IsInAir();
 
         UpdateVerticalVelocity();
         UpdateHorizontalVelocity();
@@ -105,72 +74,72 @@ public class MovementController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        mAnimator.SetFloat("Speed", mHorizontalVelocity.magnitude);
-        mAnimator.SetBool("Landed", !mIsInAir);
+        animator.SetFloat("Speed", horizontalVelocity.magnitude);
+        animator.SetBool("Landed", !isInAir);
     }
 
     private void UpdateTransform()
     {
-        mCharacterController.Move((mHorizontalVelocity + mVerticalVelocity) * Time.deltaTime);
-        if (mHorizontalVelocity.sqrMagnitude > 0)
+        characterController.Move((horizontalVelocity + verticalVelocity) * Time.deltaTime);
+        if (horizontalVelocity.sqrMagnitude > 0)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(mHorizontalVelocity.normalized, Vector3.up),
-                Time.deltaTime * mTurnLerpRate);
+                Quaternion.LookRotation(horizontalVelocity.normalized, Vector3.up),
+                Time.deltaTime * turnLerpRate);
         }
     }
 
     private void UpdateVerticalVelocity()
     {
-        if (mShouldTryJump && !mIsInAir)
+        if (shouldJump && !isInAir)
         {
-            mVerticalVelocity.y = mJumpSpeed;
-            mAnimator.SetTrigger("Jump");
-            mShouldTryJump = false;
+            verticalVelocity.y = jumpSpeed;
+            animator.SetTrigger("Jump");
+            shouldJump = false;
             return;
         }
 
-        if (mCharacterController.isGrounded)
+        if (characterController.isGrounded)
         {
-            mAnimator.ResetTrigger("Jump");
-            mVerticalVelocity.y = -1f;
+            animator.ResetTrigger("Jump");
+            verticalVelocity.y = -1f;
             return;
         }
 
-        if (mVerticalVelocity.y > -mMaxFallSpeed)
+        if (verticalVelocity.y > -maxFallSpeed)
         {
-            mVerticalVelocity.y += Physics.gravity.y * Time.deltaTime;
+            verticalVelocity.y += Physics.gravity.y * Time.deltaTime;
         }
     }
 
     private void UpdateHorizontalVelocity()
     {
-        Vector3 moveDir = PlayerInputToWorldDir(mMoveInput);
-        float acceleration = mCharacterController.isGrounded ? mGroundMoveSpeedAcceleration : mAirMoveSpeedAcceleration;
+        Vector3 moveDir = PlayerInputToWorldDir(moveInput);
+        float acceleration = characterController.isGrounded ? groundAcceleration : airAcceleration;
 
         if (moveDir.sqrMagnitude > 0)
         {
-            mHorizontalVelocity += moveDir * acceleration * Time.deltaTime;
-            mHorizontalVelocity = Vector3.ClampMagnitude(mHorizontalVelocity, mMaxMoveSpeed);
+            horizontalVelocity += moveDir * acceleration * Time.deltaTime;
+            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, maxMoveSpeed);
         }
         else
         {
-            mHorizontalVelocity = Vector3.MoveTowards(mHorizontalVelocity, Vector3.zero, acceleration * Time.deltaTime);
+            horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, Vector3.zero, acceleration * Time.deltaTime);
         }
     }
 
-    Vector3 PlayerInputToWorldDir(Vector2 inputVal)
+    private Vector3 PlayerInputToWorldDir(Vector2 inputVal)
     {
         Vector3 rightDir = mainCamera.transform.right;
         Vector3 fwdDir = Vector3.Cross(rightDir, Vector3.up);
         return rightDir * inputVal.x + fwdDir * inputVal.y;
     }
 
-    bool IsInAir()
+    private bool IsInAir()
     {
-        if (mCharacterController.isGrounded) return false;
+        if (characterController.isGrounded) return false;
 
-        Collider[] airCheckColliders = Physics.OverlapSphere(transform.position, mAirCheckRadius, mAirCheckLayerMask);
+        Collider[] airCheckColliders = Physics.OverlapSphere(transform.position, airCheckRadius, airCheckLayerMask);
         foreach (Collider collider in airCheckColliders)
         {
             if (collider.gameObject != gameObject) return false;
@@ -201,8 +170,8 @@ public class MovementController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = mIsInAir ? Color.red : Color.green;
-        Gizmos.DrawSphere(transform.position, mAirCheckRadius);
+        Gizmos.color = isInAir ? Color.red : Color.green;
+        Gizmos.DrawSphere(transform.position, airCheckRadius);
     }
 
 }
