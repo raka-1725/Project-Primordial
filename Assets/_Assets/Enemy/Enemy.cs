@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Behavior;
 using System;
 using UnityEditor.ShaderGraph.Internal;
+using UnityEditor.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class Enemy : MonoBehaviour
         get { return mTarget; }
         set
         {
-            if (Target == value)
+            if (mTarget == value)
             {
                 return;
             }
-            if (value == null)
+            if (value == null && mTarget != null)
             {
                 mBehaviorGraphAgent.BlackboardReference.SetVariableValue("HasLastSeenPosition", true);
                 mBehaviorGraphAgent.BlackboardReference.SetVariableValue("TargetLastSeenPosition", mTarget.transform.position);
@@ -30,7 +31,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] float mViewAngle = 30f;
     [SerializeField] float mAlwaysAwareDistance = 1.5f;
 
+    [SerializeField] float mLostTargetTime = 5f;
+
     BehaviorGraphAgent mBehaviorGraphAgent;
+    private float loseTimer;
+
     private void Awake()
     {
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
@@ -54,14 +59,9 @@ public class Enemy : MonoBehaviour
 
 
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        bool isVisible = true;
 
         if (distanceToPlayer <= mAlwaysAwareDistance)
-        {
-            Target = player.gameObject;
-            return;
-        }
-
-        if (distanceToPlayer > mSightDistance) 
         {
             Target = player.gameObject;
             return;
@@ -84,12 +84,26 @@ public class Enemy : MonoBehaviour
         {
             if (hitInfo.collider.gameObject != player.gameObject)
             {
+                isVisible = false;
                 Target = null;
                 return;
             }
         }
 
-        Target = player.gameObject;
+        if (isVisible)
+        {
+            loseTimer = 0f;
+            Target = player.gameObject;
+        }
+        else 
+        {
+            loseTimer += Time.deltaTime;
+            if (mLostTargetTime >= loseTimer) 
+            {
+                Target = null;
+            }
+        }
+
     }
 
 

@@ -45,9 +45,10 @@ GameObject:
   - component: {fileID: 3902998895110819184}
   - component: {fileID: 7214064188159489272}
   - component: {fileID: 6852276241635038578}
+  - component: {fileID: -4165823611048376639}
   m_Layer: 0
   m_Name: PlayerPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +181,18 @@ MonoBehaviour:
   magicAttackPrefab: {fileID: 0}
   magicAttackSpawn: {fileID: 0}
   magicForce: 5
+--- !u!114 &-4165823611048376639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8882243794805178592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29cf1ee645c599499fdd1b20fbc1fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4243692657090467968
 PrefabInstance:
   m_ObjectHideFlags: 0
