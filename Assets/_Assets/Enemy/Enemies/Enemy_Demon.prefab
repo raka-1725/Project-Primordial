@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2097332605059934590, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: fae0fc5b582028e48900a5ed0088396d, type: 3}
+    - target: {fileID: 2097332605059934590, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3085881cf44e64f45ab6a62e2a63233b, type: 2}
@@ -81,6 +85,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5443255676873394113}
     m_Modifications:
+    - target: {fileID: 6334826067895158095, guid: 72f7af28a017bcd4fab292531488d962, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6334826068141619221, guid: 72f7af28a017bcd4fab292531488d962, type: 3}
       propertyPath: m_Name
       value: Demon_default
