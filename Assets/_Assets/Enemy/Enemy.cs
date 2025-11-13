@@ -33,12 +33,18 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float mLostTargetTime = 5f;
 
+    [SerializeField] float mWalkSPD = 1;
+    [SerializeField] float mChaseSPD = 3;
+
     BehaviorGraphAgent mBehaviorGraphAgent;
     private float loseTimer;
 
     private void Awake()
     {
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
+
+        mBehaviorGraphAgent.BlackboardReference.SetVariableValue("WalkSPD", mWalkSPD);
+        mBehaviorGraphAgent.BlackboardReference.SetVariableValue("ChaseSPD", mChaseSPD);
     }
     void Start()
     {
