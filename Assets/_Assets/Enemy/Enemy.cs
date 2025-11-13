@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Behavior;
 using System;
+using UnityEditor.ShaderGraph.Internal;
+using UnityEditor.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,11 +12,11 @@ public class Enemy : MonoBehaviour
         get { return mTarget; }
         set
         {
-            if (Target == value)
+            if (mTarget == value)
             {
                 return;
             }
-            if (value == null)
+            if (value == null && mTarget != null)
             {
                 mBehaviorGraphAgent.BlackboardReference.SetVariableValue("HasLastSeenPosition", true);
                 mBehaviorGraphAgent.BlackboardReference.SetVariableValue("TargetLastSeenPosition", mTarget.transform.position);
@@ -29,10 +31,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] float mViewAngle = 30f;
     [SerializeField] float mAlwaysAwareDistance = 1.5f;
 
+    [SerializeField] float mLostTargetTime = 5f;
+
+    [SerializeField] float mWalkSPD = 1;
+    [SerializeField] float mChaseSPD = 3;
+
     BehaviorGraphAgent mBehaviorGraphAgent;
+    private float loseTimer;
+
     private void Awake()
     {
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
+
+        mBehaviorGraphAgent.BlackboardReference.SetVariableValue("WalkSPD", mWalkSPD);
+        mBehaviorGraphAgent.BlackboardReference.SetVariableValue("ChaseSPD", mChaseSPD);
     }
     void Start()
     {
@@ -46,5 +58,78 @@ public class Enemy : MonoBehaviour
     private void PlayerSearch()
     {
 
+        Player player = GameManager.mGamaManager.mPlayer;
+
+        Debug.Log($"Player {player}");
+        if (!player) { return; }
+
+
+        float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        bool isVisible = true;
+
+        if (distanceToPlayer <= mAlwaysAwareDistance)
+        {
+            Target = player.gameObject;
+            return;
+        }
+
+        if (distanceToPlayer > mSightDistance) 
+        {
+            Target = null;
+            return;
+        }
+
+        Vector3 playerDir = (player.transform.position - transform.position).normalized;
+        if (Vector3.Angle(playerDir, transform.forward) > mViewAngle)
+        {
+            Target = null;
+            return;
+        }
+        Vector3 eyeViewPoint = transform.position + Vector3.up * mEyeHeight;
+        if (Physics.Raycast(eyeViewPoint, playerDir, out RaycastHit hitInfo, mSightDistance))
+        {
+            if (hitInfo.collider.gameObject != player.gameObject)
+            {
+                isVisible = false;
+                Target = null;
+                return;
+            }
+        }
+
+        if (isVisible)
+        {
+            loseTimer = 0f;
+            Target = player.gameObject;
+        }
+        else 
+        {
+            loseTimer += Time.deltaTime;
+            if (mLostTargetTime >= loseTimer) 
+            {
+                Target = null;
+            }
+        }
+
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Vector3 eyeviewPoint = transform.position + Vector3.up * mEyeHeight;
+        Gizmos.DrawWireSphere(eyeviewPoint, mSightDistance);
+        Gizmos.DrawWireSphere(eyeviewPoint, mAlwaysAwareDistance);
+
+
+        Vector3 leftLineDir = Quaternion.AngleAxis(mViewAngle, Vector3.up) * transform.forward;
+        Vector3 rightLineDir = Quaternion.AngleAxis(-mViewAngle, Vector3.up) * transform.forward;
+        Gizmos.DrawLine(eyeviewPoint, eyeviewPoint + leftLineDir * mSightDistance);
+        Gizmos.DrawLine(eyeviewPoint, eyeviewPoint + rightLineDir * mSightDistance);
+
+        if (Target)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, Target.transform.position);
+            Gizmos.DrawWireSphere(Target.transform.position, 0.5f);
+        }
     }
 }
