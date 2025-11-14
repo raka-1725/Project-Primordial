@@ -1,16 +1,8 @@
 fileFormatVersion: 2
-guid: 863bc21d8e09b2947b9a2bdb62943225
+guid: 404cbc2643e9a624a9ab23ffa4b2ba1c
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 335052
-  packageName: Arachnid-Alien Head Lite
-  packageVersion: 1.0
-  assetPath: Assets/Stocklancer/ArachnidAlienHead_Lite/Material/URP_ArachnicAlienHeadLite
-    1.mat
-  uploadId: 792814
