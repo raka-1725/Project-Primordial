@@ -3,7 +3,7 @@ using UnityEngine;
 public class Door : MonoBehaviour//, Interactable
 {
     [SerializeField] private Vector3 mTargetRotation = new Vector3(0f, -100f, 0f);
-    [SerializeField] private float mRotationSpeed = 3f;
+    [SerializeField] private float mRotationSpeed = 1f;
     [SerializeField] private bool mStayOpen = false;
     private bool mIsOpen = false;
     private bool mIsRotating = false;
