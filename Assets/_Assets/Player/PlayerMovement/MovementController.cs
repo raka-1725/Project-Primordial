@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
     private Camera mainCamera;
 
     [Header("Player Interaction")]
-     private Collider mInteractableInRange;
+    private Collider mInteractableInRange;
 
     private CharacterController mCharacterController;
     private Animator mAnimator;
@@ -44,7 +44,6 @@ public class MovementController : MonoBehaviour
         mInputAction.Player.Jump.performed += PerformJump;
         mInputAction.Player.Move.performed += HandleMoveInput;
         mInputAction.Player.Move.canceled += HandleMoveInput;
-        mInputAction.Player.Attack.performed += ctx => TryMagicAttack();
         mInputAction.Player.Interact.performed += ctx => TryInteraction();
 
         characterController = GetComponent<CharacterController>();
@@ -68,23 +67,6 @@ public class MovementController : MonoBehaviour
         if (!isInAir && context.performed)
         {
             shouldJump = true;
-        }
-    }
-    private void TryMagicAttack()
-    {
-        if (mCanAttack && mMagicAttackPrefab != null && mMagicAttackSpawn != null)
-        {
-            mCanAttack = false;
-            mAnimator.SetTrigger("Attack");
-
-            GameObject magicClone = Instantiate(mMagicAttackPrefab, mMagicAttackSpawn.position, mMagicAttackSpawn.rotation);
-            Rigidbody rBody = magicClone.GetComponent<Rigidbody>();
-            if (rBody != null)
-            {
-                rBody.AddForce(mMagicAttackSpawn.forward * mMagicForce, ForceMode.Impulse);
-            }
-
-            Invoke(nameof(ResetAttack), 1.0f); // Cooldown or animation delay
         }
     }
     private void TryInteraction()
