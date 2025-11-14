@@ -75,14 +75,14 @@ public class Enemy : MonoBehaviour
 
         if (distanceToPlayer > mSightDistance) 
         {
-            Target = null;
+            isVisible = false;
             return;
         }
 
         Vector3 playerDir = (player.transform.position - transform.position).normalized;
         if (Vector3.Angle(playerDir, transform.forward) > mViewAngle)
         {
-            Target = null;
+            isVisible = false;
             return;
         }
         Vector3 eyeViewPoint = transform.position + Vector3.up * mEyeHeight;
@@ -91,7 +91,6 @@ public class Enemy : MonoBehaviour
             if (hitInfo.collider.gameObject != player.gameObject)
             {
                 isVisible = false;
-                Target = null;
                 return;
             }
         }
@@ -104,7 +103,7 @@ public class Enemy : MonoBehaviour
         else 
         {
             loseTimer += Time.deltaTime;
-            if (mLostTargetTime >= loseTimer) 
+            if (loseTimer >= mLostTargetTime) 
             {
                 Target = null;
             }
