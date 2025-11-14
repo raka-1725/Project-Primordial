@@ -21,6 +21,9 @@ public class MovementController : MonoBehaviour
     [SerializeField] private Transform mMagicAttackSpawn;
     [SerializeField] private float mMagicForce = 20.0f;
 
+    [Header("Player Interaction")]
+     private Collider mInteractableInRange;
+
     private CharacterController mCharacterController;
     private Animator mAnimator;
 
@@ -44,6 +47,7 @@ public class MovementController : MonoBehaviour
         mInputAction.Player.Move.performed += HandleMoveInput;
         mInputAction.Player.Move.canceled += HandleMoveInput;
         mInputAction.Player.Attack.performed += ctx => TryMagicAttack();
+        mInputAction.Player.Interact.performed += ctx => TryInteraction();
 
         mCharacterController = GetComponent<CharacterController>();
         mAnimator = GetComponent<Animator>();
@@ -87,6 +91,36 @@ public class MovementController : MonoBehaviour
             }
 
             Invoke(nameof(ResetAttack), 1.0f); // Cooldown or animation delay
+        }
+    }
+    private void TryInteraction()
+    {
+         if (mInteractableInRange != null)
+        {
+            Lever lever = mInteractableInRange.GetComponent<Lever>();
+            if (lever != null)
+            {
+                lever.Activate();
+            }
+            Door door = mInteractableInRange.GetComponent<Door>();
+            if (door != null)
+            {
+                door.Activate();
+            }
+        }
+    }
+     private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            mInteractableInRange = other;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == mInteractableInRange)
+        {
+            mInteractableInRange = null;
         }
     }
 
