@@ -2,6 +2,10 @@ using UnityEngine;
 
 public interface Interactable
 {
-    public bool CanInteract();
-    //public bool Interact(Interactor interactor);
+    //Key pick up
+    //Chest or lootables
+    //Medkits
+    //Levers activate arrays
+    //
+
 }
