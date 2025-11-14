@@ -69,6 +69,7 @@ public class MovementController : MonoBehaviour
             shouldJump = true;
         }
     }
+/*
     private void TryInteraction()
     {
          if (mInteractableInRange != null)
@@ -99,13 +100,7 @@ public class MovementController : MonoBehaviour
             mInteractableInRange = null;
         }
     }
-
-    private void ResetAttack()
-    {
-        mCanAttack = true;
-    }
-
-
+*/
     void Update()
     {
         isInAir = IsInAir();
