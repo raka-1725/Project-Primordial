@@ -3,6 +3,8 @@ using Unity.Behavior;
 using System;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEditor.UI;
+using Unity.VisualScripting;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -36,12 +38,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] float mWalkSPD = 1;
     [SerializeField] float mChaseSPD = 3;
 
+    [Header("Freeze")]
+    [SerializeField] bool bIsFrozed;
+    [SerializeField] private float mFrozeDuration;
+    private float mFrozeTimer;
+
+
     BehaviorGraphAgent mBehaviorGraphAgent;
+    NavMeshAgent mNavAgent;
     private float loseTimer;
 
     private void Awake()
     {
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
+        mNavAgent  = GetComponent<NavMeshAgent>();
 
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("WalkSPD", mWalkSPD);
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("ChaseSPD", mChaseSPD);
@@ -53,6 +63,20 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         PlayerSearch();
+        FrozeTimer();
+    }
+
+    private void FrozeTimer()
+    {
+        if (!bIsFrozed) return;
+
+        mFrozeTimer += Time.deltaTime;
+
+        if (mFrozeTimer >= mFrozeDuration) 
+        {
+            UnFreeze();
+            mFrozeTimer = 0;
+        }
     }
 
     private void PlayerSearch()
@@ -111,6 +135,18 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public void Freeze() 
+    {
+        mNavAgent.isStopped = true;
+        bIsFrozed = true;
+        
+    }
+
+    public void UnFreeze()
+    {
+        mNavAgent.isStopped = false;
+        bIsFrozed = false;
+    }
 
     private void OnDrawGizmos()
     {
