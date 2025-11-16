@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8979104953633283103}
   - component: {fileID: 2415060883261280290}
   m_Layer: 0
-  m_Name: MagicPrefab
+  m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
