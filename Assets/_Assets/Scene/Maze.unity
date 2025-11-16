@@ -885,6 +885,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: maxMoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8882243794805178592, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
@@ -977,6 +981,22 @@ PrefabInstance:
     - target: {fileID: 1776627319394472599, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_Name
       value: Enemy_Ghoul
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393345350320943290, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393345350320943290, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393345350320943290, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393345350320943290, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
