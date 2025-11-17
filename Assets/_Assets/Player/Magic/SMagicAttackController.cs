@@ -1,7 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
-using System;
+using static UnityEditor.ShaderData;
 
 public class SMagicAttackController : MonoBehaviour
 {
@@ -61,13 +62,26 @@ public class SMagicAttackController : MonoBehaviour
     // Called by animation event
     private void SpawnMagic()
     {
+
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
         GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
+
+        // Pass freeze info to projectile if needed
+        SFireballExplosion explosionScript = magicClone.GetComponent<SFireballExplosion>();
+        if (explosionScript != null)
+        {
+            explosionScript.isFreezeAttack = attackData.mIsFreezeAttack;
+            explosionScript.mSpecialEffectPrefab = attackData.mSpecialEffectPrefab;
+            explosionScript.mEffectDuration = attackData.mEffectDuration;
+        }
 
         Rigidbody rBody = magicClone.GetComponent<Rigidbody>();
         if (rBody != null)
         {
-            Vector3 direction = (mCurrentTarget.transform.position - magicAttackSpawn.position).normalized;
+            Vector3 direction = mCurrentTarget != null
+                ? (mCurrentTarget.transform.position - magicAttackSpawn.position).normalized
+                : magicAttackSpawn.forward;
+
             rBody.AddForce(direction * attackData.mForce, ForceMode.Impulse);
         }
     }
