@@ -62,6 +62,20 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         PlayerSearch();
+        FrozeTimer();
+    }
+
+    private void FrozeTimer()
+    {
+        if (!bIsFrozed) return;
+
+        mFrozeTimer += Time.deltaTime;
+
+        if (mFrozeTimer >= mFrozeDuration) 
+        {
+            UnFreeze();
+            mFrozeTimer = 0;
+        }
     }
 
 
@@ -162,6 +176,18 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public void Freeze() 
+    {
+        mNavAgent.isStopped = true;
+        bIsFrozed = true;
+        
+    }
+
+    public void UnFreeze()
+    {
+        mNavAgent.isStopped = false;
+        bIsFrozed = false;
+    }
 
     private void OnDrawGizmos()
     {
