@@ -15,6 +15,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private float maxFallSpeed = 50f;
     [SerializeField] private float airCheckRadius = 0.2f;
     [SerializeField] private LayerMask airCheckLayerMask = 1;
+    [SerializeField] private LayerMask groundLayerMask;
 
     private CharacterController characterController;
     private Animator animator;
@@ -70,6 +71,7 @@ public class MovementController : MonoBehaviour
         UpdateTransform();
         UpdateAnimation();
         HandleMouseTargeting();
+        RotatePlayer();
     }
 
     private void UpdateAnimation()
@@ -167,6 +169,37 @@ public class MovementController : MonoBehaviour
             }
         }
     }
+
+    private void RotatePlayer()
+    {
+        if (currentTarget != null)
+        {
+            // Face the targeted enemy
+            Vector3 lookDir = currentTarget.transform.position - transform.position;
+            lookDir.y = 0;
+            if (lookDir.sqrMagnitude > 0.01f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(lookDir);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnLerpRate);
+            }
+        }
+        else
+        {
+            // Face the cursor position on ground
+            Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundLayerMask))
+            {
+                Vector3 lookDir = hit.point - transform.position;
+                lookDir.y = 0;
+                if (lookDir.sqrMagnitude > 0.01f)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(lookDir);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnLerpRate);
+                }
+            }
+        }
+    }
+
 
     void OnDrawGizmos()
     {

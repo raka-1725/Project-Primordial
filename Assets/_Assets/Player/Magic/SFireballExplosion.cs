@@ -7,6 +7,10 @@ public class SFireballExplosion : MonoBehaviour
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private float explosionRadius = 1.0f;
 
+    public bool isFreezeAttack = false;
+    public GameObject mSpecialEffectPrefab;
+    public float mEffectDuration = 3f;
+
     private void OnCollisionEnter(Collision collision)
     {
         // Ignore collisions with Player
@@ -26,8 +30,24 @@ public class SFireballExplosion : MonoBehaviour
             // Destroy only enemies
             if (nearbyObj.CompareTag("Enemy"))
             {
-                Destroy(nearbyObj.gameObject);
-                Debug.Log($"Enemy destroyed: {nearbyObj.name}");
+
+                if (isFreezeAttack && mSpecialEffectPrefab != null)
+                {
+                    // Freeze logic
+                    GameObject freezeEffect = Instantiate(mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
+                    freezeEffect.transform.SetParent(nearbyObj.transform);
+
+                    FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
+                    freezeScript.Initialize(nearbyObj.gameObject, mEffectDuration);
+                }
+                else
+                {
+                    // Fireball logic: destroy enemy
+                    Destroy(nearbyObj.gameObject);
+                    Debug.Log($"Enemy destroyed: {nearbyObj.name}");
+                }
+
+
             }
         }
 
