@@ -16,3 +16,6 @@ MonoBehaviour:
   mAttackPrefab: {fileID: 286646688807115751, guid: 8f91505aceccb084e9c9bb22ea162bcd, type: 3}
   mForce: 20
   mCooldown: 1
+  mIsFreezeAttack: 1
+  mSpecialEffectPrefab: {fileID: 1058577671838409447, guid: b0a30eb7adee6e6459926bfb9ecf4732, type: 3}
+  mEffectDuration: 3
