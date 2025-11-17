@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MagicSelector : MonoBehaviour
@@ -11,20 +12,29 @@ public class MagicSelector : MonoBehaviour
 
     [Header("UI")]
 
-    [SerializeField] private Sprite mSelectedSkillIcon;
+    [SerializeField] private GameObject mSkillIconPrefab;
+
+
     [SerializeField] private TextMeshProUGUI mSelectedskillText;
 
-    [SerializeField] private Sprite mPreviousSkillIcon;
-    [SerializeField] private Sprite m2PreviousSkillIcon;
-    [SerializeField] private Sprite mNextSkillIcon;
-    [SerializeField] private Sprite m2NextSkillIcon;
+    [SerializeField] private GameObject mSelectedSkill;
 
+    [SerializeField] private Transform mSkillSliderParent;
 
+    [SerializeField] private List<Sprite> mSkillIconSprites; //change this once there is sprite variable in the scriptable object
+    private int currentSelectedIndex;
 
-    public void UpdateAttackInventoryUI(int selectedMagicIndex) 
+    public void NewSkillAccuired(SMagicAttackData magicdata) 
     {
-        
-        
+        GameObject newSkillIconObj = Instantiate(mSkillIconPrefab, mSkillSliderParent);
+        newSkillIconObj.GetComponent<SkillIcon>().UpdateIcon(mSkillIconSprites[0], magicdata.mAttackName); 
+    }
+
+    public void UpdateAttackInventoryUI(int selectedIndex, List<SMagicAttackData> magicAttackDataList) 
+    {
+
+
+
     }
 
 }
