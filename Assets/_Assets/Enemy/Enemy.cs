@@ -111,7 +111,7 @@ public class Enemy : MonoBehaviour
 
         Player player = GameManager.mGamaManager.mPlayer;
 
-        Debug.Log($"Player {player}");
+        //Debug.Log($"Player {player}");
         if (!player) { return; }
 
 
