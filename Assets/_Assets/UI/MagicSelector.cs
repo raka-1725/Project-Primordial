@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MagicSelector : MonoBehaviour
 {
@@ -21,8 +22,16 @@ public class MagicSelector : MonoBehaviour
 
     [SerializeField] private Transform mSkillSliderParent;
 
+    [SerializeField] private float ScaleUpWidth = 90;
+    [SerializeField] private float ScaleUpHeight = 90;
+
+    [SerializeField] private float DefaultWidth = 50;
+    [SerializeField] private float DefaultHeight = 50;
+
+    [SerializeField] private List<GameObject> mSkillUIList;
     [SerializeField] private List<Sprite> mSkillIconSprites; //change this once there is sprite variable in the scriptable object
     private int currentSelectedIndex;
+    private InputSystem_Actions inputActions;
 
     public void NewSkillAccuired(SMagicAttackData magicdata) 
     {
@@ -37,4 +46,40 @@ public class MagicSelector : MonoBehaviour
 
     }
 
+
+    public void SelectAbility(int index) 
+    {
+        foreach (GameObject SkillIcons in mSkillUIList) 
+        {
+            SkillIcon skillIcon = SkillIcons.GetComponent<SkillIcon>();
+            skillIcon.ChangeScale(DefaultWidth, DefaultHeight);
+        }
+        mSkillUIList[index].GetComponent<SkillIcon>().ChangeScale(ScaleUpWidth, ScaleUpHeight);
+    }
+
+
+    [SerializeField] private int currentAttackIndex;
+
+    void Awake()
+    {
+        inputActions = new InputSystem_Actions();
+
+        inputActions.Player.SwitchAttackScroll.performed += ctx =>
+        {
+            Vector2 scrollValue = ctx.ReadValue<Vector2>();
+            if (scrollValue.y > 0) CycleAttack(1);
+            else if (scrollValue.y < 0) CycleAttack(-1);
+        };
+    }
+
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
+    private void CycleAttack(int direction)
+    {
+        currentAttackIndex += direction;
+        if (currentAttackIndex <= -1) { currentAttackIndex = 0; }
+        if (currentAttackIndex > 4) { currentAttackIndex = 4; }
+        SelectAbility(currentAttackIndex);
+        Debug.Log($"Switched to attack: {currentAttackIndex}");
+    }
 }
