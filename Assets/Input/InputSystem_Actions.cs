@@ -126,6 +126,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwitchAttackKey"",
+                    ""type"": ""Value"",
+                    ""id"": ""6cf93490-268e-48d3-84f3-4cb24990b6d8"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,61 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""SwitchAttackScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e814593-72c5-45f5-8a77-cf06b100fc67"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b54e2434-9abb-49c6-af5e-9a17cd22a428"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a50595cc-2732-4262-87fd-af3eaa3b455d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c152ee2-b22e-45d2-a322-93dd22fdba62"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6fdd312-0bbb-43fc-8c53-77d088c684e5"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -805,6 +869,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_SwitchAttackScroll = m_Player.FindAction("SwitchAttackScroll", throwIfNotFound: true);
+        m_Player_SwitchAttackKey = m_Player.FindAction("SwitchAttackKey", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -902,6 +967,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_SwitchAttackScroll;
+    private readonly InputAction m_Player_SwitchAttackKey;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -929,6 +995,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/SwitchAttackScroll".
         /// </summary>
         public InputAction @SwitchAttackScroll => m_Wrapper.m_Player_SwitchAttackScroll;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwitchAttackKey".
+        /// </summary>
+        public InputAction @SwitchAttackKey => m_Wrapper.m_Player_SwitchAttackKey;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -967,6 +1037,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SwitchAttackScroll.started += instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.performed += instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.canceled += instance.OnSwitchAttackScroll;
+            @SwitchAttackKey.started += instance.OnSwitchAttackKey;
+            @SwitchAttackKey.performed += instance.OnSwitchAttackKey;
+            @SwitchAttackKey.canceled += instance.OnSwitchAttackKey;
         }
 
         /// <summary>
@@ -990,6 +1063,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SwitchAttackScroll.started -= instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.performed -= instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.canceled -= instance.OnSwitchAttackScroll;
+            @SwitchAttackKey.started -= instance.OnSwitchAttackKey;
+            @SwitchAttackKey.performed -= instance.OnSwitchAttackKey;
+            @SwitchAttackKey.canceled -= instance.OnSwitchAttackKey;
         }
 
         /// <summary>
@@ -1318,6 +1394,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchAttackScroll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchAttackKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchAttackKey(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

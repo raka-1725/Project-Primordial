@@ -3,6 +3,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+
 
 public class MagicSelector : MonoBehaviour
 {
@@ -67,18 +69,36 @@ public class MagicSelector : MonoBehaviour
         inputActions.Player.SwitchAttackScroll.performed += ctx =>
         {
             Vector2 scrollValue = ctx.ReadValue<Vector2>();
-            if (scrollValue.y > 0) CycleAttack(1);
-            else if (scrollValue.y < 0) CycleAttack(-1);
+            if (scrollValue.y > 0) CycleAttackScroll(1);
+            else if (scrollValue.y < 0) CycleAttackScroll(-1);
+        };
+
+        inputActions.Player.SwitchAttackKey.performed += ctx => 
+        { 
+            var KeyControl = ctx.control as KeyControl;
+            switch (KeyControl.keyCode) 
+            {
+                case Key.Digit1: CycleAttack(1); break;
+                case Key.Digit2: CycleAttack(2); break;
+                case Key.Digit3: CycleAttack(3); break;
+                case Key.Digit4: CycleAttack(4); break;
+                case Key.Digit5: CycleAttack(5); break;
+            }
         };
     }
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
-    private void CycleAttack(int direction)
+
+    private void CycleAttackScroll(int direction) 
     {
         currentAttackIndex += direction;
-        if (currentAttackIndex <= -1) { currentAttackIndex = 0; }
-        if (currentAttackIndex > 4) { currentAttackIndex = 4; }
+        currentAttackIndex = Mathf.Clamp(currentAttackIndex, 0, mSkillUIList.Count - 1);
+        SelectAbility(currentAttackIndex);
+    }
+    private void CycleAttack(int direction)
+    {
+        currentAttackIndex = (direction - 1);
         SelectAbility(currentAttackIndex);
         Debug.Log($"Switched to attack: {currentAttackIndex}");
     }
