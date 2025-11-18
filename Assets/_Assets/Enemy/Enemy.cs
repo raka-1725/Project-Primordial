@@ -77,20 +77,6 @@ public class Enemy : MonoBehaviour
             mFrozeTimer = 0;
         }
     }
-
-
-    private void FrozeTimer()
-    {
-        if (!bIsFrozed) return;
-
-        mFrozeTimer += Time.deltaTime;
-
-        if (mFrozeTimer >= mFrozeDuration)
-        {
-            UnFreeze();
-            mFrozeTimer = 0;
-        }
-    }
     /*public void SetFrozen(bool frozen)
     {
         if (frozen)
@@ -125,7 +111,7 @@ public class Enemy : MonoBehaviour
 
         Player player = GameManager.mGamaManager.mPlayer;
 
-        Debug.Log($"Player {player}");
+        //Debug.Log($"Player {player}");
         if (!player) { return; }
 
 
@@ -174,19 +160,6 @@ public class Enemy : MonoBehaviour
             }
         }
 
-    }
-
-    public void Freeze() 
-    {
-        mNavAgent.isStopped = true;
-        bIsFrozed = true;
-        
-    }
-
-    public void UnFreeze()
-    {
-        mNavAgent.isStopped = false;
-        bIsFrozed = false;
     }
 
     private void OnDrawGizmos()
