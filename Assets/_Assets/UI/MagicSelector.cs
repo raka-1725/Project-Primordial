@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -92,18 +93,36 @@ public class MagicSelector : MonoBehaviour
             else if (scrollValue.y < 0) CycleAttackScroll(-1);
         };
 
-        inputActions.Player.SwitchAttackKey.performed += ctx => 
-        { 
+        inputActions.Player.SwitchAttackKey.performed += ctx =>
+        {
             var KeyControl = ctx.control as KeyControl;
-            switch (KeyControl.keyCode) 
-            {
-                case Key.Digit1: CycleAttack(1); break;
-                case Key.Digit2: CycleAttack(2); break;
-                case Key.Digit3: CycleAttack(3); break;
-                case Key.Digit4: CycleAttack(4); break;
-                case Key.Digit5: CycleAttack(5); break;
-            }
+            SwitchAttackKey(KeyControl);
+
         };
+    }
+
+    private void SwitchAttackKey(KeyControl KeyControl)
+    {
+        switch (KeyControl.keyCode)
+        {
+            case Key.Digit1:
+                CycleAttack(1);
+                break;
+            case Key.Digit2:
+                CycleAttack(2);
+                break;
+            case Key.Digit3:
+                CycleAttack(3);
+                break;
+            case Key.Digit4:
+                CycleAttack(4);
+                break;
+            case Key.Digit5:
+                CycleAttack(5);
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnEnable() => inputActions.Enable();
@@ -115,10 +134,11 @@ public class MagicSelector : MonoBehaviour
         currentAttackIndex = Mathf.Clamp(currentAttackIndex, 0, mSkillUIList.Count - 1);
         SelectAbility(currentAttackIndex);
     }
-    private void CycleAttack(int direction)
+    private void CycleAttack(int index)
     {
-        currentAttackIndex = (direction - 1);
+        if (index >= mSkillUIList.Count +1 ) { return; }
+        currentAttackIndex = (index - 1);
         SelectAbility(currentAttackIndex);
-        Debug.Log($"Switched to attack: {currentAttackIndex}");
+        //Debug.Log($"Switched to attack: {currentAttackIndex}");
     }
 }
