@@ -9,7 +9,7 @@ using UnityEngine.InputSystem.Controls;
 public class MagicSelector : MonoBehaviour
 {
     SMagicAttackController mMagicAttackController;
-    List<SMagicAttackData> mMagicAttackData;
+    [SerializeField] List<SMagicAttackData> mMagicAttackData;
 
     private int mMagicAttackIndex;
 
@@ -35,10 +35,29 @@ public class MagicSelector : MonoBehaviour
     private int currentSelectedIndex;
     private InputSystem_Actions inputActions;
 
-    public void NewSkillAccuired(SMagicAttackData magicdata) 
+    private void Start()
+    {
+        mMagicAttackController = FindAnyObjectByType<SMagicAttackController>();
+        mMagicAttackData = mMagicAttackController.magicAttacks;
+
+        SetUpUISkillList(mMagicAttackData);
+    }
+
+    private void SetUpUISkillList(List<SMagicAttackData> magicAttackDataList) 
+    {
+        foreach (SMagicAttackData magicAttackData in magicAttackDataList) 
+        {
+            GameObject SkillIcon = Instantiate(mSkillIconPrefab, mSkillSliderParent);
+            //SkillIcon.GetComponent<SkillIcon>().UpdateIcon(magicAttackData.mSkillIcon, magicAttackData.mAttackName); //waiting for Scriptable object to be updated
+            mSkillUIList.Add(SkillIcon);
+        }
+    }
+
+    public void NewSkillAccuired(SMagicAttackData magicAttackData) 
     {
         GameObject newSkillIconObj = Instantiate(mSkillIconPrefab, mSkillSliderParent);
-        newSkillIconObj.GetComponent<SkillIcon>().UpdateIcon(mSkillIconSprites[0], magicdata.mAttackName); 
+        //newSkillIconObj.GetComponent<SkillIcon>().UpdateIcon(magicAttackData.mSkillIcon, magicAttackData.mAttackName);
+        mSkillUIList.Add(newSkillIconObj);
     }
 
     public void UpdateAttackInventoryUI(int selectedIndex, List<SMagicAttackData> magicAttackDataList) 

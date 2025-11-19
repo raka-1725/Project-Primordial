@@ -7,7 +7,12 @@ using static UnityEditor.ShaderData;
 public class SMagicAttackController : MonoBehaviour
 {
     [Header("Magic Attack Settings")]
-    [SerializeField] private List<SMagicAttackData> magicAttacks; // All attack types
+    //[SerializeField] private List<SMagicAttackData> magicAttacks;// All attack types
+    
+    //Testing for getter and setter
+    [field:SerializeField]
+    public List<SMagicAttackData> magicAttacks { get; private set; }
+
     [SerializeField] private Transform magicAttackSpawn;
 
     private InputSystem_Actions inputActions;
