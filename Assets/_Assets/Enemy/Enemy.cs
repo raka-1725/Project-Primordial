@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
         if (!bIsFrozed) return;
 
         mFrozeTimer += Time.deltaTime;
-
+        mNavAgent.isStopped = true;
         if (mFrozeTimer >= mFrozeDuration) 
         {
             UnFreeze();
@@ -95,15 +95,15 @@ public class Enemy : MonoBehaviour
 
     public void Freeze()
     {
-        mNavAgent.isStopped = true;
         bIsFrozed = true;
-
+        Debug.Log($"Enemy{this.name}, is frozed");
     }
 
     public void UnFreeze()
     {
         mNavAgent.isStopped = false;
         bIsFrozed = false;
+        Debug.Log($"Enemy{this.name}, is unfrozed");
     }
 
     private void PlayerSearch()
