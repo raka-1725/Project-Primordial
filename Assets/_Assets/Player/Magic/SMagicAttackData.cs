@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MagicAttackData", menuName = "Magic/AttackData")]
 public class SMagicAttackData : ScriptableObject
 {
+    public Sprite mAttackIconSprite;
     public string mAttackName;
     public GameObject mAttackPrefab;
     public float mForce = 20f;

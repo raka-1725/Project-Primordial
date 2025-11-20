@@ -470,6 +470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434082910023953775, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
+      propertyPath: mFrozeDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3173205822387757455, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
       propertyPath: 'managedReferences[1169701459774144615].m_Value.Array.data[0]'
       value: 
@@ -1355,6 +1359,10 @@ PrefabInstance:
       propertyPath: 'managedReferences[1169701459774144615].m_Value.Array.data[3]'
       value: 
       objectReference: {fileID: 1415570278}
+    - target: {fileID: 7773988748592815109, guid: f432e871066552b448e7db26504b9884, type: 3}
+      propertyPath: mFrozeDuration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1690,6 +1698,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3980391290403256750, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: mFrozeDuration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1740,6 +1752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1927850427808577646, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
+      propertyPath: mFrozeDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2679226794609833102, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: 'managedReferences[1169701459774144615].m_Value.Array.data[0]'
       value: 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using static UnityEditor.ShaderData;
 
 public class SMagicAttackController : MonoBehaviour
@@ -35,12 +36,50 @@ public class SMagicAttackController : MonoBehaviour
             else if (scrollValue.y < 0) CycleAttack(-1);
         };
 
+        inputActions.Player.SwitchAttackKey.performed += ctx =>
+        {
+            var KeyControl = ctx.control as KeyControl;
+            SwitchAttackKey(KeyControl);
+
+        };
+
         animator = GetComponent<Animator>();
         movementController = GetComponent<MovementController>();
     }
 
+    private void SwitchAttackKey(KeyControl KeyControl)
+    {
+        switch (KeyControl.keyCode)
+        {
+            case Key.Digit1:
+                CycleAttackKey(1);
+                break;
+            case Key.Digit2:
+                CycleAttackKey(2);
+                break;
+            case Key.Digit3:
+                CycleAttackKey(3);
+                break;
+            case Key.Digit4:
+                CycleAttackKey(4);
+                break;
+            case Key.Digit5:
+                CycleAttackKey(5);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
+
+    private void CycleAttackKey(int index) 
+    {
+        if (index >= magicAttacks.Count + 1) { return; }
+        currentAttackIndex = (index - 1);
+        Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
+    }
     private void CycleAttack(int direction)
     {
         currentAttackIndex += direction;

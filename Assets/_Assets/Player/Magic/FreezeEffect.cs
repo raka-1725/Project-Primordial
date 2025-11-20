@@ -15,6 +15,7 @@ public class FreezeEffect : MonoBehaviour
         if (enemyScript != null)
         {
             enemyScript.Freeze();
+            Debug.Log($"Enemy Frozed:{enemy.name}");
         }
 
         Invoke(nameof(UnfreezeEnemy), duration);
