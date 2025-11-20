@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SFireballExplosion : MonoBehaviour
+public class SProjectileLogic : MonoBehaviour
 {
     [Header("Explosion Settings")]
     [SerializeField] private GameObject explosionEffect;
@@ -17,9 +16,11 @@ public class SFireballExplosion : MonoBehaviour
         if (collision.transform.CompareTag("Player")) return;
 
         // Spawn explosion effect
-        if (explosionEffect != null)
+        if (explosionEffect != null && collision.transform.CompareTag("Enemy"))
         {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            Debug.Log("Destroy projectile");
         }
 
         // Find all objects in radius
@@ -46,8 +47,6 @@ public class SFireballExplosion : MonoBehaviour
                     Destroy(nearbyObj.gameObject);
                     Debug.Log($"Enemy destroyed: {nearbyObj.name}");
                 }
-
-
             }
         }
 

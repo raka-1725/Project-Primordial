@@ -109,9 +109,8 @@ public class SMagicAttackController : MonoBehaviour
 
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
         GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
-
         // Pass freeze info to projectile if needed
-        SFireballExplosion explosionScript = magicClone.GetComponent<SFireballExplosion>();
+        SProjectileLogic explosionScript = magicClone.GetComponent<SProjectileLogic>();
         if (explosionScript != null)
         {
             explosionScript.isFreezeAttack = attackData.mIsFreezeAttack;
