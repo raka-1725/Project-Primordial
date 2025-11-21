@@ -7,11 +7,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float mPlayerHealth = 100;
     [SerializeField] private float mPlayerMana = 50;
 
-
+    [Header("Player Effects")]
+    [SerializeField] private GameObject mDamageEffect;
 
 
     public void TakeHealth(float health) 
     {
         mPlayerHealth -= health;
+
     }
 }
