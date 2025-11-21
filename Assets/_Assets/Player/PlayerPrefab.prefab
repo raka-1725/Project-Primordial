@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mPlayerHealth: 100
   mPlayerMana: 50
+  mDamageEffect: {fileID: 4502175675019780610, guid: 9a09523d077b8a449bccdeb315a274b4, type: 3}
 --- !u!1001 &4243692657090467968
 PrefabInstance:
   m_ObjectHideFlags: 0
