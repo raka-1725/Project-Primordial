@@ -27,7 +27,7 @@ public class SMagicAttackController : MonoBehaviour
     void Awake()
     {
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Attack.performed += ctx => TryMagicAttack();
+        inputActions.Player.Attack.performed += ctx => TryAttack();
 
         inputActions.Player.SwitchAttackScroll.performed += ctx =>
         {
@@ -89,45 +89,57 @@ public class SMagicAttackController : MonoBehaviour
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 
-    private void TryMagicAttack()
+    private void TryAttack()
     {
         mCurrentTarget = movementController.CurrentTarget;
         if (mCurrentTarget == null || magicAttacks.Count == 0) return;
 
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
-        if (Time.time >= nextAttackTime)
+        if (Time.time >= nextAttackTime) return;
+
+        switch (attackData.mAnimationType)
         {
-            animator.SetTrigger("Attack");
-            nextAttackTime = Time.time + attackData.mCooldown;
+            case AttackAnimationType.Magic:
+                animator.SetTrigger("Attack");
+                break;
+
+            case AttackAnimationType.AoE:
+                animator.SetTrigger("AoE");
+                break;
         }
+
+        nextAttackTime = Time.time + attackData.mCooldown;
     }
 
     // Called by animation event
     private void SpawnMagic()
     {
-
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
-        GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
 
-        // Pass freeze info to projectile if needed
-        SFireballExplosion explosionScript = magicClone.GetComponent<SFireballExplosion>();
-        if (explosionScript != null)
-        {
-            explosionScript.isFreezeAttack = attackData.mIsFreezeAttack;
-            explosionScript.mSpecialEffectPrefab = attackData.mSpecialEffectPrefab;
-            explosionScript.mEffectDuration = attackData.mEffectDuration;
-        }
+        GameObject magicClone = Instantiate(
+            attackData.mAttackPrefab,
+            magicAttackSpawn.position,
+            magicAttackSpawn.rotation
+        );
 
-        Rigidbody rBody = magicClone.GetComponent<Rigidbody>();
-        if (rBody != null)
+        Rigidbody rb = magicClone.GetComponent<Rigidbody>();
+        if (rb != null)
         {
             Vector3 direction = mCurrentTarget != null
                 ? (mCurrentTarget.transform.position - magicAttackSpawn.position).normalized
                 : magicAttackSpawn.forward;
 
-            rBody.AddForce(direction * attackData.mForce, ForceMode.Impulse);
+            rb.AddForce(direction * attackData.mForce, ForceMode.Impulse);
         }
+
+        // Add SProjectileLogic for all attacks
+        SProjectileLogic projLogic = magicClone.AddComponent<SProjectileLogic>();
+        projLogic.isFreezeAttack = attackData.mIsFreezeAttack;
+        projLogic.mSpecialEffectPrefab = attackData.mSpecialEffectPrefab;
+        projLogic.mEffectDuration = attackData.mEffectDuration;
+        projLogic.isAoEAttack = attackData.mIsAoEAttack;
+        projLogic.aoeRadius = attackData.mAoERadius;
     }
 
 }

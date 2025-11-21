@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3994413077647588205}
-  - component: {fileID: 8979104953633283103}
   - component: {fileID: 2415060883261280290}
+  - component: {fileID: -5866858180178632225}
   m_Layer: 0
   m_Name: FireBall
   m_TagString: Untagged
@@ -34,20 +34,6 @@ Transform:
   - {fileID: 4880941172278057346}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8979104953633283103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286646688807115751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc2667b564eefd48aaff0589474712a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionEffect: {fileID: 0}
-  explosionRadius: 0.5
 --- !u!54 &2415060883261280290
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,6 +61,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5866858180178632225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286646688807115751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b272f33774dcac046a9a1770722f7239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 286646688807115751}
+  explosionRadius: 1
+  isFreezeAttack: 0
+  mSpecialEffectPrefab: {fileID: 0}
+  mEffectDuration: 3
 --- !u!1 &7063415797907078838
 GameObject:
   m_ObjectHideFlags: 0

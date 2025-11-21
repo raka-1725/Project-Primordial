@@ -1,15 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SFireballExplosion : MonoBehaviour
+public class SProjectileLogic : MonoBehaviour
 {
     [Header("Explosion Settings")]
     [SerializeField] private GameObject explosionEffect;
-    [SerializeField] private float explosionRadius = 1.0f;
 
     public bool isFreezeAttack = false;
     public GameObject mSpecialEffectPrefab;
     public float mEffectDuration = 3f;
+    public bool isAoEAttack = false;
+    public float aoeRadius = 3f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -22,15 +22,16 @@ public class SFireballExplosion : MonoBehaviour
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
         }
 
+        // Determine radius
+        float radius = isAoEAttack ? aoeRadius : 1f;
+
         // Find all objects in radius
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider nearbyObj in colliders)
         {
-            // Destroy only enemies
             if (nearbyObj.CompareTag("Enemy"))
             {
-
                 if (isFreezeAttack && mSpecialEffectPrefab != null)
                 {
                     // Freeze logic
@@ -42,23 +43,21 @@ public class SFireballExplosion : MonoBehaviour
                 }
                 else
                 {
-                    // Fireball logic: destroy enemy
+                    // Normal attack: destroy enemy
                     Destroy(nearbyObj.gameObject);
                     Debug.Log($"Enemy destroyed: {nearbyObj.name}");
                 }
-
-
             }
         }
 
-        // Destroy projectile after explosion
+        // Destroy projectile after collision processing
         Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+        float radius = isAoEAttack ? aoeRadius : 1f;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
-
 }
