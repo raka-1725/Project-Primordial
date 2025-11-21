@@ -811,10 +811,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1434082910023953775, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
-      propertyPath: mFrozeDuration
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3173205822387757455, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
       propertyPath: 'managedReferences[1169701459774144615].m_Value.Array.data[0]'
       value: 
@@ -1848,6 +1844,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Demon
       objectReference: {fileID: 0}
+    - target: {fileID: 5080006041759623567, guid: f432e871066552b448e7db26504b9884, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1.36
+      objectReference: {fileID: 0}
     - target: {fileID: 5443255676873394113, guid: f432e871066552b448e7db26504b9884, type: 3}
       propertyPath: m_LocalPosition.x
       value: 78.69784
@@ -2426,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1681431923024700010, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.214586
+      value: 24.31
       objectReference: {fileID: 0}
     - target: {fileID: 1681431923024700010, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2459,6 +2459,10 @@ PrefabInstance:
     - target: {fileID: 1776627319394472599, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_Name
       value: Enemy_Ghoul
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918603579210517540, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 2393345350320943290, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_LocalScale.x
@@ -2553,6 +2557,10 @@ PrefabInstance:
     - target: {fileID: 3844930965840663383, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: m_Name
       value: Enemy_Mutant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989088382116744676, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 4227063765339055018, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: m_LocalPosition.x

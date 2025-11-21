@@ -185,8 +185,10 @@ public class Enemy : MonoBehaviour
                 Target = null;
             }
         }
+        float dist = (player.transform.position - transform.position).sqrMagnitude;
+        float attackRange = mNavAgent.stoppingDistance * mNavAgent.stoppingDistance;
 
-        if (mNavAgent.remainingDistance <= mNavAgent.stoppingDistance && !bIsFrozed) 
+        if (dist <= attackRange && !bIsFrozed) //Improve this
         {
             AttackPlayer();
         }
