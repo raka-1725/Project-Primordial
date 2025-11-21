@@ -8,12 +8,7 @@ using static UnityEditor.ShaderData;
 public class SMagicAttackController : MonoBehaviour
 {
     [Header("Magic Attack Settings")]
-    //[SerializeField] private List<SMagicAttackData> magicAttacks;// All attack types
-    
-    //Testing for getter and setter
-    [field:SerializeField]
-    public List<SMagicAttackData> magicAttacks { get; private set; }
-
+    [field: SerializeField] public List<SMagicAttackData> magicAttacks { get; private set; }
     [SerializeField] private Transform magicAttackSpawn;
 
     private InputSystem_Actions inputActions;
@@ -22,6 +17,7 @@ public class SMagicAttackController : MonoBehaviour
 
     private int currentAttackIndex = 0;
     private GameObject mCurrentTarget;
+    private float lastAttackTime = 0f;
 
     void Awake()
     {
@@ -37,48 +33,36 @@ public class SMagicAttackController : MonoBehaviour
 
         inputActions.Player.SwitchAttackKey.performed += ctx =>
         {
-            var KeyControl = ctx.control as KeyControl;
-            SwitchAttackKey(KeyControl);
-
+            var keyControl = ctx.control as KeyControl;
+            SwitchAttackKey(keyControl);
         };
 
         animator = GetComponent<Animator>();
         movementController = GetComponent<MovementController>();
     }
 
-    private void SwitchAttackKey(KeyControl KeyControl)
-    {
-        switch (KeyControl.keyCode)
-        {
-            case Key.Digit1:
-                CycleAttackKey(1);
-                break;
-            case Key.Digit2:
-                CycleAttackKey(2);
-                break;
-            case Key.Digit3:
-                CycleAttackKey(3);
-                break;
-            case Key.Digit4:
-                CycleAttackKey(4);
-                break;
-            case Key.Digit5:
-                CycleAttackKey(5);
-                break;
-            default:
-                break;
-        }
-    }
-
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
 
-    private void CycleAttackKey(int index) 
+    private void SwitchAttackKey(KeyControl keyControl)
     {
-        if (index >= magicAttacks.Count + 1) { return; }
-        currentAttackIndex = (index - 1);
+        switch (keyControl.keyCode)
+        {
+            case Key.Digit1: CycleAttackKey(1); break;
+            case Key.Digit2: CycleAttackKey(2); break;
+            case Key.Digit3: CycleAttackKey(3); break;
+            case Key.Digit4: CycleAttackKey(4); break;
+            case Key.Digit5: CycleAttackKey(5); break;
+        }
+    }
+
+    private void CycleAttackKey(int index)
+    {
+        if (index < 1 || index > magicAttacks.Count) return;
+        currentAttackIndex = index - 1;
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
+
     private void CycleAttack(int direction)
     {
         currentAttackIndex += direction;
@@ -95,12 +79,15 @@ public class SMagicAttackController : MonoBehaviour
 
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
+        // Cooldown check
+        if (Time.time < lastAttackTime + attackData.mCooldown) return;
+        lastAttackTime = Time.time;
+
         switch (attackData.mAnimationType)
         {
             case AttackAnimationType.Magic:
                 animator.SetTrigger("Attack");
                 break;
-
             case AttackAnimationType.AoE:
                 animator.SetTrigger("AoE");
                 break;
@@ -112,26 +99,53 @@ public class SMagicAttackController : MonoBehaviour
     {
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
-        GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
-
-        Rigidbody rb = magicClone.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (attackData.mIsAoEAttack)
         {
-            Vector3 direction = mCurrentTarget != null
-                ? (mCurrentTarget.transform.position - magicAttackSpawn.position).normalized
-                : magicAttackSpawn.forward;
+            // AoE attack logic
+            Vector3 aoeCenter = mCurrentTarget != null ? mCurrentTarget.transform.position : magicAttackSpawn.position;
 
-            rb.AddForce(direction * attackData.mForce, ForceMode.Impulse);
+            if (attackData.mAttackPrefab != null)
+                Instantiate(attackData.mAttackPrefab, aoeCenter, Quaternion.identity);
+
+            Collider[] colliders = Physics.OverlapSphere(aoeCenter, attackData.mAoERadius);
+            foreach (Collider nearbyObj in colliders)
+            {
+                if (nearbyObj.CompareTag("Enemy"))
+                {
+                    if (attackData.mIsFreezeAttack && attackData.mSpecialEffectPrefab != null)
+                    {
+                        GameObject freezeEffect = Instantiate(attackData.mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
+                        freezeEffect.transform.SetParent(nearbyObj.transform);
+
+                        FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
+                        freezeScript.Initialize(nearbyObj.gameObject, attackData.mEffectDuration);
+                    }
+                    else
+                    {
+                        Destroy(nearbyObj.gameObject);
+                        Debug.Log($"Enemy hit by AoE: {nearbyObj.name}");
+                    }
+                }
+            }
         }
+        else
+        {
+            // Projectile attack logic
+            GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
 
-        // Add SProjectileLogic for all attacks
-        SProjectileLogic projLogic = magicClone.AddComponent<SProjectileLogic>();
-        projLogic.isFreezeAttack = attackData.mIsFreezeAttack;
-        projLogic.mSpecialEffectPrefab = attackData.mSpecialEffectPrefab;
-        projLogic.mEffectDuration = attackData.mEffectDuration;
-        projLogic.isAoEAttack = attackData.mIsAoEAttack;
-        projLogic.aoeRadius = attackData.mAoERadius;
+            Rigidbody rb = magicClone.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                Vector3 direction = mCurrentTarget != null
+                    ? (mCurrentTarget.transform.position - magicAttackSpawn.position).normalized
+                    : magicAttackSpawn.forward;
+
+                rb.AddForce(direction * attackData.mForce, ForceMode.Impulse);
+            }
+
+            SProjectileLogic projLogic = magicClone.AddComponent<SProjectileLogic>();
+            projLogic.Initialize(attackData);
+        }
     }
-
 }
 
