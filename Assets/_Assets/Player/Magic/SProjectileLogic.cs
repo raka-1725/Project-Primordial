@@ -11,21 +11,23 @@ public class SProjectileLogic : MonoBehaviour
     public bool isAoEAttack = false;
     public float aoeRadius = 3f;
 
+    public void Initialize(SMagicAttackData attackData)
+    {
+        isFreezeAttack = attackData.mIsFreezeAttack;
+        mSpecialEffectPrefab = attackData.mSpecialEffectPrefab;
+        mEffectDuration = attackData.mEffectDuration;
+        isAoEAttack = attackData.mIsAoEAttack;
+        aoeRadius = attackData.mAoERadius;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        // Ignore collisions with Player
         if (collision.transform.CompareTag("Player")) return;
 
-        // Spawn explosion effect
         if (explosionEffect != null)
-        {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        }
 
-        // Determine radius
         float radius = isAoEAttack ? aoeRadius : 1f;
-
-        // Find all objects in radius
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
 
         foreach (Collider nearbyObj in colliders)
@@ -34,7 +36,6 @@ public class SProjectileLogic : MonoBehaviour
             {
                 if (isFreezeAttack && mSpecialEffectPrefab != null)
                 {
-                    // Freeze logic
                     GameObject freezeEffect = Instantiate(mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
                     freezeEffect.transform.SetParent(nearbyObj.transform);
 
@@ -43,14 +44,12 @@ public class SProjectileLogic : MonoBehaviour
                 }
                 else
                 {
-                    // Normal attack: destroy enemy
                     Destroy(nearbyObj.gameObject);
                     Debug.Log($"Enemy destroyed: {nearbyObj.name}");
                 }
             }
         }
 
-        // Destroy projectile after collision processing
         Destroy(gameObject);
     }
 
@@ -60,4 +59,5 @@ public class SProjectileLogic : MonoBehaviour
         float radius = isAoEAttack ? aoeRadius : 1f;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+
 }
