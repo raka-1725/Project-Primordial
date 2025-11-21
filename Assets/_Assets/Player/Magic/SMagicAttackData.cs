@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public enum AttackAnimationType
-{
-    Magic,
-    AoE
-}
+public enum AttackAnimationType{ Magic, AoE }
 
 [CreateAssetMenu(fileName = "MagicAttackData", menuName = "Magic/AttackData")]
 public class SMagicAttackData : ScriptableObject

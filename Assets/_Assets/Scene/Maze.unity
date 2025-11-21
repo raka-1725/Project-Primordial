@@ -2052,6 +2052,10 @@ PrefabInstance:
       propertyPath: '<magicAttacks>k__BackingField.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: 3b0f5bce40c35f84fb885aecb92a89e6, type: 2}
+    - target: {fileID: 7214064188159489272, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8882243794805178592, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
