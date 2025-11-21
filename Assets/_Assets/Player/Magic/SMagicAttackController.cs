@@ -21,7 +21,6 @@ public class SMagicAttackController : MonoBehaviour
     private MovementController movementController;
 
     private int currentAttackIndex = 0;
-    private float nextAttackTime = 0f;
     private GameObject mCurrentTarget;
 
     void Awake()
@@ -96,8 +95,6 @@ public class SMagicAttackController : MonoBehaviour
 
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
-        if (Time.time >= nextAttackTime) return;
-
         switch (attackData.mAnimationType)
         {
             case AttackAnimationType.Magic:
@@ -108,8 +105,6 @@ public class SMagicAttackController : MonoBehaviour
                 animator.SetTrigger("AoE");
                 break;
         }
-
-        nextAttackTime = Time.time + attackData.mCooldown;
     }
 
     // Called by animation event
@@ -117,11 +112,7 @@ public class SMagicAttackController : MonoBehaviour
     {
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
-        GameObject magicClone = Instantiate(
-            attackData.mAttackPrefab,
-            magicAttackSpawn.position,
-            magicAttackSpawn.rotation
-        );
+        GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
 
         Rigidbody rb = magicClone.GetComponent<Rigidbody>();
         if (rb != null)

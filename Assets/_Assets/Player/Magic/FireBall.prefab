@@ -73,11 +73,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b272f33774dcac046a9a1770722f7239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionEffect: {fileID: 286646688807115751}
-  explosionRadius: 1
+  explosionEffect: {fileID: 0}
   isFreezeAttack: 0
   mSpecialEffectPrefab: {fileID: 0}
   mEffectDuration: 3
+  isAoEAttack: 0
+  aoeRadius: 3
 --- !u!1 &7063415797907078838
 GameObject:
   m_ObjectHideFlags: 0

@@ -1576,7 +1576,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6ea06a5ccb6579142acf935695d0235f, type: 2}
     - target: {fileID: 6852276241635038578, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: <magicAttacks>k__BackingField.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6852276241635038578, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: '<magicAttacks>k__BackingField.Array.data[0]'
@@ -1586,6 +1586,10 @@ PrefabInstance:
       propertyPath: '<magicAttacks>k__BackingField.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 6ea06a5ccb6579142acf935695d0235f, type: 2}
+    - target: {fileID: 6852276241635038578, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
+      propertyPath: '<magicAttacks>k__BackingField.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3b0f5bce40c35f84fb885aecb92a89e6, type: 2}
     - target: {fileID: 8882243794805178592, guid: 6c3158506f17c2644875cb24d9d9fd17, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
