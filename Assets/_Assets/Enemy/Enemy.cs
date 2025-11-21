@@ -186,7 +186,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (mNavAgent.remainingDistance <= mNavAgent.stoppingDistance) 
+        if (mNavAgent.remainingDistance <= mNavAgent.stoppingDistance && !bIsFrozed) 
         {
             AttackPlayer();
         }
@@ -215,6 +215,7 @@ public class Enemy : MonoBehaviour
 
     public void Hit() 
     {
+        if (bIsFrozed) return;
         Collider[] collider = Physics.OverlapSphere(mAttackTransform.position, mAttackArea);
 
         foreach (Collider obj in collider)
