@@ -14,6 +14,8 @@ public class SMagicAttackController : MonoBehaviour
     private InputSystem_Actions inputActions;
     private Animator animator;
     private MovementController movementController;
+    //UI
+    private MagicSelector mMagicSelector;
 
     private int currentAttackIndex = 0;
     private GameObject mCurrentTarget;
@@ -29,6 +31,7 @@ public class SMagicAttackController : MonoBehaviour
             Vector2 scrollValue = ctx.ReadValue<Vector2>();
             if (scrollValue.y > 0) CycleAttack(1);
             else if (scrollValue.y < 0) CycleAttack(-1);
+
         };
 
         inputActions.Player.SwitchAttackKey.performed += ctx =>
@@ -39,6 +42,7 @@ public class SMagicAttackController : MonoBehaviour
 
         animator = GetComponent<Animator>();
         movementController = GetComponent<MovementController>();
+        mMagicSelector = FindAnyObjectByType<MagicSelector>();
     }
 
     private void OnEnable() => inputActions.Enable();
@@ -60,6 +64,7 @@ public class SMagicAttackController : MonoBehaviour
     {
         if (index < 1 || index > magicAttacks.Count) return;
         currentAttackIndex = index - 1;
+        mMagicSelector.UpdateCycleAttackIndex(currentAttackIndex);
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 
@@ -68,7 +73,7 @@ public class SMagicAttackController : MonoBehaviour
         currentAttackIndex += direction;
         if (currentAttackIndex >= magicAttacks.Count) currentAttackIndex = 0;
         if (currentAttackIndex < 0) currentAttackIndex = magicAttacks.Count - 1;
-
+        mMagicSelector.UpdateCycleAttackIndex(currentAttackIndex);
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 
@@ -80,7 +85,15 @@ public class SMagicAttackController : MonoBehaviour
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
         // Cooldown check
-        if (Time.time < lastAttackTime + attackData.mCooldown) return;
+        if (Time.time < lastAttackTime + attackData.mCooldown) 
+        {
+            float timeLeft = (lastAttackTime + attackData.mCooldown) - Time.time;
+            float normalized = timeLeft / attackData.mCooldown;
+
+            mMagicSelector.onAttackCoolDown(currentAttackIndex, normalized);
+            return;
+                
+        }
         lastAttackTime = Time.time;
 
         switch (attackData.mAnimationType)

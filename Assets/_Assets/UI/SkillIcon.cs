@@ -6,6 +6,7 @@ public class SkillIcon : MonoBehaviour
 {
     [SerializeField] private Sprite mIconSprite;
     [SerializeField] private Image mIconImageComponent;
+    
     [SerializeField] private string mSkillName;
 
     [SerializeField] private GameObject mDisabledTint;
@@ -13,19 +14,24 @@ public class SkillIcon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mSkillNameText;
 
 
-   public void UpdateIcon(Sprite icon, string name) 
+   public void UpdateIcon(SMagicAttackData magicAttackData) 
    {
-        mIconSprite = icon;
-        mSkillName = name;
+        mIconSprite = magicAttackData.mAttackIconSprite;
+        mSkillName = magicAttackData.mAttackName;
         mIconImageComponent.sprite = mIconSprite;
+        mSkillNameText.SetText(mSkillName);
+
+        mCoolDownSlider.maxValue = magicAttackData.mCooldown;
    }
 
-    public void ChangeScale(float width, float height) 
+    public void ChangeScale(float scaleIndex) 
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(width, height);
-        mIconImageComponent.rectTransform.sizeDelta = new Vector2(width,height);
+        rectTransform.localScale = new Vector3(scaleIndex, scaleIndex, scaleIndex);
     }
-    
-    
+
+    public void OnCoolDown(float value) 
+    {
+        mCoolDownSlider.value = value;
+    }
 }
