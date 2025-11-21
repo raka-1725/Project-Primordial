@@ -107,6 +107,34 @@ public class SMagicAttackController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        UpdateCoolDown();
+    }
+
+    private void UpdateCoolDown()
+    {
+        if (magicAttacks.Count == 0) return;
+
+        SMagicAttackData attackData = magicAttacks[currentAttackIndex];
+
+        float cooldown = attackData.mCooldown;
+        float elapsed = Time.time - lastAttackTime;
+        if (elapsed >= cooldown)
+        {
+            mMagicSelector.onAttackCoolDown(currentAttackIndex, 1f);
+        }
+        else
+        {
+            float normalized = (cooldown - elapsed) / cooldown;
+
+            normalized = 1f - normalized;
+
+            mMagicSelector.onAttackCoolDown(currentAttackIndex, normalized);
+        }
+
+    }
+
     // Called by animation event
     private void SpawnMagic()
     {
