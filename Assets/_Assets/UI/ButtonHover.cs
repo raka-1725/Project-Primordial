@@ -28,4 +28,9 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         mRectTransform.localScale = mNormalScale;
     }
+
+    public void onClickReset() 
+    {
+        mRectTransform.localScale = mNormalScale;
+    }
 }
