@@ -5,6 +5,7 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEditor.UI;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -38,6 +39,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] float mWalkSPD = 1;
     [SerializeField] float mChaseSPD = 3;
 
+    [Header("Enemy Attack")]
+    [SerializeField] Transform mAttackTransform;
+    [SerializeField] float mAttackArea = 1;
+    [SerializeField] float mAttackStrength = 20;
+    [SerializeField] float mAttackInterval = 2f;
+
+
     [Header("PatrolPoints")]
     [SerializeField] List<GameObject> mPatrolPoints;
 
@@ -48,12 +56,14 @@ public class Enemy : MonoBehaviour
 
     BehaviorGraphAgent mBehaviorGraphAgent;
     NavMeshAgent mNavAgent;
+    Animator mAnimator;
     private float loseTimer;
 
     private void Awake()
     {
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         mNavAgent = GetComponent<NavMeshAgent>();
+        mAnimator = GetComponent<Animator>();
 
         SetPatrolPoints();
 
@@ -176,13 +186,46 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        if (mNavAgent.remainingDistance <= mNavAgent.stoppingDistance) 
+        {
+            AttackPlayer();
+        }
     }
+
+    public void AttackPlayer() 
+    {
+        Collider[] collider = Physics.OverlapSphere(mAttackTransform.position, mAttackArea);
+
+        foreach (Collider obj in collider) 
+        {
+            if (obj.CompareTag("Player")) 
+            {
+                StartCoroutine(AttackCoroutine());
+            }
+        }
+    
+    }
+
+    private IEnumerator AttackCoroutine() 
+    {
+        mAnimator.SetTrigger("Attack");
+        yield return new WaitForSeconds(mAttackInterval);
+    }
+
+    public void Hit() 
+    {
+        
+    }
+
+
+
 
     private void OnDrawGizmos()
     {
         Vector3 eyeviewPoint = transform.position + Vector3.up * mEyeHeight;
         Gizmos.DrawWireSphere(eyeviewPoint, mSightDistance);
         Gizmos.DrawWireSphere(eyeviewPoint, mAlwaysAwareDistance);
+        Gizmos.DrawWireSphere(mAttackTransform.position, mAttackArea);
 
 
         Vector3 leftLineDir = Quaternion.AngleAxis(mViewAngle, Vector3.up) * transform.forward;
@@ -197,4 +240,8 @@ public class Enemy : MonoBehaviour
             Gizmos.DrawWireSphere(Target.transform.position, 0.5f);
         }
     }
+
+
+
+
 }

@@ -16,9 +16,21 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3085881cf44e64f45ab6a62e2a63233b, type: 2}
+    - target: {fileID: 3559501716564611799, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 3559501716564611799, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.839
+      objectReference: {fileID: 0}
     - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: mEyeHeight
       value: 1.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: mAttackArea
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: 8157258424985310423, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: m_Name
