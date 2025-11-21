@@ -26,7 +26,6 @@ public class PauseMenu : MonoBehaviour
 
     private void OnPausePressed(InputAction.CallbackContext context)
     {
-        Debug.Log("Paused");
         bPaused = !bPaused;
         mPauseMenu.SetActive(bPaused);
         Paused();

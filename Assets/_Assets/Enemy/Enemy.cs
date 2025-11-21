@@ -194,6 +194,7 @@ public class Enemy : MonoBehaviour
 
     public void AttackPlayer() 
     {
+
         Collider[] collider = Physics.OverlapSphere(mAttackTransform.position, mAttackArea);
 
         foreach (Collider obj in collider) 
@@ -214,7 +215,16 @@ public class Enemy : MonoBehaviour
 
     public void Hit() 
     {
-        
+        Collider[] collider = Physics.OverlapSphere(mAttackTransform.position, mAttackArea);
+
+        foreach (Collider obj in collider)
+        {
+            if (obj.CompareTag("Player"))
+            {
+                Player player = obj.GetComponent<Player>();
+                player.TakeHealth(mAttackStrength);
+            }
+        }
     }
 
 
