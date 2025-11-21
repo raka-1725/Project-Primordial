@@ -1,16 +1,17 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("Player Health")]
+    [SerializeField] private float mPlayerHealth = 100;
+    [SerializeField] private float mPlayerMana = 50;
 
-    // Update is called once per frame
-    void Update()
+
+
+
+    public void TakeHealth(float health) 
     {
-        
+        mPlayerHealth -= health;
     }
 }

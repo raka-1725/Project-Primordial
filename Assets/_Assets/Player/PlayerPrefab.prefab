@@ -166,6 +166,9 @@ MonoBehaviour:
   airCheckLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &6852276241635038578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c76df9dc6a2e7247a02fe72a1127800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magicAttackPrefab: {fileID: 286646688807115751, guid: 55e53a526edc8264197baaa4fbe6c7aa, type: 3}
+  <magicAttacks>k__BackingField: []
   magicAttackSpawn: {fileID: 6811805260163846328}
-  magicForce: 5
 --- !u!114 &-4165823611048376639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29cf1ee645c599499fdd1b20fbc1fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mPlayerHealth: 100
+  mPlayerMana: 50
 --- !u!1001 &4243692657090467968
 PrefabInstance:
   m_ObjectHideFlags: 0
