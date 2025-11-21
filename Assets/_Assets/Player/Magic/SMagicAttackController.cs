@@ -99,15 +99,18 @@ public class SMagicAttackController : MonoBehaviour
     {
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
+        if (mCurrentTarget == null) return;
+
+        // Spawn at enemy position
+        Vector3 spawnPosition = mCurrentTarget.transform.position;
+
+        // Instantiate the attack prefab at enemy location
+        GameObject magicClone = Instantiate(attackData.mAttackPrefab, spawnPosition, Quaternion.identity);
+
+        // If it's AoE, apply AoE logic here
         if (attackData.mIsAoEAttack)
         {
-            // AoE attack logic
-            Vector3 aoeCenter = mCurrentTarget != null ? mCurrentTarget.transform.position : magicAttackSpawn.position;
-
-            if (attackData.mAttackPrefab != null)
-                Instantiate(attackData.mAttackPrefab, aoeCenter, Quaternion.identity);
-
-            Collider[] colliders = Physics.OverlapSphere(aoeCenter, attackData.mAoERadius);
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, attackData.mAoERadius);
             foreach (Collider nearbyObj in colliders)
             {
                 if (nearbyObj.CompareTag("Enemy"))
@@ -123,28 +126,9 @@ public class SMagicAttackController : MonoBehaviour
                     else
                     {
                         Destroy(nearbyObj.gameObject);
-                        Debug.Log($"Enemy hit by AoE: {nearbyObj.name}");
                     }
                 }
             }
-        }
-        else
-        {
-            // Projectile attack logic
-            GameObject magicClone = Instantiate(attackData.mAttackPrefab, magicAttackSpawn.position, magicAttackSpawn.rotation);
-
-            Rigidbody rb = magicClone.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                Vector3 direction = mCurrentTarget != null
-                    ? (mCurrentTarget.transform.position - magicAttackSpawn.position).normalized
-                    : magicAttackSpawn.forward;
-
-                rb.AddForce(direction * attackData.mForce, ForceMode.Impulse);
-            }
-
-            SProjectileLogic projLogic = magicClone.AddComponent<SProjectileLogic>();
-            projLogic.Initialize(attackData);
         }
     }
 }
