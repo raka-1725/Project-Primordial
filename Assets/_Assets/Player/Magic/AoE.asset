@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d052361e5e0012499ed59e95ca04da7, type: 3}
-  m_Name: Iceball
+  m_Name: AoE
   m_EditorClassIdentifier: 
-  mAttackIconSprite: {fileID: 21300000, guid: 6e7a7d4509d113c44be8358ecbbca0fc, type: 3}
-  mAttackName: Iceball
-  mAttackPrefab: {fileID: 286646688807115751, guid: 8f91505aceccb084e9c9bb22ea162bcd, type: 3}
+  mAttackIconSprite: {fileID: 21300000, guid: d98b775a6f3c03e43ba95a50dd259d3f, type: 3}
+  mAttackName: 
+  mAttackPrefab: {fileID: 0}
   mForce: 20
   mCooldown: 1
-  mAnimationType: 0
-  mIsFreezeAttack: 1
-  mSpecialEffectPrefab: {fileID: 1058577671838409447, guid: b0a30eb7adee6e6459926bfb9ecf4732, type: 3}
+  mAnimationType: 1
+  mIsFreezeAttack: 0
+  mSpecialEffectPrefab: {fileID: 0}
   mEffectDuration: 3
-  mIsAoEAttack: 0
+  mIsAoEAttack: 1
   mAoERadius: 3
