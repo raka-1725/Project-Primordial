@@ -4,6 +4,7 @@ using System;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEditor.UI;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] float mWalkSPD = 1;
     [SerializeField] float mChaseSPD = 3;
 
+    [Header("PatrolPoints")]
+    [SerializeField] List<GameObject> mPatrolPoints;
 
     [Header("Freeze")]
     [SerializeField] bool bIsFrozed;
@@ -52,9 +55,22 @@ public class Enemy : MonoBehaviour
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         mNavAgent = GetComponent<NavMeshAgent>();
 
+        SetPatrolPoints();
+
+        mBehaviorGraphAgent.BlackboardReference.SetVariableValue("Patrol Point", mPatrolPoints);
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("WalkSPD", mWalkSPD);
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("ChaseSPD", mChaseSPD);
     }
+
+    private void SetPatrolPoints()
+    {
+        GameObject[] PT = GameObject.FindGameObjectsWithTag("PatrolPoints");
+        foreach (GameObject patrolPoints in PT) 
+        {
+            mPatrolPoints.Add(patrolPoints);
+        }
+    }
+
     void Start()
     {
         
