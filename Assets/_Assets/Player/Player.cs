@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -14,6 +15,15 @@ public class Player : MonoBehaviour
     public void TakeHealth(float health) 
     {
         mPlayerHealth -= health;
-
+        damageEffect();
     }
+
+    private IEnumerator damageEffect() 
+    {
+        Instantiate(mDamageEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(mDamageEffect.GetComponent<ParticleSystem>().main.duration);
+        Destroy(mDamageEffect);
+    }
+
+
 }
