@@ -8,11 +8,12 @@ TagManager:
   - FxTemporaire
   - CinemachineTarget
   - Interactable
+  - PatrolPoints
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

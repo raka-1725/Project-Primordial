@@ -122,6 +122,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""82157b5b-a2bd-4416-bfa2-b2a325cb6ef4"",
+                    ""name"": ""SwitchAttackScroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""c3c95b1d-ef7e-498a-a22e-51425c7baa1b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwitchAttackKey"",
+                    ""type"": ""Value"",
+                    ""id"": ""6cf93490-268e-48d3-84f3-4cb24990b6d8"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a63762f-173a-4677-bb6b-982548d886ec"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -214,6 +235,78 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""id"": ""8c658c04-6efd-4bbe-944c-2a19f06a4035"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e814593-72c5-45f5-8a77-cf06b100fc67"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b54e2434-9abb-49c6-af5e-9a17cd22a428"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a50595cc-2732-4262-87fd-af3eaa3b455d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c152ee2-b22e-45d2-a322-93dd22fdba62"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6fdd312-0bbb-43fc-8c53-77d088c684e5"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""SwitchAttackKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44de683d-dd3a-43d5-a4e2-7565e4b4b440"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -805,6 +898,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_SwitchAttackScroll = m_Player.FindAction("SwitchAttackScroll", throwIfNotFound: true);
+        m_Player_SwitchAttackKey = m_Player.FindAction("SwitchAttackKey", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -902,6 +998,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_SwitchAttackScroll;
+    private readonly InputAction m_Player_SwitchAttackKey;
+    private readonly InputAction m_Player_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -929,6 +1028,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        /// Provides access to the underlying input action "Player/SwitchAttackScroll".
+        /// </summary>
+        public InputAction @SwitchAttackScroll => m_Wrapper.m_Player_SwitchAttackScroll;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwitchAttackKey".
+        /// </summary>
+        public InputAction @SwitchAttackKey => m_Wrapper.m_Player_SwitchAttackKey;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Pause".
+        /// </summary>
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -967,6 +1077,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @SwitchAttackScroll.started += instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.performed += instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.canceled += instance.OnSwitchAttackScroll;
+            @SwitchAttackKey.started += instance.OnSwitchAttackKey;
+            @SwitchAttackKey.performed += instance.OnSwitchAttackKey;
+            @SwitchAttackKey.canceled += instance.OnSwitchAttackKey;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -990,6 +1109,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @SwitchAttackScroll.started -= instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.performed -= instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.canceled -= instance.OnSwitchAttackScroll;
+            @SwitchAttackKey.started -= instance.OnSwitchAttackKey;
+            @SwitchAttackKey.performed -= instance.OnSwitchAttackKey;
+            @SwitchAttackKey.canceled -= instance.OnSwitchAttackKey;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -1313,11 +1441,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "SwitchAttackScroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        void OnSwitchAttackScroll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchAttackKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchAttackKey(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPause(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
