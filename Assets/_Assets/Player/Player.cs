@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
         mPlayerHealth -= health;
         damageEffect();
         mStatsUI.UpdateHealthSlider(mPlayerHealth);
-        Debug.Log($"Player damage, Take helth{health}, current health{mPlayerHealth}");
     }
 
     private IEnumerator damageEffect() 
