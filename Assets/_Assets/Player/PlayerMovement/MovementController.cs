@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class MovementController : MonoBehaviour
 {
-    private InputSystem_Actions inputActions;
+    private InputSystem_Actions mInputAction;
 
     [Header("Movement Settings")]
     [SerializeField] private float jumpSpeed = 6f;
@@ -21,11 +21,18 @@ public class MovementController : MonoBehaviour
     private Animator animator;
     private Camera mainCamera;
 
+    [Header("Player Interaction")]
+    //private Collider mInteractableInRange;
+
+    private CharacterController mCharacterController;
+    private Animator mAnimator;
     private Vector3 verticalVelocity;
     private Vector3 horizontalVelocity;
     private Vector2 moveInput;
     private bool shouldJump;
     private bool isInAir;
+    private bool mCanAttack;
+
 
     private GameObject currentTarget;
 
@@ -33,10 +40,12 @@ public class MovementController : MonoBehaviour
 
     void Awake()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Jump.performed += PerformJump;
-        inputActions.Player.Move.performed += HandleMoveInput;
-        inputActions.Player.Move.canceled += HandleMoveInput;
+
+        mInputAction = new InputSystem_Actions();
+        mInputAction.Player.Jump.performed += PerformJump;
+        mInputAction.Player.Move.performed += HandleMoveInput;
+        mInputAction.Player.Move.canceled += HandleMoveInput;
+        
 
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -46,8 +55,8 @@ public class MovementController : MonoBehaviour
         Cursor.visible = true;
     }
 
-    private void OnEnable() => inputActions.Enable();
-    private void OnDisable() => inputActions.Disable();
+    private void OnEnable() => mInputAction.Enable();
+    private void OnDisable() => mInputAction.Disable();
 
     private void HandleMoveInput(InputAction.CallbackContext context)
     {
@@ -61,7 +70,38 @@ public class MovementController : MonoBehaviour
             shouldJump = true;
         }
     }
-
+/*
+    private void TryInteraction()
+    {
+         if (mInteractableInRange != null)
+        {
+            Lever lever = mInteractableInRange.GetComponent<Lever>();
+            if (lever != null)
+            {
+                lever.Activate();
+            }
+            Door door = mInteractableInRange.GetComponent<Door>();
+            if (door != null)
+            {
+                door.Activate();
+            }
+        }
+    }
+     private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            mInteractableInRange = other;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == mInteractableInRange)
+        {
+            mInteractableInRange = null;
+        }
+    }
+*/
     void Update()
     {
         isInAir = IsInAir();

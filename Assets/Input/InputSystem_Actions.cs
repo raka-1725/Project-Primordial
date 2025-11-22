@@ -119,6 +119,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""82157b5b-a2bd-4416-bfa2-b2a325cb6ef4"",
                     ""name"": ""SwitchAttackScroll"",
                     ""type"": ""Value"",
                     ""id"": ""c3c95b1d-ef7e-498a-a22e-51425c7baa1b"",
@@ -226,6 +229,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""41d15ba5-9bca-4130-b45f-3e794dffe956"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""id"": ""8c658c04-6efd-4bbe-944c-2a19f06a4035"",
                     ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
@@ -888,6 +897,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_SwitchAttackScroll = m_Player.FindAction("SwitchAttackScroll", throwIfNotFound: true);
         m_Player_SwitchAttackKey = m_Player.FindAction("SwitchAttackKey", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
@@ -987,6 +997,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_SwitchAttackScroll;
     private readonly InputAction m_Player_SwitchAttackKey;
     private readonly InputAction m_Player_Pause;
@@ -1014,6 +1025,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Interact".
+        /// </summary>
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         /// Provides access to the underlying input action "Player/SwitchAttackScroll".
         /// </summary>
         public InputAction @SwitchAttackScroll => m_Wrapper.m_Player_SwitchAttackScroll;
@@ -1060,6 +1074,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
             @SwitchAttackScroll.started += instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.performed += instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.canceled += instance.OnSwitchAttackScroll;
@@ -1089,6 +1106,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
             @SwitchAttackScroll.started -= instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.performed -= instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.canceled -= instance.OnSwitchAttackScroll;
@@ -1420,11 +1440,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// Method invoked when associated input action "SwitchAttackScroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteract(InputAction.CallbackContext context);
         void OnSwitchAttackScroll(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "SwitchAttackKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

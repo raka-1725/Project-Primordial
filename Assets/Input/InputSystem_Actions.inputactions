@@ -33,6 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "82157b5b-a2bd-4416-bfa2-b2a325cb6ef4",
                     "name": "SwitchAttackScroll",
                     "type": "Value",
                     "id": "c3c95b1d-ef7e-498a-a22e-51425c7baa1b",
@@ -140,6 +143,12 @@
                 },
                 {
                     "name": "",
+                    "id": "41d15ba5-9bca-4130-b45f-3e794dffe956",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "id": "8c658c04-6efd-4bbe-944c-2a19f06a4035",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
