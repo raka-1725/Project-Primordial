@@ -122,9 +122,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""82157b5b-a2bd-4416-bfa2-b2a325cb6ef4"",
-                    ""name"": ""SwitchAttackScroll"",
-                    ""type"": ""Value"",
-                    ""id"": ""c3c95b1d-ef7e-498a-a22e-51425c7baa1b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -147,6 +144,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchAttackScroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""6a2c27a9-c4af-4122-aa16-0650b7cdf6ee"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -235,12 +241,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
-                    ""id"": ""8c658c04-6efd-4bbe-944c-2a19f06a4035"",
-                    ""path"": ""<Mouse>/scroll"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""SwitchAttackScroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -307,6 +307,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""200d3511-5b81-49e7-a4e1-68def202684d"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchAttackScroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -898,9 +909,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_SwitchAttackScroll = m_Player.FindAction("SwitchAttackScroll", throwIfNotFound: true);
         m_Player_SwitchAttackKey = m_Player.FindAction("SwitchAttackKey", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_SwitchAttackScroll = m_Player.FindAction("SwitchAttackScroll", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -998,9 +1009,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_SwitchAttackScroll;
     private readonly InputAction m_Player_SwitchAttackKey;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_SwitchAttackScroll;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1028,9 +1039,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        /// Provides access to the underlying input action "Player/SwitchAttackScroll".
-        /// </summary>
-        public InputAction @SwitchAttackScroll => m_Wrapper.m_Player_SwitchAttackScroll;
         /// <summary>
         /// Provides access to the underlying input action "Player/SwitchAttackKey".
         /// </summary>
@@ -1039,6 +1047,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Pause".
         /// </summary>
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwitchAttackScroll".
+        /// </summary>
+        public InputAction @SwitchAttackScroll => m_Wrapper.m_Player_SwitchAttackScroll;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1077,15 +1089,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @SwitchAttackScroll.started += instance.OnSwitchAttackScroll;
-            @SwitchAttackScroll.performed += instance.OnSwitchAttackScroll;
-            @SwitchAttackScroll.canceled += instance.OnSwitchAttackScroll;
             @SwitchAttackKey.started += instance.OnSwitchAttackKey;
             @SwitchAttackKey.performed += instance.OnSwitchAttackKey;
             @SwitchAttackKey.canceled += instance.OnSwitchAttackKey;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @SwitchAttackScroll.started += instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.performed += instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.canceled += instance.OnSwitchAttackScroll;
         }
 
         /// <summary>
@@ -1109,15 +1121,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @SwitchAttackScroll.started -= instance.OnSwitchAttackScroll;
-            @SwitchAttackScroll.performed -= instance.OnSwitchAttackScroll;
-            @SwitchAttackScroll.canceled -= instance.OnSwitchAttackScroll;
             @SwitchAttackKey.started -= instance.OnSwitchAttackKey;
             @SwitchAttackKey.performed -= instance.OnSwitchAttackKey;
             @SwitchAttackKey.canceled -= instance.OnSwitchAttackKey;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @SwitchAttackScroll.started -= instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.performed -= instance.OnSwitchAttackScroll;
+            @SwitchAttackScroll.canceled -= instance.OnSwitchAttackScroll;
         }
 
         /// <summary>
@@ -1441,13 +1453,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// Method invoked when associated input action "SwitchAttackScroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
-        void OnSwitchAttackScroll(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "SwitchAttackKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1462,6 +1472,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchAttackScroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchAttackScroll(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

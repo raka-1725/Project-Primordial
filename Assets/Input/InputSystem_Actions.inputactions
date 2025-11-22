@@ -36,9 +36,6 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "82157b5b-a2bd-4416-bfa2-b2a325cb6ef4",
-                    "name": "SwitchAttackScroll",
-                    "type": "Value",
-                    "id": "c3c95b1d-ef7e-498a-a22e-51425c7baa1b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -61,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchAttackScroll",
+                    "type": "Value",
+                    "id": "6a2c27a9-c4af-4122-aa16-0650b7cdf6ee",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -149,12 +155,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
-                    "id": "8c658c04-6efd-4bbe-944c-2a19f06a4035",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "SwitchAttackScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -221,6 +221,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "200d3511-5b81-49e7-a4e1-68def202684d",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchAttackScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

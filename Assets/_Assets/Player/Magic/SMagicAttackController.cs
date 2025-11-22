@@ -52,11 +52,11 @@ public class SMagicAttackController : MonoBehaviour
     {
         switch (keyControl.keyCode)
         {
-            case Key.Digit1: CycleAttackKey(1); break;
-            case Key.Digit2: CycleAttackKey(2); break;
-            case Key.Digit3: CycleAttackKey(3); break;
-            case Key.Digit4: CycleAttackKey(4); break;
-            case Key.Digit5: CycleAttackKey(5); break;
+            case UnityEngine.InputSystem.Key.Digit1: CycleAttackKey(1); break;
+            case UnityEngine.InputSystem.Key.Digit2: CycleAttackKey(2); break;
+            case UnityEngine.InputSystem.Key.Digit3: CycleAttackKey(3); break;
+            case UnityEngine.InputSystem.Key.Digit4: CycleAttackKey(4); break;
+            case UnityEngine.InputSystem.Key.Digit5: CycleAttackKey(5); break;
         }
     }
 
