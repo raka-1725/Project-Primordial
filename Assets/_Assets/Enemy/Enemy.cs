@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Enemy Attack")]
     [SerializeField] Transform mAttackTransform;
+    bool bCanAttack = true;
     [SerializeField] float mAttackArea = 1;
     [SerializeField] float mAttackStrength = 20;
     [SerializeField] float mAttackInterval = 2f;
@@ -147,20 +148,17 @@ public class Enemy : MonoBehaviour
         if (distanceToPlayer <= mAlwaysAwareDistance)
         {
             Target = player.gameObject;
-            return;
         }
 
         if (distanceToPlayer > mSightDistance) 
         {
             isVisible = false;
-            return;
         }
 
         Vector3 playerDir = (player.transform.position - transform.position).normalized;
         if (Vector3.Angle(playerDir, transform.forward) > mViewAngle)
         {
             isVisible = false;
-            return;
         }
         Vector3 eyeViewPoint = transform.position + Vector3.up * mEyeHeight;
         if (Physics.Raycast(eyeViewPoint, playerDir, out RaycastHit hitInfo, mSightDistance))
@@ -168,7 +166,6 @@ public class Enemy : MonoBehaviour
             if (hitInfo.collider.gameObject != player.gameObject)
             {
                 isVisible = false;
-                return;
             }
         }
 
@@ -185,10 +182,8 @@ public class Enemy : MonoBehaviour
                 Target = null;
             }
         }
-        float dist = (player.transform.position - transform.position).sqrMagnitude;
-        float attackRange = mNavAgent.stoppingDistance * mNavAgent.stoppingDistance;
 
-        if (dist <= attackRange && !bIsFrozed) //Improve this
+        if (isVisible && !bIsFrozed && bCanAttack)
         {
             AttackPlayer();
         }
@@ -211,15 +206,15 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator AttackCoroutine() 
     {
+        bCanAttack = false;
         mAnimator.SetTrigger("Attack");
         yield return new WaitForSeconds(mAttackInterval);
+        bCanAttack = true;
     }
 
     public void Hit() 
     {
-        if (bIsFrozed) return;
         Collider[] collider = Physics.OverlapSphere(mAttackTransform.position, mAttackArea);
-
         foreach (Collider obj in collider)
         {
             if (obj.CompareTag("Player"))
@@ -238,9 +233,10 @@ public class Enemy : MonoBehaviour
         Vector3 eyeviewPoint = transform.position + Vector3.up * mEyeHeight;
         Gizmos.DrawWireSphere(eyeviewPoint, mSightDistance);
         Gizmos.DrawWireSphere(eyeviewPoint, mAlwaysAwareDistance);
+        Gizmos.color = Color.orange;
         Gizmos.DrawWireSphere(mAttackTransform.position, mAttackArea);
 
-
+        Gizmos.color = Color.blue;
         Vector3 leftLineDir = Quaternion.AngleAxis(mViewAngle, Vector3.up) * transform.forward;
         Vector3 rightLineDir = Quaternion.AngleAxis(-mViewAngle, Vector3.up) * transform.forward;
         Gizmos.DrawLine(eyeviewPoint, eyeviewPoint + leftLineDir * mSightDistance);

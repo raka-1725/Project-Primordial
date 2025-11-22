@@ -811,6 +811,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434082910023953775, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
+      propertyPath: bCanAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434082910023953775, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
+      propertyPath: mAttackStrength
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3173205822387757455, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
       propertyPath: 'managedReferences[1169701459774144615].m_Value.Array.data[0]'
       value: 
@@ -870,6 +878,10 @@ PrefabInstance:
     - target: {fileID: 4358370799693317718, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
       propertyPath: m_Name
       value: Enemy_Arachnid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4502453724161382629, guid: fc99d2b0bd155e24a82809cba33e8778, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1672,6 +1684,7 @@ GameObject:
   - component: {fileID: 1522716554}
   - component: {fileID: 1522716558}
   - component: {fileID: 1522716559}
+  - component: {fileID: 1522716560}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1793,6 +1806,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mPauseMenu: {fileID: 1545687141}
   bPaused: 0
+--- !u!114 &1522716560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522716553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8271314bea295c84c9aed1528d3498dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mHealthSlider: {fileID: 1639647042}
 --- !u!1 &1545687141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,7 +1872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5080006041759623567, guid: f432e871066552b448e7db26504b9884, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1.36
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5443255676873394113, guid: f432e871066552b448e7db26504b9884, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1905,8 +1931,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1415570278}
     - target: {fileID: 7773988748592815109, guid: f432e871066552b448e7db26504b9884, type: 3}
+      propertyPath: bCanAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773988748592815109, guid: f432e871066552b448e7db26504b9884, type: 3}
       propertyPath: mFrozeDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773988748592815109, guid: f432e871066552b448e7db26504b9884, type: 3}
+      propertyPath: mAttackStrength
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1924,7 +1958,7 @@ GameObject:
   - component: {fileID: 1639647041}
   - component: {fileID: 1639647042}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: HealthSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2462,7 +2496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1918603579210517540, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1.36
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2393345350320943290, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: m_LocalScale.x
@@ -2481,8 +2515,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3980391290403256750, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: bCanAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980391290403256750, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
       propertyPath: mFrozeDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3980391290403256750, guid: 5785f52ccc3dd404c8b3cf4eff3629c0, type: 3}
+      propertyPath: mAttackStrength
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2535,8 +2577,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1927850427808577646, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
+      propertyPath: bCanAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927850427808577646, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: mFrozeDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927850427808577646, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
+      propertyPath: mAttackStrength
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2679226794609833102, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: 'managedReferences[1169701459774144615].m_Value.Array.data[0]'
@@ -2560,7 +2610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3989088382116744676, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1.36
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4227063765339055018, guid: 41d36c621e13cec4891aadd77b9359f2, type: 3}
       propertyPath: m_LocalPosition.x
