@@ -21,7 +21,7 @@ public class MovementController : MonoBehaviour
     private Camera mainCamera;
 
     [Header("Player Interaction")]
-    private Collider mInteractableInRange;
+    //private Collider mInteractableInRange;
 
     private CharacterController mCharacterController;
     private Animator mAnimator;
@@ -44,7 +44,7 @@ public class MovementController : MonoBehaviour
         mInputAction.Player.Jump.performed += PerformJump;
         mInputAction.Player.Move.performed += HandleMoveInput;
         mInputAction.Player.Move.canceled += HandleMoveInput;
-        mInputAction.Player.Interact.performed += ctx => TryInteraction();
+        
 
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();

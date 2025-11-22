@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public interface Interactable
+
+public interface IInteractable
 {
+    void Activate(Interactions player);
     //Key pick up
     //Chest or lootables
     //Medkits

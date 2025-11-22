@@ -1,17 +1,45 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour//, Interactable
+public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private Vector3 mTargetRotation = new Vector3(0f, -100f, 0f);
     [SerializeField] private float mRotationSpeed = 1f;
-    [SerializeField] private bool mStayOpen = false;
+    [SerializeField] private bool mStayOpen = false; // for doors that shouldn't reopen.
+    [SerializeField] private bool mLeverOnly = false; //needs lever
+    [SerializeField] private bool mLocked = false; //need key
     private bool mIsOpen = false;
     private bool mIsRotating = false;
-    
 
-    public void Activate()
+
+    public void Activate(Interactions player)
     {
-         Debug.Log("Door Open");
+            if (mLeverOnly)
+            {
+                Debug.Log("This door can only be opened by a lever.");
+                return;
+            }
+            if (mLocked)
+            {
+                if(player.mKeys <= 0)
+                {
+                    Debug.Log("This door is locked.");
+                    return;
+                }
+                else
+                {
+                    player.mKeys--;
+                    mLocked = false;
+                }
+            }
+        OpenDoor();
+    }
+    public void ActivateFromLever()
+    {
+        OpenDoor();
+    }
+    private void OpenDoor()
+    {
+        Debug.Log("Door Open");
         if (mIsRotating) return;
         if (mIsOpen)
             StartCoroutine(RotateDoor(-mTargetRotation));
