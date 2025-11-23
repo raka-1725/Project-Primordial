@@ -54,6 +54,9 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
+<<<<<<< HEAD
+      events: []
+=======
       events:
       - time: 0.8333334
         functionName: ResetAttack
@@ -69,6 +72,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+>>>>>>> origin/master
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
