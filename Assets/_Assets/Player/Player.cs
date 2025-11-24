@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -12,24 +13,33 @@ public class Player : MonoBehaviour
 
     PlayerStatsUI mStatsUI;
 
+    public Action<Player> onPlayerDead;
+
     private void Awake()
     {
         mStatsUI = FindAnyObjectByType<PlayerStatsUI>();
     }
-
+    private void Update()
+    {
+        if (mPlayerHealth <= 0) 
+        {
+            onPlayerDead?.Invoke(this);
+        }
+    }
     public void TakeHealth(float health) 
     {
         mPlayerHealth -= health;
-        damageEffect();
+        StartCoroutine(damageEffect());
         mStatsUI.UpdateHealthSlider(mPlayerHealth);
     }
 
     private IEnumerator damageEffect() 
     {
-        Instantiate(mDamageEffect, transform.position, Quaternion.identity);
+        GameObject damageEffect = Instantiate(mDamageEffect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(2);
-        Destroy(mDamageEffect);
+        Destroy(damageEffect);
     }
+
 
 
 }
