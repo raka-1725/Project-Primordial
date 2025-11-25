@@ -49,8 +49,10 @@ public class SProjectileLogic : MonoBehaviour
                 }
             }
         }
-
-        Destroy(gameObject);
+        if (collision.transform.gameObject) //add detection system and timer to destroy
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDrawGizmosSelected()
