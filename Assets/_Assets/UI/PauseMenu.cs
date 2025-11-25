@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
+    Player mPlayer;
     private InputSystem_Actions mInputAction;
     [SerializeField] GameObject mPauseMenu;
 
@@ -14,9 +15,23 @@ public class PauseMenu : MonoBehaviour
         mInputAction = new InputSystem_Actions();
         mInputAction.Player.Pause.performed += OnPausePressed;
         mInputAction.Player.Enable();
+        mPlayer = FindAnyObjectByType<Player>();
+        mPauseMenu.SetActive(false);
 
+        mPlayer.onPlayerDead += DisablePause;
+    }
+
+    private void Start()
+    {
+        mInputAction.Enable();
+    }
+
+    private void DisablePause(Player player)
+    {
+        mInputAction.Disable();
         mPauseMenu.SetActive(false);
     }
+
     private void OnEnable() => mInputAction.Enable();
     private void OnDisable()
     {
@@ -43,7 +58,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    
+    private void Update()
+    {
+        
+    }
 }
 
 

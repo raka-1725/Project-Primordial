@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Bson;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class PlayerStatsUI : MonoBehaviour
     [Header("Health")]
     [SerializeField] private Slider mHealthSlider;
     [SerializeField] private Image mHealthTint;
+    [SerializeField] private float mFadeSpeed = 5f;
+    private float targetAlpha = 0f;
 
     [Header("Death")]
     [SerializeField] GameObject mDeathScreen;
@@ -16,15 +19,32 @@ public class PlayerStatsUI : MonoBehaviour
     {
         mPlayer = FindAnyObjectByType<Player>();
         mDeathScreen.SetActive(false);
+        mPlayer.onPlayerDead += PlayerDead;
     }
+
+    private void PlayerDead(Player player)
+    {
+        Time.timeScale = 0;
+        mDeathScreen.SetActive(true);
+    }
+
     public void UpdateHealthSlider(float currentHealth)
     {
         mHealthSlider.value = currentHealth / 100;
-        Color c = mHealthTint.color;
-        c.a = Mathf.Clamp01(currentHealth / 200f);
-        mHealthTint.color = c;
+        targetAlpha = 1 - (currentHealth / 170);
+
         //Debug.Log($"Slider{mHealthSlider.value}, sended value {currentHealth}");
     }
 
-    
+    private void Update()
+    {
+        UpdateFade();
+    }
+
+    private void UpdateFade()
+    {
+        Color c = mHealthTint.color;
+        c.a = Mathf.Lerp(c.a, targetAlpha, Time.deltaTime * mFadeSpeed);
+        mHealthTint.color = c;
+    }
 }
