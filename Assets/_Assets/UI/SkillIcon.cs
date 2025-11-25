@@ -21,7 +21,7 @@ public class SkillIcon : MonoBehaviour
         mIconImageComponent.sprite = mIconSprite;
         mSkillNameText.SetText(mSkillName);
 
-        mCoolDownSlider.maxValue = magicAttackData.mCooldown;
+
    }
 
     public void ChangeScale(float scaleIndex) 

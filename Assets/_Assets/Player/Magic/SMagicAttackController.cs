@@ -19,7 +19,7 @@ public class SMagicAttackController : MonoBehaviour
 
     private int currentAttackIndex = 0;
     private GameObject mCurrentTarget;
-    private float lastAttackTime = 0f;
+    private float[] lastAttackTimes;
 
     void Awake()
     {
@@ -43,6 +43,10 @@ public class SMagicAttackController : MonoBehaviour
         animator = GetComponent<Animator>();
         movementController = GetComponent<MovementController>();
         mMagicSelector = FindAnyObjectByType<MagicSelector>();
+
+        lastAttackTimes = new float[magicAttacks.Count];
+
+        for (int i = 0; i < lastAttackTimes.Length; i++) { lastAttackTimes[i] = -10; }
     }
 
     private void OnEnable() => inputActions.Enable();
@@ -85,16 +89,17 @@ public class SMagicAttackController : MonoBehaviour
         SMagicAttackData attackData = magicAttacks[currentAttackIndex];
 
         // Cooldown check
-        if (Time.time < lastAttackTime + attackData.mCooldown) 
+        if (Time.time < lastAttackTimes[currentAttackIndex] + attackData.mCooldown) 
         {
-            float timeLeft = (lastAttackTime + attackData.mCooldown) - Time.time;
-            float normalized = timeLeft / attackData.mCooldown;
+            float timeLeft = (lastAttackTimes[currentAttackIndex] + attackData.mCooldown) - Time.time;
+            float normalized = 1f - (timeLeft / attackData.mCooldown);
+
 
             mMagicSelector.onAttackCoolDown(currentAttackIndex, normalized);
             return;
                 
         }
-        lastAttackTime = Time.time;
+        lastAttackTimes[currentAttackIndex] = Time.time;
 
         switch (attackData.mAnimationType)
         {
@@ -116,24 +121,20 @@ public class SMagicAttackController : MonoBehaviour
     {
         if (magicAttacks.Count == 0) return;
 
-        SMagicAttackData attackData = magicAttacks[currentAttackIndex];
-
-        float cooldown = attackData.mCooldown;
-        float elapsed = Time.time - lastAttackTime;
-        if (elapsed >= cooldown)
+        for (int i = 0; i < magicAttacks.Count; i++)
         {
-            mMagicSelector.onAttackCoolDown(currentAttackIndex, 1f);
+            SMagicAttackData attackData = magicAttacks[i];
+
+            float cooldown = attackData.mCooldown;
+            float elapsed = Time.time - lastAttackTimes[i];
+
+            float normalized = Mathf.Clamp01(elapsed / cooldown);
+
+            mMagicSelector.onAttackCoolDown(i, normalized);
         }
-        else
-        {
-            float normalized = (cooldown - elapsed) / cooldown;
-
-            normalized = 1f - normalized;
-
-            mMagicSelector.onAttackCoolDown(currentAttackIndex, normalized);
-        }
-
     }
+
+
 
     // Called by animation event
     private void SpawnMagic()
