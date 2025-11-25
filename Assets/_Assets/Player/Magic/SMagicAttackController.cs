@@ -144,10 +144,9 @@ public class SMagicAttackController : MonoBehaviour
 
         // Spawn at enemy position
         Vector3 spawnPosition = mCurrentTarget.transform.position;
-
+        Debug.Log(attackData.mAttackPrefab.name);
         // Instantiate the attack prefab at enemy location
         GameObject magicClone = Instantiate(attackData.mAttackPrefab, spawnPosition, Quaternion.identity);
-
         // If it's AoE, apply AoE logic here
         if (attackData.mIsAoEAttack)
         {
