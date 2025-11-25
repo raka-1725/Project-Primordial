@@ -16,7 +16,7 @@ MonoBehaviour:
   mAttackName: Fireball
   mAttackPrefab: {fileID: 286646688807115751, guid: 55e53a526edc8264197baaa4fbe6c7aa, type: 3}
   mForce: 20
-  mCooldown: 1
+  mCooldown: 5
   mAnimationType: 0
   mIsFreezeAttack: 0
   mSpecialEffectPrefab: {fileID: 0}
