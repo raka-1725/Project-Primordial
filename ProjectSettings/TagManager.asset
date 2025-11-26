@@ -9,6 +9,7 @@ TagManager:
   - CinemachineTarget
   - Interactable
   - PatrolPoints
+  - SpawnPoints
   layers:
   - Default
   - TransparentFX
