@@ -101,14 +101,34 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: cb572da4b00ff454b8c44c0d9a69bec0, type: 2}
     - target: {fileID: 3559501716564611799, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.12
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3559501716564611799, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: m_LocalPosition.z
       value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: mEyeHeight
+      value: 1.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: mViewAngle
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: mAttackArea
+      value: 2.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: mSightDistance
+      value: 12.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: mAttackStrength
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
+      propertyPath: mAlwaysAwareDistance
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8157258424985310423, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
