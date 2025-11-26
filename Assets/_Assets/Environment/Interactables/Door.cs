@@ -3,12 +3,15 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private Vector3 mTargetRotation = new Vector3(0f, -100f, 0f);
+    [SerializeField] private Vector3 mTargetMove = new Vector3(0f, -3f, 0f);
     [SerializeField] private float mRotationSpeed = 1f;
+    [SerializeField] private bool mMovesDown = true; //Door opens by moving down
     [SerializeField] private bool mStayOpen = false; // for doors that shouldn't reopen.
     [SerializeField] private bool mLeverOnly = false; //needs lever
     [SerializeField] private bool mLocked = false; //need key
     private bool mIsOpen = false;
     private bool mIsRotating = false;
+    
 
 
     public void Activate(Interactions player)
@@ -41,12 +44,41 @@ public class Door : MonoBehaviour, IInteractable
     {
         Debug.Log("Door Open");
         if (mIsRotating) return;
+        if (mMovesDown)
+            OpenMoveDoor(); return;
         if (mIsOpen)
             StartCoroutine(RotateDoor(-mTargetRotation));
         else
             StartCoroutine(RotateDoor(mTargetRotation));
         mIsOpen = ! mIsOpen;
     }
+    private void OpenMoveDoor()
+    {
+        if (mIsOpen)
+            StartCoroutine(MoveDoor(-mTargetMove));
+        else
+            StartCoroutine(MoveDoor(mTargetMove));
+         mIsOpen = ! mIsOpen;
+    }
+    private System.Collections.IEnumerator MoveDoor(Vector3 mTargetMove)
+    {
+        mIsRotating = true;
+
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = startPos + mTargetMove;
+
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * mRotationSpeed;
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
+            yield return null;
+        }
+        
+        mIsRotating = false;
+    }
+
     private System.Collections.IEnumerator RotateDoor(Vector3 rotationAmount)
     {
         mIsRotating = true;
