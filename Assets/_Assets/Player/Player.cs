@@ -19,18 +19,15 @@ public class Player : MonoBehaviour
     {
         mStatsUI = FindAnyObjectByType<PlayerStatsUI>();
     }
-    private void Update()
-    {
-        if (mPlayerHealth <= 0) 
-        {
-            onPlayerDead?.Invoke(this);
-        }
-    }
     public void TakeHealth(float health) 
     {
         mPlayerHealth -= health;
         StartCoroutine(damageEffect());
         mStatsUI.UpdateHealthSlider(mPlayerHealth);
+        if (mPlayerHealth <= 0)
+        {
+            onPlayerDead?.Invoke(this);
+        }
     }
 
     private IEnumerator damageEffect() 

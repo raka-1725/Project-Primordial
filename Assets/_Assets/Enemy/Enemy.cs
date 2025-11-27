@@ -60,8 +60,11 @@ public class Enemy : MonoBehaviour
     Animator mAnimator;
     private float loseTimer;
 
+    GameManager mGameManager;
+
     private void Awake()
     {
+        mGameManager = FindAnyObjectByType<GameManager>();
         mBehaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         mNavAgent = GetComponent<NavMeshAgent>();
         mAnimator = GetComponent<Animator>();
@@ -71,6 +74,8 @@ public class Enemy : MonoBehaviour
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("Patrol Point", mPatrolPoints);
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("WalkSPD", mWalkSPD);
         mBehaviorGraphAgent.BlackboardReference.SetVariableValue("ChaseSPD", mChaseSPD);
+
+        mGameManager.onPlayerGoal += StopChase;
     }
 
     private void SetPatrolPoints()
@@ -225,7 +230,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
+    private void StopChase(GameManager manager) 
+    {
+        bIsFrozed = true;
+        mNavAgent.isStopped = true;
+    }
 
 
     private void OnDrawGizmos()

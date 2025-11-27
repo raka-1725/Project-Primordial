@@ -10,6 +10,7 @@ TagManager:
   - Interactable
   - PatrolPoints
   - SpawnPoints
+  - Goal
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
+  - PlayerMock
+  - BG
   - 
   - 
   - 
