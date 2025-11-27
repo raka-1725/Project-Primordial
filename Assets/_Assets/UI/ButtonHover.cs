@@ -13,7 +13,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Vector3 mNormalScale;
     private RectTransform mRectTransform;
 
-    public bool bButtonHovered;
+    private bool bButtonHovered;
     public event Action<bool> onHoverChanged;
     public bool bIsHovered 
     {
@@ -36,13 +36,13 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         mRectTransform.localScale = mScaleUp;
-        bButtonHovered = true;
+        bIsHovered = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         mRectTransform.localScale = mNormalScale;
-        bButtonHovered = false;
+        bIsHovered = false;
     }
 
     public void onClickReset() 

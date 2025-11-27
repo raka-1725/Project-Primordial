@@ -1,4 +1,3 @@
-using Unity.AppUI.UI;
 using UnityEngine;
 
 public class MainMenuMock : MonoBehaviour
@@ -20,6 +19,7 @@ public class MainMenuMock : MonoBehaviour
     public void HoverOverButtion(bool hover) 
     {
         mAnimator.SetBool("ButtonHover", hover);
+        Debug.Log($"BH {hover}");
     }
 
     public void StartScene() 
