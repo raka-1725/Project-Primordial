@@ -1,8 +1,5 @@
 using UnityEngine;
 using Unity.Behavior;
-using System;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEditor.UI;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
