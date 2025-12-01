@@ -5,6 +5,7 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private Vector3 mTargetRotation = new Vector3(0f, -100f, 0f);
     [SerializeField] private Vector3 mTargetMove = new Vector3(0f, -3f, 0f);
     [SerializeField] private float mRotationSpeed = 1f;
+    [SerializeField] private bool mStartOpen = true; //To let bake mesh not mess up
     [SerializeField] private bool mMovesDown = true; //Door opens by moving down
     [SerializeField] private bool mStayOpen = false; // for doors that shouldn't reopen.
     [SerializeField] private bool mLeverOnly = false; //needs lever
@@ -13,7 +14,15 @@ public class Door : MonoBehaviour, IInteractable
     private bool mIsRotating = false;
     
 
-
+    public void Start()
+    {
+        if (mStartOpen == true)
+        {
+            Debug.Log("Opening");
+            mIsOpen = true;
+            OpenMoveDoor();
+        }
+    }
     public void Activate(Interactions player)
     {
             if (mLeverOnly)
