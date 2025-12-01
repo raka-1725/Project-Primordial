@@ -31,9 +31,36 @@ A puzzle and escape game with magic combat and combat ability system included wi
 
 # Features
 
+- ## WASD Character Controller
+    - WASD key binding for character movement
+    - Mouse click for attack
+    - Number keys & Mouse wheel for selecting magic
+- ## Magic Attack
+    - Fire, Ice, Area magic attack
+    - Customizebale settings
+- ## Player Interacting Map Objects
+    - Keys to open/Interacting with doors
+    - Interactable doors
+- ## Procedual Enemy Spawn
+    - Player decting spawn
+    - Ramdomized Spawn Mechanics
+
 ---
 
 # Core Classes
+```MovementController.cs``` - Handles character movent with new Unity Input system
+
+```Player.cs``` - Handles Player's health and Win/Lose state
+
+```SProjectileLogic.cs``` - Contorlls magic attack's projectile motion and atttack to the enemy
+
+```SMagicAttackController.cs``` - Controlls all magic attack and cooldown. Controlls Player attack animation and handles each magic's data
+
+```SMagicAttackData.cs``` - `ScriptableObject` - Contains all settings for each magic attack
+
+```Enemy.cs``` - Handles Enemy behaviour made with BehaviourGraph. Various settings for each type of enemy and customizable chase/patrol settings
+
+```EnemySpawner.cs``` - Handles spawning enemy with player priority and weight settings
 
 ---
 

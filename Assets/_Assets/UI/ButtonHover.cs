@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +13,19 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private Vector3 mNormalScale;
     private RectTransform mRectTransform;
 
+    private bool bButtonHovered;
+    public event Action<bool> onHoverChanged;
+    public bool bIsHovered 
+    {
+        get => bButtonHovered;
+        set 
+        {
+            bButtonHovered = value;
+            onHoverChanged?.Invoke(bButtonHovered);
+        }
+    }
+
+
     //instead of size delta use scale
     private void Awake()
     {
@@ -22,11 +36,13 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         mRectTransform.localScale = mScaleUp;
+        bIsHovered = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         mRectTransform.localScale = mNormalScale;
+        bIsHovered = false;
     }
 
     public void onClickReset() 

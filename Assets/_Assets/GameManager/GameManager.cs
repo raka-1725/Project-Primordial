@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     public Player mPlayer => mPlayerPrefab;
 
     public static GameManager mGamaManager;
+
+    public Action<GameManager> onPlayerGoal;
 
     private void OnDestroy()
     {
