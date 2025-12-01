@@ -421,7 +421,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119872487}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faa6bd579c0e31d4b9828841f5253050, type: 3}
   m_Name: 
@@ -2129,7 +2129,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1522716558}
         m_TargetAssemblyTypeName: AsyncLoader, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 5
@@ -2138,7 +2138,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Maze
+          m_StringArgument: Maze_Interaction
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &552620710
@@ -3533,7 +3533,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1522716558}
         m_TargetAssemblyTypeName: AsyncLoader, Assembly-CSharp
         m_MethodName: LoadLevel
         m_Mode: 5
@@ -6586,7 +6586,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Maze
+          m_StringArgument: Maze_Interaction
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1774665026

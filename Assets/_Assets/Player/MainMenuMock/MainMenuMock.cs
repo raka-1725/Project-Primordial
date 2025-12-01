@@ -4,7 +4,7 @@ public class MainMenuMock : MonoBehaviour
 {
     Animator mAnimator;
     ButtonHover[] mButtons;
-
+    public string mLoadSceneName;
     private void Awake()
     {
         mAnimator = GetComponent<Animator>();
@@ -31,6 +31,6 @@ public class MainMenuMock : MonoBehaviour
     {
 
         AsyncLoader asyncLoader = FindAnyObjectByType<AsyncLoader>();
-        asyncLoader.LoadLevel("Maze");
+        asyncLoader.LoadLevel(mLoadSceneName);
     }
 }
