@@ -153,6 +153,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwitchCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7fcd8ac-6eac-4bbb-81ce-156eb1be1b35"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -318,6 +327,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchAttackScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""881cd28e-7350-486f-8e82-4d87ded73e0e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -912,6 +932,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_SwitchAttackKey = m_Player.FindAction("SwitchAttackKey", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_SwitchAttackScroll = m_Player.FindAction("SwitchAttackScroll", throwIfNotFound: true);
+        m_Player_SwitchCamera = m_Player.FindAction("SwitchCamera", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1012,6 +1033,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwitchAttackKey;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_SwitchAttackScroll;
+    private readonly InputAction m_Player_SwitchCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1051,6 +1073,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/SwitchAttackScroll".
         /// </summary>
         public InputAction @SwitchAttackScroll => m_Wrapper.m_Player_SwitchAttackScroll;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwitchCamera".
+        /// </summary>
+        public InputAction @SwitchCamera => m_Wrapper.m_Player_SwitchCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1098,6 +1124,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SwitchAttackScroll.started += instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.performed += instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.canceled += instance.OnSwitchAttackScroll;
+            @SwitchCamera.started += instance.OnSwitchCamera;
+            @SwitchCamera.performed += instance.OnSwitchCamera;
+            @SwitchCamera.canceled += instance.OnSwitchCamera;
         }
 
         /// <summary>
@@ -1130,6 +1159,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @SwitchAttackScroll.started -= instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.performed -= instance.OnSwitchAttackScroll;
             @SwitchAttackScroll.canceled -= instance.OnSwitchAttackScroll;
+            @SwitchCamera.started -= instance.OnSwitchCamera;
+            @SwitchCamera.performed -= instance.OnSwitchCamera;
+            @SwitchCamera.canceled -= instance.OnSwitchCamera;
         }
 
         /// <summary>
@@ -1479,6 +1511,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchAttackScroll(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchCamera(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

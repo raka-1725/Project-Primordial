@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SwitchCamera",
+                    "type": "Button",
+                    "id": "b7fcd8ac-6eac-4bbb-81ce-156eb1be1b35",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -232,6 +241,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchAttackScroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "881cd28e-7350-486f-8e82-4d87ded73e0e",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
