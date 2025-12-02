@@ -65,6 +65,8 @@ public class OpeningSequence : MonoBehaviour
 
         yield return new WaitForSeconds(mDiffDuration);
 
+
+        //BG fadeout
         time = 0;
         while (time < mFadeOutDuration)
         {
