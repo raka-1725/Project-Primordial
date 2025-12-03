@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: mAttackStrength
-      value: 15
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: mAlwaysAwareDistance

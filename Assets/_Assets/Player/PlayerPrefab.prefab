@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5713014916870133018}
   - component: {fileID: 5295224041613323279}
-  - component: {fileID: 7790183748261111748}
   m_Layer: 0
   m_Name: PlayerInteraction
   m_TagString: Untagged
@@ -77,27 +76,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mKeys: 0
---- !u!135 &7790183748261111748
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757427484947266593}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8882243794805178592
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c76df9dc6a2e7247a02fe72a1127800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <magicAttacks>k__BackingField: []
+  allMagicAttacks: []
   magicAttackSpawn: {fileID: 6811805260163846328}
 --- !u!114 &-4165823611048376639
 MonoBehaviour:
