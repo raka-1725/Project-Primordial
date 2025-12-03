@@ -56,31 +56,27 @@ public class MagicSelector : MonoBehaviour
         GameObject newSkillIconObj = Instantiate(mSkillIconPrefab, mSkillSliderParent);
         newSkillIconObj.GetComponent<SkillIcon>().UpdateIcon(magicAttackData);
         mSkillUIList.Add(newSkillIconObj);
+        newSkillIconObj.GetComponent<SkillKeyIconSetter>().SetSkillKeyIcon(mSkillUIList.IndexOf(newSkillIconObj));
     }
 
     public void UpdateAttackInventoryUI(int selectedIndex, List<SMagicAttackData> magicAttackDataList) 
     {
-        // Clear old UI icons
         foreach (GameObject skillIconObj in mSkillUIList)
         {
             Destroy(skillIconObj);
         }
         mSkillUIList.Clear();
 
-        // Create new icons for each unlocked attack
         foreach (SMagicAttackData magicAttackData in magicAttackDataList)
         {
             GameObject newSkillIconObj = Instantiate(mSkillIconPrefab, mSkillSliderParent);
             newSkillIconObj.GetComponent<SkillIcon>().UpdateIcon(magicAttackData);
             mSkillUIList.Add(newSkillIconObj);
         }
-
-        // Highlight the selected skill if valid
         if (selectedIndex >= 0 && selectedIndex < mSkillUIList.Count)
         {
             SelectAbility(selectedIndex);
         }
-
     }
 
 
@@ -91,7 +87,9 @@ public class MagicSelector : MonoBehaviour
             SkillIcon skillIcon = SkillIcons.GetComponent<SkillIcon>();
             skillIcon.ChangeScale(DefaultScale);
         }
+        mSkillUIList[index].GetComponent<SkillKeyIconSetter>().KeyIconSelected(index);
         mSkillUIList[index].GetComponent<SkillIcon>().ChangeScale(ScaleUpScale);
+
     }
 
     void Awake()

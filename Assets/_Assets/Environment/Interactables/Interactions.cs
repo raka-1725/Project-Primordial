@@ -9,6 +9,8 @@ public class Interactions : MonoBehaviour
 
     public int mKeys;
 
+    
+
     void Awake()
         {
             mInputAction = new InputSystem_Actions();
@@ -53,6 +55,10 @@ public class Interactions : MonoBehaviour
         {
             Debug.Log("Interactable In Range");
             mInteractableInRange = other;
+
+            //UI
+            Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
+            InteractableUI.EnableUI();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -60,6 +66,8 @@ public class Interactions : MonoBehaviour
         if (other == mInteractableInRange)
         {
             mInteractableInRange = null;
+            Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
+            InteractableUI.DisableUI();
         }
     }
 }
