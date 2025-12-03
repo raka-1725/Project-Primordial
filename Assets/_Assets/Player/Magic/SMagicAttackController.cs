@@ -154,15 +154,15 @@ public class SMagicAttackController : MonoBehaviour
             {
                 if (nearbyObj.CompareTag("Enemy"))
                 {
-                    if (attackData.mIsFreezeAttack && attackData.mSpecialEffectPrefab != null)
-                    {
-                        GameObject freezeEffect = Instantiate(attackData.mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
-                        freezeEffect.transform.SetParent(nearbyObj.transform);
+                    //if (attackData.mIsFreezeAttack && attackData.mSpecialEffectPrefab != null)
+                    //{
+                    //    GameObject freezeEffect = Instantiate(attackData.mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
+                    //    freezeEffect.transform.SetParent(nearbyObj.transform);
 
-                        FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
-                        freezeScript.Initialize(nearbyObj.gameObject, attackData.mEffectDuration);
-                    }
-                    else
+                    //    FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
+                    //    freezeScript.Initialize(nearbyObj.gameObject, attackData.mEffectDuration);
+                    //}
+                    //else
                     {
                         Destroy(nearbyObj.gameObject);
                     }

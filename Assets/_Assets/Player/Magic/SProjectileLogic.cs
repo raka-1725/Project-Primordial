@@ -11,6 +11,8 @@ public class SProjectileLogic : MonoBehaviour
     public bool isAoEAttack = false;
     public float aoeRadius = 3f;
 
+    private bool bHasCollided = false;
+
     public void Initialize(SMagicAttackData attackData)
     {
         isFreezeAttack = attackData.mIsFreezeAttack;
@@ -22,10 +24,15 @@ public class SProjectileLogic : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Player")) return;
+        if(bHasCollided) return;
+        bHasCollided = true;
+        if (collision.transform.CompareTag("Player")) { bHasCollided = false; return; }
 
-        if (explosionEffect != null)
+        if (explosionEffect != null) 
+        {
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            bHasCollided = false;
+        }
 
         float radius = isAoEAttack ? aoeRadius : 1f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
@@ -38,20 +45,25 @@ public class SProjectileLogic : MonoBehaviour
                 {
                     GameObject freezeEffect = Instantiate(mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
                     freezeEffect.transform.SetParent(nearbyObj.transform);
+                    FreezeEffect freezeScript = freezeEffect.GetComponent<FreezeEffect>();
+                    if (freezeScript == null)
+                        freezeScript = freezeEffect.AddComponent<FreezeEffect>();
 
-                    FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
                     freezeScript.Initialize(nearbyObj.gameObject, mEffectDuration);
+                    bHasCollided = false;
                 }
                 else
                 {
                     Destroy(nearbyObj.gameObject);
                     Debug.Log($"Enemy destroyed: {nearbyObj.name}");
+                    bHasCollided = false;
                 }
             }
         }
         if (collision.transform.gameObject) //add detection system and timer to destroy
         {
             Destroy(gameObject);
+            bHasCollided = false;
         }
     }
 

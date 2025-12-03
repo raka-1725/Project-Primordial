@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Freeze")]
     [SerializeField] bool bIsFrozed;
-    [SerializeField] private float mFrozeDuration;
+    private float mFrozeDuration;
     private float mFrozeTimer;
 
     BehaviorGraphAgent mBehaviorGraphAgent;
@@ -122,8 +122,9 @@ public class Enemy : MonoBehaviour
 
     }*/
 
-    public void Freeze()
+    public void Freeze(float duration)
     {
+        mFrozeDuration = duration;
         bIsFrozed = true;
         Debug.Log($"Enemy{this.name}, is frozed");
     }
