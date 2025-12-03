@@ -2741,6 +2741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorWall Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 4277469055672846530, guid: 8e09aa8ef22714768acf26be242ee84e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5719041517814917644, guid: 8e09aa8ef22714768acf26be242ee84e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
