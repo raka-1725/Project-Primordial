@@ -14,7 +14,7 @@ public class FreezeEffect : MonoBehaviour
         Enemy enemyScript = enemy.GetComponent<Enemy>();
         if (enemyScript != null)
         {
-            enemyScript.Freeze();
+            enemyScript.Freeze(duration);
             Debug.Log($"Enemy Frozed:{enemy.name}");
         }
 
@@ -23,15 +23,6 @@ public class FreezeEffect : MonoBehaviour
 
     private void UnfreezeEnemy()
     {
-        if (enemy != null)
-        {
-            Enemy enemyScript = enemy.GetComponent<Enemy>();
-            if (enemyScript != null)
-            {
-                enemyScript.UnFreeze();
-            }
-        }
-
         Destroy(gameObject); // Remove freeze cube
     }
 
