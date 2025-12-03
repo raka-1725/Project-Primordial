@@ -7,7 +7,10 @@ using UnityEngine.InputSystem.Controls;
 public class SMagicAttackController : MonoBehaviour
 {
     [Header("Magic Attack Settings")]
-    [field: SerializeField] public List<SMagicAttackData> magicAttacks { get; private set; }
+
+    [SerializeField] private List<SMagicAttackData> allMagicAttacks; // All possible attacks
+    public List<SMagicAttackData> magicAttacks { get; private set; } = new List<SMagicAttackData>(); // Starts empty
+
     [SerializeField] private Transform magicAttackSpawn;
 
     private InputSystem_Actions inputActions;
@@ -50,6 +53,25 @@ public class SMagicAttackController : MonoBehaviour
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
+
+    public void UnlockAttack(int index)
+    {
+        if (index < 0 || index >= allMagicAttacks.Count) return;
+
+        SMagicAttackData newAttack = allMagicAttacks[index];
+        if (!magicAttacks.Contains(newAttack))
+        {
+            magicAttacks.Add(newAttack);
+
+            // Resize lastAttackTimes to match magicAttacks.Count
+            System.Array.Resize(ref lastAttackTimes, magicAttacks.Count);
+            lastAttackTimes[magicAttacks.Count - 1] = -10; // Initialize new slot
+
+            mMagicSelector.NewSkillAccuired(newAttack); // Update UI
+            Debug.Log($"Unlocked attack: {newAttack.mAttackName}");
+
+        }
+    }
 
     private void SwitchAttackKey(KeyControl keyControl)
     {
