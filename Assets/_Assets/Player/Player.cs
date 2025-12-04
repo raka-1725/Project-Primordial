@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         HealthRecover();
-        Debug.Log($"Recover timer {mHealthRecoverTimer}, Health recover bool :{bIsInRecover}");
+        //Debug.Log($"Recover timer {mHealthRecoverTimer}, Health recover bool :{bIsInRecover}");
 
     }
 
