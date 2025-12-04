@@ -1,5 +1,8 @@
 # Project Primordial
 
+<img src="Assets\Documents\Project-Primordial_Logo.png" width = 300>
+
+
 ---
 
 * Project Configuration
@@ -61,6 +64,16 @@ A puzzle and escape game with magic combat and combat ability system included wi
 ```Enemy.cs``` - Handles Enemy behaviour made with BehaviourGraph. Various settings for each type of enemy and customizable chase/patrol settings
 
 ```EnemySpawner.cs``` - Handles spawning enemy with player priority and weight settings
+
+---
+
+# Captures
+
+<img src="Assets\Documents\PP-GameCap_1.png" width = 400>
+<img src="Assets\Documents\PP-GameCap_2.png" width = 400>
+
+
+
 
 ---
 
