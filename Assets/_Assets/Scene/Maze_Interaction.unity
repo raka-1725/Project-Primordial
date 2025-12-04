@@ -1874,7 +1874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Escaped...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0dbdab88a6ae7bc44b1346353272910f, type: 2}
   m_sharedMaterial: {fileID: -141531605409746277, guid: 0dbdab88a6ae7bc44b1346353272910f, type: 2}
@@ -3861,6 +3861,72 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5719041517814917644, guid: 8e09aa8ef22714768acf26be242ee84e, type: 3}
   m_PrefabInstance: {fileID: 608587975}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &833018656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 833018659}
+  - component: {fileID: 833018658}
+  - component: {fileID: 833018657}
+  m_Layer: 0
+  m_Name: GoalRoom
+  m_TagString: Goal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &833018657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833018656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7ba6141860cbc40abc787c0ed6a470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &833018658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833018656}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 14, y: 8, z: 13}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &833018659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833018656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28, y: 3, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &837770301
 GameObject:
   m_ObjectHideFlags: 0
@@ -6128,7 +6194,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You are dead...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0dbdab88a6ae7bc44b1346353272910f, type: 2}
   m_sharedMaterial: {fileID: -141531605409746277, guid: 0dbdab88a6ae7bc44b1346353272910f, type: 2}
@@ -6613,10 +6679,10 @@ RectTransform:
   - {fileID: 1337625971}
   - {fileID: 1545687142}
   - {fileID: 2123106818}
+  - {fileID: 488225520}
   - {fileID: 135130671}
   - {fileID: 388325820}
   - {fileID: 1689201749}
-  - {fileID: 488225520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6665,13 +6731,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mHealthSlider: {fileID: 1639647042}
-  mHealthCoolDownSlider: {fileID: 1128038478}
   mHealthTint: {fileID: 2123106819}
   mFadeSpeed: 5
   mDeathScreen: {fileID: 135130670}
+  mDeathImageBG: {fileID: 962502907}
   mDeathText: {fileID: 1405954277}
   mDeathMSG: You are dead...
   mWinScreen: {fileID: 388325819}
+  mWinImageBG: {fileID: 966383677}
   mWinText: {fileID: 409715750}
   mWinMSG: You Escaped...
   mCharacterPerSec: 5
@@ -9955,3 +10022,4 @@ SceneRoots:
   - {fileID: 2041993226}
   - {fileID: 1194508488}
   - {fileID: 80792093}
+  - {fileID: 833018659}
