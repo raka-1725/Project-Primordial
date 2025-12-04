@@ -55,7 +55,7 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -88,7 +88,7 @@ MonoBehaviour:
     m_Value: 0.153
   m_SampleCount:
     m_OverrideState: 1
-    m_Value: 16
+    m_Value: 10
 --- !u!114 &-8016559507776916330
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -104,7 +104,7 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 0
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -127,16 +127,16 @@ MonoBehaviour:
     m_Value: 1
   m_MaxRaySteps:
     m_OverrideState: 1
-    m_Value: 128
+    m_Value: 32
   m_DenoiseSS:
     m_OverrideState: 1
     m_Value: 1
   m_HalfResolutionDenoiserSS:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   m_DenoiserRadiusSS:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.75
   m_SecondDenoiserPassSS:
     m_OverrideState: 1
     m_Value: 1
@@ -316,22 +316,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f034cba68ab55e046ae1445a42f18c0e, type: 3}
   m_Name: IndirectLightingController
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 1.5
   indirectDiffuseLightingLayers:
     m_OverrideState: 1
-    m_Value: 65535
+    m_Value: -1
   reflectionLightingMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   reflectionLightingLayers:
     m_OverrideState: 1
     m_Value: 65535
   reflectionProbeIntensityMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
 --- !u!114 &-2098615783420902932
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -347,7 +347,7 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 0
   enabled:
     m_OverrideState: 1
     m_Value: 1
@@ -377,10 +377,10 @@ MonoBehaviour:
     m_Value: 44
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 227.14
+    m_Value: 273.5
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 204.75
+    m_Value: 92.7
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
     m_Value: 64
   m_VolumetricFogBudget:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.25
   m_ResolutionDepthRatio:
     m_OverrideState: 1
     m_Value: 0.5
@@ -446,6 +446,53 @@ MonoBehaviour:
   - {fileID: 7609120837779909970}
   - {fileID: 8545363256309081832}
   - {fileID: -8370290077748635007}
+  - {fileID: 2010650206907289781}
+--- !u!114 &2010650206907289781
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf384b154398e341b6b29969c078198, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  quality:
+    m_OverrideState: 1
+    m_Value: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+  maximumVelocity:
+    m_OverrideState: 1
+    m_Value: 200
+  minimumVelocity:
+    m_OverrideState: 1
+    m_Value: 2
+  cameraMotionBlur:
+    m_OverrideState: 0
+    m_Value: 1
+  specialCameraClampMode:
+    m_OverrideState: 0
+    m_Value: 0
+  cameraVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.05
+  cameraTranslationVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.05
+  cameraRotationVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.03
+  depthComparisonExtent:
+    m_OverrideState: 0
+    m_Value: 1
+  m_SampleCount:
+    m_OverrideState: 1
+    m_Value: 8
 --- !u!114 &7236950158713865520
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -458,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88178bb13f64a54f90d6cd6ef7aa9a1, type: 3}
   m_Name: CloudLayer
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   opacity:
     m_OverrideState: 1
     m_Value: 1
@@ -624,19 +671,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.8
   contrast:
     m_OverrideState: 1
-    m_Value: 69
+    m_Value: 100
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.9292453, g: 0.93020195, b: 1, a: 1}
   hueShift:
     m_OverrideState: 1
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 6
+    m_Value: 18
 --- !u!114 &8545363256309081832
 MonoBehaviour:
   m_ObjectHideFlags: 3
