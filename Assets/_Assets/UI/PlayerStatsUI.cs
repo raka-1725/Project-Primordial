@@ -86,7 +86,7 @@ public class PlayerStatsUI : MonoBehaviour
             BGImage.color = C;
             yield return null;
         }
-        yield return new WaitForSecondsRealtime(duration + 0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 
     private IEnumerator TypeText(string line, TextMeshProUGUI textComponent) 

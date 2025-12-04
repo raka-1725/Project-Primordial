@@ -151,6 +151,7 @@ public class Enemy : MonoBehaviour
         if (distanceToPlayer <= mAlwaysAwareDistance)
         {
             Target = player.gameObject;
+            isVisible = true;
         }
 
         if (distanceToPlayer > mSightDistance) 
