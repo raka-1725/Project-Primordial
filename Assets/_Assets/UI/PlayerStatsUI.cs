@@ -11,9 +11,13 @@ public class PlayerStatsUI : MonoBehaviour
     Player mPlayer;
     [Header("Health")]
     [SerializeField] private Slider mHealthSlider;
+
+
     [SerializeField] private Image mHealthTint;
     [SerializeField] private float mFadeSpeed = 5f;
     private float targetAlpha = 0f;
+
+
 
     [Header("Death")]
     [SerializeField] GameObject mDeathScreen;

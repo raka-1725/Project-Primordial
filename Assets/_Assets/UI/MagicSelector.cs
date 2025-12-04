@@ -86,6 +86,8 @@ public class MagicSelector : MonoBehaviour
         {
             SkillIcon skillIcon = SkillIcons.GetComponent<SkillIcon>();
             skillIcon.ChangeScale(DefaultScale);
+            SkillIcons.GetComponent<SkillKeyIconSetter>().KeyIconDeSelected(mSkillUIList.IndexOf(SkillIcons));
+
         }
         mSkillUIList[index].GetComponent<SkillKeyIconSetter>().KeyIconSelected(index);
         mSkillUIList[index].GetComponent<SkillIcon>().ChangeScale(ScaleUpScale);
