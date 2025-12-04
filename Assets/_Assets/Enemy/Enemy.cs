@@ -3,6 +3,7 @@ using Unity.Behavior;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
@@ -78,10 +79,9 @@ public class Enemy : MonoBehaviour
     private void SetPatrolPoints()
     {
         GameObject[] PT = GameObject.FindGameObjectsWithTag("PatrolPoints");
-        foreach (GameObject patrolPoints in PT) 
-        {
-            mPatrolPoints.Add(patrolPoints);
-        }
+        mPatrolPoints = PT.ToList();
+        System.Random rnd = new System.Random();
+        mPatrolPoints = mPatrolPoints.OrderBy(x => rnd.Next()).ToList();
     }
 
     void Start()
