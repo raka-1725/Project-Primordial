@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
 {
     [Header("Player Health")]
     [SerializeField] public float mPlayerHealth { get; private set; } = 100;
+    [SerializeField] private float mPlayerHealthRecoverCoolDown = 10f;
+    [SerializeField] private float mHealthRecoveryIndex = 3f;
+
+    private float mHealthRecoverTimer;
 
     [Header("Player Effects")]
     [SerializeField] private GameObject mDamageEffect;
@@ -14,6 +18,7 @@ public class Player : MonoBehaviour
     PlayerStatsUI mStatsUI;
 
     public Action<Player> onPlayerDead;
+    private bool bIsInRecover;
 
     private void Awake()
     {
@@ -28,6 +33,8 @@ public class Player : MonoBehaviour
         {
             onPlayerDead?.Invoke(this);
         }
+
+        mHealthRecoverTimer = 0;
     }
 
     private IEnumerator damageEffect() 
@@ -37,6 +44,36 @@ public class Player : MonoBehaviour
         Destroy(damageEffect);
     }
 
+    private void Update()
+    {
+        HealthRecover();
+        Debug.Log($"Recover timer {mHealthRecoverTimer}, Health recover bool :{bIsInRecover}");
+
+    }
+
+    private void HealthRecover()
+    {
+        if (mPlayerHealth < 100) 
+        {
+            mHealthRecoverTimer += Time.deltaTime;
+        }
+        if (bIsInRecover) 
+        {
+            mPlayerHealth += Time.deltaTime * mHealthRecoveryIndex;
+            mStatsUI.UpdateHealthSlider(mPlayerHealth);
+            if (mPlayerHealth >= 100) 
+            {
+                bIsInRecover = false;
+                mHealthRecoverTimer = 0;
+            }
+            return;
+        }
+        if (mHealthRecoverTimer >= mPlayerHealthRecoverCoolDown)
+        {
+            bIsInRecover = true;
+            mHealthRecoverTimer = 0;
+        }
+    }
 
 
 }

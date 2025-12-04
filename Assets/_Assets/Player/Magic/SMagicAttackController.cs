@@ -19,6 +19,8 @@ public class SMagicAttackController : MonoBehaviour
     //UI
     private MagicSelector mMagicSelector;
 
+    private SPlayerEquippedVFX equippedVFX;
+
     private int currentAttackIndex = 0;
     private GameObject mCurrentTarget;
     private float[] lastAttackTimes;
@@ -45,6 +47,7 @@ public class SMagicAttackController : MonoBehaviour
         animator = GetComponent<Animator>();
         movementController = GetComponent<MovementController>();
         mMagicSelector = FindAnyObjectByType<MagicSelector>();
+        equippedVFX = GetComponent<SPlayerEquippedVFX>();
 
         lastAttackTimes = new float[magicAttacks.Count];
 
@@ -70,6 +73,10 @@ public class SMagicAttackController : MonoBehaviour
             mMagicSelector.NewSkillAccuired(newAttack); // Update UI
             Debug.Log($"Unlocked attack: {newAttack.mAttackName}");
 
+            if (magicAttacks.Count == 1)
+            {
+                equippedVFX?.SetEquippedVFX(newAttack);
+            }
         }
     }
 
@@ -90,6 +97,7 @@ public class SMagicAttackController : MonoBehaviour
         if (index < 1 || index > magicAttacks.Count) return;
         currentAttackIndex = index - 1;
         mMagicSelector.UpdateCycleAttackIndex(currentAttackIndex);
+        equippedVFX?.SetEquippedVFX(magicAttacks[currentAttackIndex]);
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 
@@ -99,6 +107,7 @@ public class SMagicAttackController : MonoBehaviour
         if (currentAttackIndex >= magicAttacks.Count) currentAttackIndex = 0;
         if (currentAttackIndex < 0) currentAttackIndex = magicAttacks.Count - 1;
         mMagicSelector.UpdateCycleAttackIndex(currentAttackIndex);
+        equippedVFX?.SetEquippedVFX(magicAttacks[currentAttackIndex]);
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 

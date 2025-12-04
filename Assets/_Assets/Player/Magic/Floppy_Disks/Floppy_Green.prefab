@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c8566d87f8f1b418f4a5ee9a8514a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackIndexToUnlock: 1
+  attackIndexToUnlock: 2
 --- !u!1 &542834851611759023
 GameObject:
   m_ObjectHideFlags: 0
