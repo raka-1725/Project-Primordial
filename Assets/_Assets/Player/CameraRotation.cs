@@ -15,6 +15,8 @@ public class CameraRotation : MonoBehaviour
     {
         mInputAction = new InputSystem_Actions();
         mInputAction.Player.SwitchCamera.performed += SwitchCamera;
+
+        targetRotation = 45f;
     }
 
     private void SwitchCamera(InputAction.CallbackContext context)
