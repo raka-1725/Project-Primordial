@@ -25,7 +25,7 @@ public class VolumeManager : MonoBehaviour
     public void ChangeVolume() 
     {
         AudioListener.volume = mVolumeSlider.value;
-        Debug.Log($"volume : {mVolumeSlider.value}");
+        //Debug.Log($"volume : {mVolumeSlider.value}");
         Save();
     }
 
@@ -55,6 +55,6 @@ public class VolumeManager : MonoBehaviour
     private void UpdateVolumeValueText() 
     {
         mVolumeValueText.SetText($"{Mathf.RoundToInt(mVolumeSlider.value * 100)}%");
-        Debug.Log("Update text");
+        //Debug.Log("Update text");
     }
 }
