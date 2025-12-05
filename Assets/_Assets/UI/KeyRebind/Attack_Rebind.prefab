@@ -211,7 +211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Attack
+  m_Text: 
 --- !u!1 &4679162326726912371
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ RectTransform:
   m_GameObject: {fileID: 6466430350476966631}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.92222, y: 0.92222, z: 0.92222}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3241562908200730484}
@@ -498,7 +498,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LMB
+  m_Text: 
 --- !u!1 &7756539593407406879
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,11 +588,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7756539593407406879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc11d99b1a6682f4cbc4aba1fcd9ac5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 61a662f93a401714eb5fa1ab7cbf6ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Action: {fileID: 4038954874752458428, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
-  m_BindingId: 2d2d4ff1-5a6e-49c8-8f08-2e35b8f1b577
+  m_Action: {fileID: 0}
+  m_BindingId: 
   m_DisplayStringOptions: 0
   m_ActionLabel: {fileID: 5966961645590492285}
   m_BindingText: {fileID: 6563051566921308289}
