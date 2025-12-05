@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Interactions : MonoBehaviour
 {
-   private InputSystem_Actions mInputAction;
+    private InputSystem_Actions mInputAction;
 
     private Collider mInteractableInRange;
 
@@ -14,12 +14,22 @@ public class Interactions : MonoBehaviour
     void Awake()
         {
             mInputAction = new InputSystem_Actions();
+            LoadBindingOverrides();
             mInputAction.Player.Interact.performed += TryInteraction;
         }
     private void OnEnable() => mInputAction.Enable();
     private void OnDisable() => mInputAction.Disable();
-    
-    
+
+    private void LoadBindingOverrides()
+    {
+        if (PlayerPrefs.HasKey("InputOverrides"))
+        {
+            string json = PlayerPrefs.GetString("InputOverrides");
+            var playerMap = mInputAction.asset.FindActionMap("Player");
+            playerMap.LoadBindingOverridesFromJson(json);
+            Debug.Log("Loaded binding overrides");
+        }
+    }
     private void TryInteraction(InputAction.CallbackContext context)
     {
          if (mInteractableInRange != null)

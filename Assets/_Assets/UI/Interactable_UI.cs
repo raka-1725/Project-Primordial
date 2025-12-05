@@ -7,16 +7,19 @@ public class Interactable_UI : MonoBehaviour
     [SerializeField] GameObject InteractionUI;
     [SerializeField] TextMeshProUGUI mKeyText_Interaction;
     [SerializeField] TextMeshProUGUI mKeyText_SwitchCam;
-
-    [SerializeField] private InputSystem_Actions mInputAction;
+    [SerializeField] private InputActionAsset mInputActionAsset;
+    private InputSystem_Actions mInputAction;
     private void Awake()
     {
-        mInputAction.Enable();
+        mInputAction = new InputSystem_Actions();
+        LoadBindingOverrides();
         UpdateBindings(mKeyText_Interaction, mInputAction.Player.Interact);
         UpdateBindings(mKeyText_SwitchCam, mInputAction.Player.SwitchCamera);
         DisableUI();
     }
 
+    void OnEnable() { mInputAction.Player.Enable(); }
+    void OnDisable() { mInputAction.Player.Disable(); }
 
     public void EnableUI() 
     {
@@ -34,6 +37,17 @@ public class Interactable_UI : MonoBehaviour
         string currentBindingInteraction = action.GetBindingDisplayString(bindingIndex : 0);
         text.SetText(currentBindingInteraction);
 
-        Debug.Log(currentBindingInteraction);
+        Debug.Log($"current binding : {currentBindingInteraction}");
     }
+    private void LoadBindingOverrides()
+    {
+        if (PlayerPrefs.HasKey("InputOverrides"))
+        {
+            string json = PlayerPrefs.GetString("InputOverrides");
+            var playerMap = mInputAction.asset.FindActionMap("Player");
+            playerMap.LoadBindingOverridesFromJson(json);
+            Debug.Log("Loaded binding overrides");
+        }
+    }
+
 }
