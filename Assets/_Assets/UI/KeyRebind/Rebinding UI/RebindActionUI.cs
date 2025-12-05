@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 ////TODO: localization support
 
 ////TODO: deal with composites that have parts bound in different control schemes
+
+
 
 namespace UnityEngine.InputSystem.Samples.RebindUI
 {
@@ -469,6 +472,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 var action = m_Action?.action;
                 m_ActionLabel.text = action != null ? action.name : string.Empty;
             }
+        }
+
+        void Awake()
+        {
+            PlayerPrefs.DeleteKey("InputOverrides");
         }
 
         [Serializable]
