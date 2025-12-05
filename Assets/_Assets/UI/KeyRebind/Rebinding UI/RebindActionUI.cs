@@ -250,6 +250,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 PerformInteractiveRebind(action, bindingIndex);
             }
+            Debug.Log($"Starting rebind for action: {action.name}, bindingId: {m_BindingId}, bindingIndex: {bindingIndex}");
+
         }
 
         private void PerformInteractiveRebind(InputAction action, int bindingIndex, bool allCompositeParts = false)
@@ -296,6 +298,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                             m_RebindOverlay.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
                         UpdateBindingDisplay();
+
+                        //save as json
+                        var json = action.actionMap.SaveBindingOverridesAsJson();
+                        PlayerPrefs.SetString("InputOverrides", json);
+                        PlayerPrefs.Save();
+
+
                         CleanUp();
 
                         // If there's more composite parts we should bind, initiate a rebind
@@ -306,6 +315,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                             if (nextBindingIndex < action.bindings.Count && action.bindings[nextBindingIndex].isPartOfComposite)
                                 PerformInteractiveRebind(action, nextBindingIndex, true);
                         }
+
+                        //Debug.Log($"Rebind complete for action: {action.name}, bindingIndex: {bindingIndex}");
+                        //Debug.Log($"New binding path: {action.bindings[bindingIndex].effectivePath}");
                     });
 
             // If it's a part binding, show the name of the part in the UI.
@@ -383,6 +395,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     referencedAction.actionMap?.asset == actionAsset)
                     component.UpdateBindingDisplay();
             }
+
+
         }
 
         [Tooltip("Reference to action that is to be rebound from the UI.")]
