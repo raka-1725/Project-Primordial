@@ -14,9 +14,20 @@ public class CameraRotation : MonoBehaviour
     private void Awake()
     {
         mInputAction = new InputSystem_Actions();
+        LoadBindingOverrides();
         mInputAction.Player.SwitchCamera.performed += SwitchCamera;
 
         targetRotation = 45f;
+    }
+    private void LoadBindingOverrides()
+    {
+        if (PlayerPrefs.HasKey("InputOverrides"))
+        {
+            string json = PlayerPrefs.GetString("InputOverrides");
+            var playerMap = mInputAction.asset.FindActionMap("Player");
+            playerMap.LoadBindingOverridesFromJson(json);
+            Debug.Log("Loaded binding overrides");
+        }
     }
 
     private void SwitchCamera(InputAction.CallbackContext context)
