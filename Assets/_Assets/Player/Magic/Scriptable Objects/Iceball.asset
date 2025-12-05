@@ -23,4 +23,4 @@ MonoBehaviour:
   mEffectDuration: 3
   mIsAoEAttack: 0
   mAoERadius: 3
-  mEquippedHandVFX: {fileID: 4507998308607704928, guid: 3dc20391589302d4cbc549ea678231d9, type: 3}
+  mEquippedHandVFX: {fileID: 806585386580963401, guid: 3dc20391589302d4cbc549ea678231d9, type: 3}

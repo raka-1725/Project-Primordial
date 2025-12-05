@@ -27,8 +27,6 @@ public class SPlayerEquippedVFX : MonoBehaviour
 
         currentVFX = Instantiate(attackData.mEquippedHandVFX, handVFXAttachPoint);
         currentVFX.transform.localPosition = Vector3.zero;
-        // Scale down the VFX to fit hand
-        currentVFX.transform.localScale = new Vector3(0.000001f, 0.000001f, 0.000001f);
 
         Debug.Log($"VFX Spawned at position: {currentVFX.transform.position}");
         Debug.Log($"Hand attach point position: {handVFXAttachPoint.position}");
