@@ -775,7 +775,6 @@ Transform:
   - {fileID: 1052058095}
   - {fileID: 1705954347}
   - {fileID: 1673260475}
-  - {fileID: 2129149180}
   - {fileID: 248160593}
   - {fileID: 698742490}
   - {fileID: 1254809757}
@@ -2230,13 +2229,15 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edb51ce982037aa4db69da2abebb4138, type: 2}
   m_sharedMaterial: {fileID: -5229579735718882304, guid: edb51ce982037aa4db69da2abebb4138, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2faac5cf51fd64f468eca56d62608b81, type: 2}
+  m_sharedMaterial: {fileID: 1139515116192707173, guid: 2faac5cf51fd64f468eca56d62608b81, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280624508
-  m_fontColor: {r: 0.4867924, g: 0.14603767, b: 0.14603767, a: 1}
+    rgba: 4293191848
+  m_fontColor: {r: 0.6571947, g: 0.90943396, b: 0.8948323, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5588,7 +5589,7 @@ MonoBehaviour:
   mOSBGImage: {fileID: 1202733154}
   mText: {fileID: 416904843}
   mFadeOutDuration: 0.5
-  mCutSceneMSG: 'Escpaing out here.... '
+  mCutSceneMSG: I have to find a way to escape.  Maybe I should find the elements...
 --- !u!1 &1124574858
 GameObject:
   m_ObjectHideFlags: 0
@@ -10118,37 +10119,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123308857}
   m_CullTransparentMesh: 1
---- !u!1 &2129149179
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2129149180}
-  m_Layer: 0
-  m_Name: SP (4)
-  m_TagString: SpawnPoints
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2129149180
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2129149179}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 2, z: -5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 119872489}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2135256709
 PrefabInstance:
   m_ObjectHideFlags: 0
