@@ -19,6 +19,7 @@ public class GameStartSequence : MonoBehaviour
 
     private void Awake()
     {
+        mOpenigSequence.SetActive(true);
         Time.timeScale = 0;
         StartCoroutine(GameStartSequenceCoroutine());
     }
