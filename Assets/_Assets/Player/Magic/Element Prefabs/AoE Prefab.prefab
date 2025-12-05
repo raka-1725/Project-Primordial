@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a6a47ff7d893540b764fe29b562653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mAoE: {fileID: 2841120139311250015}
 --- !u!1 &5360173397096141982
 GameObject:
   m_ObjectHideFlags: 0
@@ -14250,7 +14251,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.1666306, g: 0.88366693, b: 0.9852941, a: 1}
-  m_Intensity: 47.746483
+  m_Intensity: 4.774648
   m_Range: 45
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -14291,7 +14292,7 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
