@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AoE
   m_EditorClassIdentifier: 
   mAttackIconSprite: {fileID: 21300000, guid: d98b775a6f3c03e43ba95a50dd259d3f, type: 3}
-  mAttackName: AoE
+  mAttackName: Lighting
   mAttackPrefab: {fileID: 1659879526719242480, guid: b7d122e79a6cc8449968ea6a5e1bb2ad, type: 3}
   mForce: 20
   mCooldown: 1
@@ -23,3 +23,4 @@ MonoBehaviour:
   mEffectDuration: 3
   mIsAoEAttack: 1
   mAoERadius: 3
+  mEquippedHandVFX: {fileID: 887043714004136797, guid: 907bedfe8f77ccc4baaadca4e10d32c1, type: 3}

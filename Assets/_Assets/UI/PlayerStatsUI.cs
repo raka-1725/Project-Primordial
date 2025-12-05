@@ -21,11 +21,13 @@ public class PlayerStatsUI : MonoBehaviour
 
     [Header("Death")]
     [SerializeField] GameObject mDeathScreen;
+    [SerializeField] Image mDeathImageBG;
     [SerializeField] TextMeshProUGUI mDeathText;
     [SerializeField] string mDeathMSG;
 
     [Header("Win")]
     [SerializeField] GameObject mWinScreen;
+    [SerializeField] Image mWinImageBG;
     [SerializeField] TextMeshProUGUI mWinText;
     [SerializeField] string mWinMSG;
 
@@ -52,7 +54,7 @@ public class PlayerStatsUI : MonoBehaviour
     {
         Time.timeScale = 0;
         mWinScreen.SetActive(true);
-        StartCoroutine(PlayerDeadSequence());
+        StartCoroutine(PlayerWinSequence());
     }
 
     private void PlayerDead(Player player)
@@ -60,32 +62,31 @@ public class PlayerStatsUI : MonoBehaviour
         Time.timeScale = 0;
         mDeathScreen.SetActive(true);
 
-        StartCoroutine(PlayerWinSequence());
+        StartCoroutine(PlayerDeadSequence());
     }
-    private IEnumerator PlayerDeadSequence() 
+    private IEnumerator PlayerWinSequence() 
     {
-        yield return StartCoroutine(ScreenFadeIn(1.2f, mWinScreen));
+        yield return StartCoroutine(ScreenFadeIn(1.2f, mWinImageBG));
         yield return StartCoroutine(TypeText(mWinMSG, mWinText));
     }
 
-    private IEnumerator PlayerWinSequence() 
+    private IEnumerator PlayerDeadSequence() 
     {
-        yield return StartCoroutine(ScreenFadeIn(1.2f, mDeathScreen));
+        yield return StartCoroutine(ScreenFadeIn(1.2f, mDeathImageBG));
         yield return StartCoroutine(TypeText(mDeathMSG, mDeathText));
     }
-    private IEnumerator ScreenFadeIn(float duration, GameObject screen) 
+    private IEnumerator ScreenFadeIn(float duration, Image BGImage) 
     {
-        Image BGImgage = screen.GetComponentInChildren<Image>();
         float elapsed = 0f;
-        Color C = BGImgage.color;
+        Color C = BGImage.color;
         while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime;
             C.a = Mathf.Clamp01(elapsed / duration);
-            BGImgage.color = C;
+            BGImage.color = C;
             yield return null;
         }
-        yield return new WaitForSeconds(duration + 0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 
     private IEnumerator TypeText(string line, TextMeshProUGUI textComponent) 
