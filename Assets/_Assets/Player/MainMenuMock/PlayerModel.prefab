@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8505a30ee1bc48d4688ed0bceae59961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mLoadSceneName: Maze_Interaction
 --- !u!1001 &3596063053451283671
 PrefabInstance:
   m_ObjectHideFlags: 0

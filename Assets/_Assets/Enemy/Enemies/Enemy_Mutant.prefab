@@ -120,7 +120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: mAttackStrength
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6822547414609018862, guid: 1c38459eac769b245a065c0ce82c09e6, type: 3}
       propertyPath: mLostTargetTime

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
-using static UnityEditor.ShaderData;
 
 public class SMagicAttackController : MonoBehaviour
 {
     [Header("Magic Attack Settings")]
-    [field: SerializeField] public List<SMagicAttackData> magicAttacks { get; private set; }
+
+    [SerializeField] private List<SMagicAttackData> allMagicAttacks; // All possible attacks
+    public List<SMagicAttackData> magicAttacks { get; private set; } = new List<SMagicAttackData>(); // Starts empty
+
     [SerializeField] private Transform magicAttackSpawn;
 
     private InputSystem_Actions inputActions;
@@ -16,6 +18,8 @@ public class SMagicAttackController : MonoBehaviour
     private MovementController movementController;
     //UI
     private MagicSelector mMagicSelector;
+
+    private SPlayerEquippedVFX equippedVFX;
 
     private int currentAttackIndex = 0;
     private GameObject mCurrentTarget;
@@ -43,6 +47,7 @@ public class SMagicAttackController : MonoBehaviour
         animator = GetComponent<Animator>();
         movementController = GetComponent<MovementController>();
         mMagicSelector = FindAnyObjectByType<MagicSelector>();
+        equippedVFX = GetComponent<SPlayerEquippedVFX>();
 
         lastAttackTimes = new float[magicAttacks.Count];
 
@@ -51,6 +56,29 @@ public class SMagicAttackController : MonoBehaviour
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
+
+    public void UnlockAttack(int index)
+    {
+        if (index < 0 || index >= allMagicAttacks.Count) return;
+
+        SMagicAttackData newAttack = allMagicAttacks[index];
+        if (!magicAttacks.Contains(newAttack))
+        {
+            magicAttacks.Add(newAttack);
+
+            // Resize lastAttackTimes to match magicAttacks.Count
+            System.Array.Resize(ref lastAttackTimes, magicAttacks.Count);
+            lastAttackTimes[magicAttacks.Count - 1] = -10; // Initialize new slot
+
+            mMagicSelector.NewSkillAccuired(newAttack); // Update UI
+            Debug.Log($"Unlocked attack: {newAttack.mAttackName}");
+
+            if (magicAttacks.Count == 1)
+            {
+                equippedVFX?.SetEquippedVFX(newAttack);
+            }
+        }
+    }
 
     private void SwitchAttackKey(KeyControl keyControl)
     {
@@ -69,6 +97,7 @@ public class SMagicAttackController : MonoBehaviour
         if (index < 1 || index > magicAttacks.Count) return;
         currentAttackIndex = index - 1;
         mMagicSelector.UpdateCycleAttackIndex(currentAttackIndex);
+        equippedVFX?.SetEquippedVFX(magicAttacks[currentAttackIndex]);
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 
@@ -78,6 +107,7 @@ public class SMagicAttackController : MonoBehaviour
         if (currentAttackIndex >= magicAttacks.Count) currentAttackIndex = 0;
         if (currentAttackIndex < 0) currentAttackIndex = magicAttacks.Count - 1;
         mMagicSelector.UpdateCycleAttackIndex(currentAttackIndex);
+        equippedVFX?.SetEquippedVFX(magicAttacks[currentAttackIndex]);
         Debug.Log($"Switched to attack: {magicAttacks[currentAttackIndex].mAttackName}");
     }
 
@@ -155,15 +185,15 @@ public class SMagicAttackController : MonoBehaviour
             {
                 if (nearbyObj.CompareTag("Enemy"))
                 {
-                    if (attackData.mIsFreezeAttack && attackData.mSpecialEffectPrefab != null)
-                    {
-                        GameObject freezeEffect = Instantiate(attackData.mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
-                        freezeEffect.transform.SetParent(nearbyObj.transform);
+                    //if (attackData.mIsFreezeAttack && attackData.mSpecialEffectPrefab != null)
+                    //{
+                    //    GameObject freezeEffect = Instantiate(attackData.mSpecialEffectPrefab, nearbyObj.transform.position, Quaternion.identity);
+                    //    freezeEffect.transform.SetParent(nearbyObj.transform);
 
-                        FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
-                        freezeScript.Initialize(nearbyObj.gameObject, attackData.mEffectDuration);
-                    }
-                    else
+                    //    FreezeEffect freezeScript = freezeEffect.AddComponent<FreezeEffect>();
+                    //    freezeScript.Initialize(nearbyObj.gameObject, attackData.mEffectDuration);
+                    //}
+                    //else
                     {
                         Destroy(nearbyObj.gameObject);
                     }

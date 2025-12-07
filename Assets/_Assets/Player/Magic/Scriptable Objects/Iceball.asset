@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d052361e5e0012499ed59e95ca04da7, type: 3}
+  m_Name: Iceball
+  m_EditorClassIdentifier: 
+  mAttackIconSprite: {fileID: 21300000, guid: 6e7a7d4509d113c44be8358ecbbca0fc, type: 3}
+  mAttackName: Iceball
+  mAttackPrefab: {fileID: 286646688807115751, guid: 8f91505aceccb084e9c9bb22ea162bcd, type: 3}
+  mForce: 20
+  mCooldown: 1
+  mAnimationType: 0
+  mIsFreezeAttack: 1
+  mSpecialEffectPrefab: {fileID: 1058577671838409447, guid: b0a30eb7adee6e6459926bfb9ecf4732, type: 3}
+  mEffectDuration: 3
+  mIsAoEAttack: 0
+  mAoERadius: 3
+  mEquippedHandVFX: {fileID: 806585386580963401, guid: 3dc20391589302d4cbc549ea678231d9, type: 3}

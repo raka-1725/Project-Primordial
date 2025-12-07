@@ -25,4 +25,7 @@ public class SMagicAttackData : ScriptableObject
     [Header("AoE Attack Settings")]
     public bool mIsAoEAttack = false;
     public float mAoERadius = 3f;
+
+    [Header("Equipped Element Indicator")]
+    public GameObject mEquippedHandVFX;
 }

@@ -40,8 +40,8 @@ public class MovementController : MonoBehaviour
 
     void Awake()
     {
-
         mInputAction = new InputSystem_Actions();
+        LoadBindingOverrides();
         mInputAction.Player.Jump.performed += PerformJump;
         mInputAction.Player.Move.performed += HandleMoveInput;
         mInputAction.Player.Move.canceled += HandleMoveInput;
@@ -53,6 +53,17 @@ public class MovementController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void LoadBindingOverrides()
+    {
+        if (PlayerPrefs.HasKey("InputOverrides"))
+        {
+            string json = PlayerPrefs.GetString("InputOverrides");
+            var playerMap = mInputAction.asset.FindActionMap("Player");
+            playerMap.LoadBindingOverridesFromJson(json);
+            Debug.Log("Loaded binding overrides");
+        }
     }
 
     private void OnEnable() => mInputAction.Enable();
