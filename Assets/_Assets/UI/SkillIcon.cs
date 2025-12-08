@@ -14,6 +14,10 @@ public class SkillIcon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mSkillNameText;
 
 
+    [Header("Variable Color")]
+    [SerializeField] Image mPanelImage;
+    [SerializeField] Image mIconFrame;
+    
    public void UpdateIcon(SMagicAttackData magicAttackData) 
    {
         mIconSprite = magicAttackData.mAttackIconSprite;
@@ -21,6 +25,10 @@ public class SkillIcon : MonoBehaviour
         mIconImageComponent.sprite = mIconSprite;
         mSkillNameText.SetText(mSkillName);
 
+        mPanelImage.color = magicAttackData.mAttackColor;
+        Color colorIconframe = magicAttackData.mAttackColor;
+        colorIconframe.a = 0.4f;
+        mIconFrame.color = colorIconframe;
 
    }
 
