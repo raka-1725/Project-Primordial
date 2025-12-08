@@ -112,6 +112,8 @@ public class Door : MonoBehaviour, IInteractable
             return "Locked (Need Key)";
         if (mLeverOnly)
             return "Requires Lever";
+        if (mIsOpen)
+            return "Press F to Close Door";
         return "Press F to Open Door";
     }
 }
