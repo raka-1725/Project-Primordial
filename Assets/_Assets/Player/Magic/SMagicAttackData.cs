@@ -8,6 +8,7 @@ public class SMagicAttackData : ScriptableObject
     [Header("Base Settings")]
     public Sprite mAttackIconSprite;
     public string mAttackName;
+    public Color mAttackColor;
 
     [Header("Attack Settings")]
     public GameObject mAttackPrefab;
