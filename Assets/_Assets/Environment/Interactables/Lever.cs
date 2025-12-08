@@ -19,4 +19,8 @@ public class Lever : MonoBehaviour, IInteractable
                 door.ActivateFromLever();
             }
     }
+    public string GetInteractText()
+    {
+        return "";
+    }
 }

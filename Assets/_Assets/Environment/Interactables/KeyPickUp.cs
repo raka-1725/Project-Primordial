@@ -45,4 +45,8 @@ public class Key : MonoBehaviour, IInteractable
     {
         Destroy(gameObject);
     }
+    public string GetInteractText()
+    {
+        return "";
+    }
 }

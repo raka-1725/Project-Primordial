@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Interactions : MonoBehaviour
 {
     private InputSystem_Actions mInputAction;
 
     private Collider mInteractableInRange;
+
+    [SerializeField] private TextMeshProUGUI InteractText;
 
     public int mKeys;
 
@@ -66,10 +69,17 @@ public class Interactions : MonoBehaviour
             Debug.Log("Interactable In Range");
             mInteractableInRange = other;
 
+            IInteractable interactable = other.GetComponent<IInteractable>();
+        if (interactable != null && InteractText != null)
+        {
+            InteractText.text = interactable.GetInteractText();
+            InteractText.gameObject.SetActive(true);
+        }
+
             //UI
-            Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
-            if (InteractableUI != null)
-            InteractableUI.EnableUI();
+            //Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
+            //if (InteractableUI != null)
+            //InteractableUI.EnableUI();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -77,9 +87,11 @@ public class Interactions : MonoBehaviour
         if (other == mInteractableInRange)
         {
             mInteractableInRange = null;
-            Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
-            if (InteractableUI != null)
-            InteractableUI.DisableUI();
+            if (InteractText != null)
+            InteractText.gameObject.SetActive(false);
+            //Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
+            //if (InteractableUI != null)
+            //InteractableUI.DisableUI();
         }
     }
 }

@@ -25,4 +25,8 @@ public class PressurePlate : MonoBehaviour
             door.ActivateFromLever(); // your custom method
         }
     }
+    public string GetInteractText()
+    {
+        return "";
+    }
 }

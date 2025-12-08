@@ -106,4 +106,12 @@ public class Door : MonoBehaviour, IInteractable
         if (mStayOpen == false)
         mIsRotating = false;
     }
+    public string GetInteractText()
+    {
+        if (mLocked)
+            return "Locked (Need Key)";
+        if (mLeverOnly)
+            return "Requires Lever";
+        return "Press F to Open Door";
+    }
 }

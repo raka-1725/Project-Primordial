@@ -30,4 +30,5 @@ public class Chest : MonoBehaviour
     {
         mIsOpen = true;
     }
+    
 }
