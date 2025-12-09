@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAttackIconSprite: {fileID: 21300000, guid: d98b775a6f3c03e43ba95a50dd259d3f, type: 3}
   mAttackName: Lighting
-  mAttackColor: {r: 0.14509805, g: 0.93333334, b: 0.30588236, a: 0}
+  mAttackColor: {r: 0.14509805, g: 0.93333334, b: 0.30588236, a: 1}
   mAttackPrefab: {fileID: 2841120139311250015, guid: 73542c3dfcdabca48869e0ecd491eaca, type: 3}
   mForce: 20
   mCooldown: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAttackIconSprite: {fileID: 21300000, guid: 6e7a7d4509d113c44be8358ecbbca0fc, type: 3}
   mAttackName: Iceball
-  mAttackColor: {r: 0.14509805, g: 0.6313726, b: 0.93333334, a: 0}
+  mAttackColor: {r: 0.14509805, g: 0.6313726, b: 0.93333334, a: 1}
   mAttackPrefab: {fileID: 286646688807115751, guid: 8f91505aceccb084e9c9bb22ea162bcd, type: 3}
   mForce: 20
   mCooldown: 1

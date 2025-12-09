@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +16,11 @@ public class GameStartSequence : MonoBehaviour
     [Header("MSG")]
     [SerializeField] string mCutSceneMSG;
 
-
+    private Clock mClock;
 
     private void Awake()
     {
+        mClock = FindAnyObjectByType<Clock>();  
         mOpenigSequence.SetActive(true);
         Time.timeScale = 0;
         StartCoroutine(GameStartSequenceCoroutine());
@@ -31,6 +33,7 @@ public class GameStartSequence : MonoBehaviour
         yield return ScreenFadeOut(mFadeOutDuration, mOSBGImage);
 
         mOpenigSequence.SetActive(false);
+        mClock.onGameStarted.Invoke(mClock);
         Time.timeScale = 1;
     }
 
