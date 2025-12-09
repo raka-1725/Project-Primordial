@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
 
     public Action<GameManager> onPlayerGoal;
 
+    private Clock mClock;
+
+    private void Start()
+    {
+        mClock = GetComponent<Clock>();
+    }
+
     private void OnDestroy()
     {
         if (mGamaManager == this) 
