@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
             mPlayer = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        //mMaxEnemies = GameMode.Instance.enemyCount;
+        mMaxEnemies = GameMode.Instance.enemyCount;
 
         StartCoroutine(SpawnEnemies());
     }

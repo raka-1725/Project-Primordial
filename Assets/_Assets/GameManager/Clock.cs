@@ -17,16 +17,17 @@ public class Clock : MonoBehaviour
     public Action<Clock> onGameStarted;
 
     Player mPlayer;
+    ClockUI mClocUI;
 
     private void Start()
     {
+        mPlayer = FindAnyObjectByType<Player>();
+        mClocUI = FindAnyObjectByType<ClockUI>();
         GameManager.mGamaManager.onPlayerGoal += GameFinished;
         mPlayer.onPlayerDead += GameFinished;
         onGameStarted += GameStarted;
 
         if (!bClock) { mTime = mDuration; }
-
-        mPlayer = FindAnyObjectByType<Player>();
 
 
         bClock = GameMode.Instance.bClock;
@@ -45,6 +46,7 @@ public class Clock : MonoBehaviour
     private void GameStarted(Clock clock)
     {
         bStop = false;
+        Debug.Log("ClockStart");
     }
 
 
@@ -59,6 +61,7 @@ public class Clock : MonoBehaviour
         if (!bClock && !bStop && mTime > 0)
         {
             mTime -= Time.deltaTime;
+            mClocUI.ShowTime(mTime);
         }
 
         if (mTime <= 0)
@@ -81,6 +84,7 @@ public class Clock : MonoBehaviour
         if (!bStop && bClock) 
         {
             mTime += Time.deltaTime;
+            mClocUI.ShowTime(mTime);
         }
     }
 

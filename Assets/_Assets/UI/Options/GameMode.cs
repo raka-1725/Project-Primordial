@@ -5,8 +5,8 @@ public class GameMode: MonoBehaviour
 {
     public static GameMode Instance { get; private set; }
 
-    public bool bClock;
-    public int enemyCount;
+    public bool bClock = true;
+    public int enemyCount = 10;
 
     private void Awake()
     {
