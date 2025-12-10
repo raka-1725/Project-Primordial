@@ -33,7 +33,7 @@ public class GameStartSequence : MonoBehaviour
         yield return ScreenFadeOut(mFadeOutDuration, mOSBGImage);
 
         mOpenigSequence.SetActive(false);
-        //mClock.onGameStarted.Invoke(mClock);
+        mClock.onGameStarted.Invoke(mClock);
         Time.timeScale = 1;
     }
 
