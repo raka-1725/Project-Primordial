@@ -20,7 +20,8 @@ public class Clock : MonoBehaviour
 
     private void Start()
     {
-        onGameFinished += GameFinished;
+        GameManager.mGamaManager.onPlayerGoal += GameFinished;
+        mPlayer.onPlayerDead += GameFinished;
         onGameStarted += GameStarted;
 
         if (!bClock) { mTime = mDuration; }
@@ -31,15 +32,21 @@ public class Clock : MonoBehaviour
         bClock = GameMode.Instance.bClock;
     }
 
+    private void GameFinished(Player player)
+    {
+        bStop = true;
+    }
+
+    private void GameFinished(GameManager manager)
+    {
+        bStop = true;
+    }
+
     private void GameStarted(Clock clock)
     {
         bStop = false;
     }
 
-    private void GameFinished(Clock clock)
-    {
-        bStop = true;
-    }
 
     private void Update()
     {
