@@ -8,6 +8,7 @@ public class SMagicAttackData : ScriptableObject
     [Header("Base Settings")]
     public Sprite mAttackIconSprite;
     public string mAttackName;
+    public Color mAttackColor;
 
     [Header("Attack Settings")]
     public GameObject mAttackPrefab;
@@ -25,4 +26,7 @@ public class SMagicAttackData : ScriptableObject
     [Header("AoE Attack Settings")]
     public bool mIsAoEAttack = false;
     public float mAoERadius = 3f;
+
+    [Header("Equipped Element Indicator")]
+    public GameObject mEquippedHandVFX;
 }

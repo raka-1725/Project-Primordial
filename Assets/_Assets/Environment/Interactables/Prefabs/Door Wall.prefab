@@ -216,7 +216,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.75, y: 1.4068218, z: 1}
+  m_Size: {x: 0.75, y: 1.4068218, z: 3}
   m_Center: {x: 0.5, y: 0.7034109, z: 0}
 --- !u!114 &4471871309907212641
 MonoBehaviour:
@@ -233,6 +233,7 @@ MonoBehaviour:
   mTargetRotation: {x: 0, y: -100, z: 0}
   mTargetMove: {x: 0, y: -3, z: 0}
   mRotationSpeed: 1
+  mStartOpen: 0
   mMovesDown: 1
   mStayOpen: 0
   mLeverOnly: 0
@@ -253,7 +254,7 @@ GameObject:
   - component: {fileID: 7127165314298101292}
   m_Layer: 0
   m_Name: Door Wall
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

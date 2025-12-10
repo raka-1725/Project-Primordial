@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d052361e5e0012499ed59e95ca04da7, type: 3}
+  m_Name: AoE
+  m_EditorClassIdentifier: 
+  mAttackIconSprite: {fileID: 21300000, guid: d98b775a6f3c03e43ba95a50dd259d3f, type: 3}
+  mAttackName: Lighting
+  mAttackColor: {r: 0.14509805, g: 0.93333334, b: 0.30588236, a: 1}
+  mAttackPrefab: {fileID: 2841120139311250015, guid: 73542c3dfcdabca48869e0ecd491eaca, type: 3}
+  mForce: 20
+  mCooldown: 1
+  mAnimationType: 1
+  mIsFreezeAttack: 0
+  mSpecialEffectPrefab: {fileID: 0}
+  mEffectDuration: 3
+  mIsAoEAttack: 1
+  mAoERadius: 3
+  mEquippedHandVFX: {fileID: 887043714004136797, guid: 907bedfe8f77ccc4baaadca4e10d32c1, type: 3}

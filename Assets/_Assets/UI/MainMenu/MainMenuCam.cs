@@ -9,7 +9,8 @@ public class MainMenuCam : MonoBehaviour
 
     [SerializeField] float mRotateDuration = 2f;
     Quaternion originRotation;
-    Quaternion targetRot = Quaternion.Euler(0, 90, 0);
+    Quaternion targetRotOption = Quaternion.Euler(0, 90, 0);
+    Quaternion targetRotSetting = Quaternion.Euler(0, -90, 0);
     private void Start()
     {
         originRotation = mMainCam.transform.rotation;
@@ -17,7 +18,12 @@ public class MainMenuCam : MonoBehaviour
 
     public void lookAtOption() 
     {
-        StartCoroutine(RotateTo(targetRot));  
+        StartCoroutine(RotateTo(targetRotOption));  
+    }
+
+    public void lookAtSetting()
+    {
+        StartCoroutine(RotateTo(targetRotSetting));
     }
 
     public void lookAtMain() 

@@ -3,21 +3,33 @@ using UnityEngine.InputSystem;
 
 public class Interactions : MonoBehaviour
 {
-   private InputSystem_Actions mInputAction;
+    private InputSystem_Actions mInputAction;
 
     private Collider mInteractableInRange;
 
     public int mKeys;
 
+    
+
     void Awake()
         {
             mInputAction = new InputSystem_Actions();
+            LoadBindingOverrides();
             mInputAction.Player.Interact.performed += TryInteraction;
         }
     private void OnEnable() => mInputAction.Enable();
     private void OnDisable() => mInputAction.Disable();
-    
-    
+
+    private void LoadBindingOverrides()
+    {
+        if (PlayerPrefs.HasKey("InputOverrides"))
+        {
+            string json = PlayerPrefs.GetString("InputOverrides");
+            var playerMap = mInputAction.asset.FindActionMap("Player");
+            playerMap.LoadBindingOverridesFromJson(json);
+            Debug.Log("Loaded binding overrides");
+        }
+    }
     private void TryInteraction(InputAction.CallbackContext context)
     {
          if (mInteractableInRange != null)
@@ -53,6 +65,10 @@ public class Interactions : MonoBehaviour
         {
             Debug.Log("Interactable In Range");
             mInteractableInRange = other;
+
+            //UI
+            Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
+            InteractableUI.EnableUI();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -60,6 +76,8 @@ public class Interactions : MonoBehaviour
         if (other == mInteractableInRange)
         {
             mInteractableInRange = null;
+            Interactable_UI InteractableUI = FindAnyObjectByType<Interactable_UI>();
+            InteractableUI.DisableUI();
         }
     }
 }

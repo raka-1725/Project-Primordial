@@ -1,11 +1,9 @@
 using UnityEngine;
 using Unity.Behavior;
-using System;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEditor.UI;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public class Enemy : MonoBehaviour
 {
@@ -52,7 +50,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Freeze")]
     [SerializeField] bool bIsFrozed;
-    [SerializeField] private float mFrozeDuration;
+    private float mFrozeDuration;
     private float mFrozeTimer;
 
     BehaviorGraphAgent mBehaviorGraphAgent;
@@ -81,10 +79,9 @@ public class Enemy : MonoBehaviour
     private void SetPatrolPoints()
     {
         GameObject[] PT = GameObject.FindGameObjectsWithTag("PatrolPoints");
-        foreach (GameObject patrolPoints in PT) 
-        {
-            mPatrolPoints.Add(patrolPoints);
-        }
+        mPatrolPoints = PT.ToList();
+        System.Random rnd = new System.Random();
+        mPatrolPoints = mPatrolPoints.OrderBy(x => rnd.Next()).ToList();
     }
 
     void Start()
@@ -125,8 +122,9 @@ public class Enemy : MonoBehaviour
 
     }*/
 
-    public void Freeze()
+    public void Freeze(float duration)
     {
+        mFrozeDuration = duration;
         bIsFrozed = true;
         Debug.Log($"Enemy{this.name}, is frozed");
     }
@@ -153,6 +151,7 @@ public class Enemy : MonoBehaviour
         if (distanceToPlayer <= mAlwaysAwareDistance)
         {
             Target = player.gameObject;
+            isVisible = true;
         }
 
         if (distanceToPlayer > mSightDistance) 
