@@ -11,6 +11,9 @@ public class MainMenuCam : MonoBehaviour
     Quaternion originRotation;
     Quaternion targetRotOption = Quaternion.Euler(0, 90, 0);
     Quaternion targetRotSetting = Quaternion.Euler(0, -90, 0);
+    Quaternion targetRotControls = Quaternion.Euler(0, -180, 0);
+
+    [SerializeField] GameObject mTransitionPanel;
     private void Start()
     {
         originRotation = mMainCam.transform.rotation;
@@ -26,6 +29,11 @@ public class MainMenuCam : MonoBehaviour
         StartCoroutine(RotateTo(targetRotSetting));
     }
 
+    public void lookAtControls() 
+    {
+        StartCoroutine(RotateTo(targetRotControls));
+    }
+
     public void lookAtMain() 
     {
         StartCoroutine(RotateTo(originRotation));
@@ -33,6 +41,7 @@ public class MainMenuCam : MonoBehaviour
 
     private IEnumerator RotateTo(Quaternion target) 
     {
+        mTransitionPanel.SetActive(true);
         Quaternion startRotation = mMainCam.transform.rotation;
         float time = 0f;
         while (time < mRotateDuration) 
@@ -45,5 +54,7 @@ public class MainMenuCam : MonoBehaviour
             yield return null;
         }
         mMainCam.transform.rotation = target;
+
+        mTransitionPanel.SetActive(false);
     }
 }

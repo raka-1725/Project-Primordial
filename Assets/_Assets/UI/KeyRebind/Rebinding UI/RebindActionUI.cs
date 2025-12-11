@@ -230,6 +230,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 action.RemoveBindingOverride(bindingIndex);
             }
+            var json = action.actionMap.SaveBindingOverridesAsJson();
+            PlayerPrefs.SetString("InputOverrides", json);
+            PlayerPrefs.Save();
             UpdateBindingDisplay();
         }
 
@@ -283,6 +286,22 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             action.actionMap.Disable();
             m_UIInputActionMap?.Disable();
 
+            m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex);
+
+            m_RebindOperation
+                .WithExpectedControlType("Vector2")
+                .WithControlsExcluding("<Mouse>")
+                .WithControlsExcluding("<Keyboard>/escape")
+                .WithControlsExcluding("<Keyboard>/f1")
+                .WithControlsExcluding("<Mouse>/leftButton");
+
+            m_RebindOperation
+                .WithControlsExcluding("<Mouse>")
+                .WithControlsExcluding("<Gamepad>/buttonSouth")
+                .WithControlsExcluding("<Gamepad>/buttonStart");
+
+
+
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .OnCancel(
@@ -293,6 +312,15 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                             m_RebindOverlay.SetActive(false);
                         UpdateBindingDisplay();
                         CleanUp();
+                    })
+                .OnPotentialMatch(
+                    operation => 
+                    {
+                        var control = operation.selectedControl;
+                        if (IsControlAlreadyUsed(control, action)) 
+                        {
+                            operation.Cancel();
+                        }
                     })
                 .OnComplete(
                     operation =>
@@ -347,6 +375,25 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+
+
+        //Check if there is no conflciting bindingsd
+        private bool IsControlAlreadyUsed(InputControl control, InputAction exceptAction = null)
+        {
+            var map = m_Action.action.actionMap;
+            foreach (var action in map.actions)
+            {
+                if (action == exceptAction)
+                    continue;
+
+                foreach (var binding in action.bindings)
+                {
+                    if (binding.effectivePath == control.path)
+                        return true;
+                }
+            }
+            return false;
         }
 
         protected void OnEnable()

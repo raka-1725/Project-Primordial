@@ -8,12 +8,13 @@ public class VolumeManager : MonoBehaviour
 {
     [SerializeField] private Slider mVolumeSlider;
     [SerializeField] private TextMeshProUGUI mVolumeValueText;
+    [SerializeField] private string mSaveKey;
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("musicVolume")) 
+        if (!PlayerPrefs.HasKey(mSaveKey)) 
         {
-            PlayerPrefs.SetFloat("musicVolume", 1);
+            PlayerPrefs.SetFloat(mSaveKey, 1);
             Load();
         }
         else
@@ -32,12 +33,12 @@ public class VolumeManager : MonoBehaviour
     private void Save()
     {
         UpdateVolumeValueText();
-        PlayerPrefs.SetFloat("musicVolume", mVolumeSlider.value);
+        PlayerPrefs.SetFloat(mSaveKey, mVolumeSlider.value);
     }
 
     private void Load()
     {
-        mVolumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        mVolumeSlider.value = PlayerPrefs.GetFloat(mSaveKey);
         UpdateVolumeValueText();
     }
 
