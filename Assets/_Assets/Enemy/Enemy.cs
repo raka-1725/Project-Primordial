@@ -47,6 +47,7 @@ public class Enemy : MonoBehaviour
 
     [Header("PatrolPoints")]
     [SerializeField] List<GameObject> mPatrolPoints;
+    [SerializeField] float mPTReAssignTime = 10f;
 
     [Header("Freeze")]
     [SerializeField] bool bIsFrozed;
@@ -57,6 +58,7 @@ public class Enemy : MonoBehaviour
     NavMeshAgent mNavAgent;
     Animator mAnimator;
     private float loseTimer;
+    private float standbyTimer;
 
     GameManager mGameManager;
 
@@ -173,6 +175,16 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        if (mNavAgent.velocity.sqrMagnitude <= 0.5f) 
+        {
+            standbyTimer += Time.deltaTime;
+            if(standbyTimer > mPTReAssignTime) 
+            {
+                PatrolReAssign();
+                standbyTimer = 0;
+            }
+        }
+
         if (isVisible)
         {
             loseTimer = 0f;
@@ -191,6 +203,11 @@ public class Enemy : MonoBehaviour
         {
             AttackPlayer();
         }
+    }
+
+    private void PatrolReAssign() 
+    {
+        mNavAgent.destination = mPatrolPoints[Random.Range(0, mPatrolPoints.Count)].transform.position;
     }
 
     public void AttackPlayer() 
@@ -256,6 +273,10 @@ public class Enemy : MonoBehaviour
             Gizmos.DrawLine(transform.position, Target.transform.position);
             Gizmos.DrawWireSphere(Target.transform.position, 0.5f);
         }
+
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(transform.position, mNavAgent.destination);
     }
 
 
