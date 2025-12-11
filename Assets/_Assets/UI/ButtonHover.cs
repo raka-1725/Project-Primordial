@@ -25,6 +25,9 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
 
+    //sound
+    private AudioSource mHoverSound;
+
 
     //instead of size delta use scale
     private void Awake()
@@ -37,6 +40,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         mRectTransform.localScale = mScaleUp;
         bIsHovered = true;
+        mHoverSound.Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
