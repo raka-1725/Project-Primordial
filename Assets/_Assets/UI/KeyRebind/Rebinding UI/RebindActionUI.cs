@@ -286,6 +286,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             action.actionMap.Disable();
             m_UIInputActionMap?.Disable();
 
+            m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex);
+
             m_RebindOperation
                 .WithExpectedControlType("Vector2")
                 .WithControlsExcluding("<Mouse>")
