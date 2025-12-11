@@ -39,7 +39,7 @@ public class GameModeButtonSetter : MonoBehaviour
         mHCB.Select();
         GameMode.Instance.HCGameMode();
         SetAllImageNotActive();
-        mHCB.gameObject.SetActive(true);
+        mHCBImage.gameObject.SetActive(true);
     }
 
     public void modeTA() 
@@ -47,15 +47,15 @@ public class GameModeButtonSetter : MonoBehaviour
         mTAB.Select();
         GameMode.Instance.TAGameMode();
         SetAllImageNotActive();
-        mTAB.gameObject.SetActive(true);
+        mTABImage.gameObject.SetActive(true);
     }
 
 
     private void SetAllImageNotActive() 
     {
         mNormalBImage.gameObject.SetActive(false);
-        mHCB.gameObject.SetActive(false);
-        mTAB.gameObject.SetActive(false);
+        mHCBImage.gameObject.SetActive(false);
+        mTABImage.gameObject.SetActive(false);
     }
 
 }
