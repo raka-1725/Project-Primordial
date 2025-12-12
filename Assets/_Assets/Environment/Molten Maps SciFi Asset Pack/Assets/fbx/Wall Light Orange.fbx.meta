@@ -3,7 +3,17 @@ guid: 9bdf481eb2e6a8a4286a8392cfb5eb81
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Atlas Emissive
+    second: {fileID: 2100000, guid: b29f814b37f86dc439b5aed897868da5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Atlas Metallic
+    second: {fileID: 2100000, guid: b2c108ce2a680774e9651851d6f37d90, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

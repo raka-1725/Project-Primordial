@@ -59,7 +59,7 @@ public class GameStartSequence : MonoBehaviour
         {
             textComponent.text += c;
             yield return new WaitForSecondsRealtime(1f / mCharacterPerSec);
-            //typo sound???
+            FindAnyObjectByType<AudioManager>().PlayTypo();
         }
     }
 }

@@ -67,7 +67,7 @@ public class Clock : MonoBehaviour
         if (mTime <= 0)
         {
             mTime = 0;
-
+            mClocUI.ShowTime(0);
             mPlayerDeathTime += Time.deltaTime;
             damageTimer += Time.deltaTime;
 

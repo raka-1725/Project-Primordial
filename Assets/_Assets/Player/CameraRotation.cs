@@ -33,7 +33,7 @@ public class CameraRotation : MonoBehaviour
     private void SwitchCamera(InputAction.CallbackContext context)
     {
         bFlipped = !bFlipped;
-        targetRotation = bFlipped ? 45 : 135;
+        targetRotation = bFlipped ? 45 : 225;
     }
 
     private void Update()
