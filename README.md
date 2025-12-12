@@ -78,5 +78,14 @@ A puzzle and escape game with magic combat and combat ability system included wi
 ---
 
 # Issues/Bugs
+    - Known bugs - V1.0
+      - Enemy stay still
+      - Button Scale
+      - Key Rebind
+      - Point & Click Attack Sensitivity
+      - Elements spawn at same spawner
+
+---
+
 
 ---
