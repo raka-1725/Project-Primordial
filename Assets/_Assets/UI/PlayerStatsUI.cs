@@ -95,8 +95,8 @@ public class PlayerStatsUI : MonoBehaviour
         foreach (char c in line) 
         {
             textComponent.text += c;
+            FindAnyObjectByType<AudioManager>().PlayTypo();
             yield return new WaitForSecondsRealtime(1f / mCharacterPerSec);
-            //typo sound???
         }
     }
 

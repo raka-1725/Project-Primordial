@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject mPauseMenu;
 
     [SerializeField] private bool bPaused;
+    AudioManager mAudio;
 
     private void Awake()
     {
@@ -17,6 +18,8 @@ public class PauseMenu : MonoBehaviour
         mInputAction.Player.Enable();
         mPlayer = FindAnyObjectByType<Player>();
         mPauseMenu.SetActive(false);
+
+        mAudio = FindAnyObjectByType<AudioManager>();
 
         mPlayer.onPlayerDead += DisablePause;
     }
@@ -29,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     private void DisablePause(Player player)
     {
         mInputAction.Disable();
+        mAudio.onGameResume.Invoke(mAudio);
         mPauseMenu.SetActive(false);
     }
 
@@ -43,6 +47,7 @@ public class PauseMenu : MonoBehaviour
     {
         bPaused = !bPaused;
         mPauseMenu.SetActive(bPaused);
+        mAudio.onGameResume.Invoke(mAudio);
         Paused();
     }
 

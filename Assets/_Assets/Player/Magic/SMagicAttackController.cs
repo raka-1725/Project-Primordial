@@ -24,7 +24,7 @@ public class SMagicAttackController : MonoBehaviour
     private int currentAttackIndex = 0;
     private GameObject mCurrentTarget;
     private float[] lastAttackTimes;
-
+    AudioManager mAudioManager;
     void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -52,6 +52,8 @@ public class SMagicAttackController : MonoBehaviour
         lastAttackTimes = new float[magicAttacks.Count];
 
         for (int i = 0; i < lastAttackTimes.Length; i++) { lastAttackTimes[i] = -10; }
+
+        mAudioManager = FindAnyObjectByType<AudioManager>();
     }
 
     private void OnEnable() => inputActions.Enable();
@@ -177,6 +179,20 @@ public class SMagicAttackController : MonoBehaviour
         Vector3 spawnPosition = mCurrentTarget.transform.position;
         // Instantiate the attack prefab at enemy location
         GameObject magicClone = Instantiate(attackData.mAttackPrefab, spawnPosition, Quaternion.identity);
+
+        if (attackData.mIsFreezeAttack)
+        {
+            mAudioManager.PlayIceMagic();
+        }
+        else if (!attackData.mIsAoEAttack) 
+        {
+            mAudioManager.PlayFireMagic();
+        }
+        else
+        {
+            mAudioManager.PlayAoEMagic();
+        }
+
         // If it's AoE, apply AoE logic here
         if (attackData.mIsAoEAttack)
         {

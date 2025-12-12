@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject mDamageEffect;
 
     PlayerStatsUI mStatsUI;
+    AudioManager mAudio;
 
     public Action<Player> onPlayerDead;
     private bool bIsInRecover;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         mStatsUI = FindAnyObjectByType<PlayerStatsUI>();
+        mAudio = FindAnyObjectByType<AudioManager>();
     }
     public void TakeHealth(float health) 
     {
@@ -33,7 +35,11 @@ public class Player : MonoBehaviour
         {
             onPlayerDead?.Invoke(this);
         }
-
+        mAudio.PlayTakeDamage();
+        if (mPlayerHealth <= 50 && mPlayerHealth > 0) 
+        {
+            mAudio.PlayLowHealth();
+        }
         mHealthRecoverTimer = 0;
     }
 
@@ -63,6 +69,7 @@ public class Player : MonoBehaviour
             mStatsUI.UpdateHealthSlider(mPlayerHealth);
             if (mPlayerHealth >= 100) 
             {
+                mAudio.PlayerRecoverHealth();
                 bIsInRecover = false;
                 mHealthRecoverTimer = 0;
             }
