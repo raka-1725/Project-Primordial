@@ -57,7 +57,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ad5ae07c00c00b2498f80e2979d58db1, type: 2}
+    - target: {fileID: 13700000, guid: a55b75e1bbafd1241b488997bb65464c, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 53ee23045d8b55541a86a61dfeb8a7b3, type: 2}
     m_RemovedComponents:
